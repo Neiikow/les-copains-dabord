@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ArticleListComponent } from './components/article/article-list/article-list.component';
+import { ArticlePresentationComponent } from './components/article/article-presentation/article-presentation.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
 import { PageEventsComponent } from './components/pages/page-events/page-events.component';
@@ -24,6 +26,8 @@ import { PageProfilComponent } from './components/pages/page-profil/page-profil.
     PageDashboardComponent,
     PageProfilComponent,
     PageLoginComponent,
+    ArticlePresentationComponent,
+    ArticleListComponent,
   ],
   imports: [
     BrowserModule,

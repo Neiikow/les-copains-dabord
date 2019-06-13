@@ -1,3 +1,16 @@
-<p>
-  page-minecraft works!
-</p>
+<section class='mb-2'>
+  <app-article-presentation></app-article-presentation>
+</section>
+<div class="app-subnav">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="terrains" class="nav-link">Terrains</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="plugins" class="nav-link">Plugins</a>
+    </li>
+  </ul>
+  <section class="pb-0">
+    <router-outlet></router-outlet>
+  </section>
+</div>

@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-page-profil',
+  styleUrls: ['./page-profil.component.css'],
   templateUrl: './page-profil.component.html',
-  styleUrls: ['./page-profil.component.css']
 })
-export class PageProfilComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class PageProfilComponent { }

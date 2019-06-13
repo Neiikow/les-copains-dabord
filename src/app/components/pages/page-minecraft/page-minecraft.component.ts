@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-page-minecraft',
+  styleUrls: ['./page-minecraft.component.css'],
   templateUrl: './page-minecraft.component.html',
-  styleUrls: ['./page-minecraft.component.css']
 })
-export class PageMinecraftComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class PageMinecraftComponent { }

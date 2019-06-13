@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div class='col-md-10'>
+    <div *ngFor="let article of article">
+      <h1 class="text-center">{{ article.title }}</h1>
+      <p>{{ article.content }}</p>
+      <div *ngIf="status && version && total" class="font-italic text-secondary font-weight-light">
+        <hr>
+        <div class="d-flex justify-content-between">
+          <p><strong>Status :</strong> {{ status }}</p>
+          <p><strong>Version :</strong> {{ version }}</p>
+          <p><strong>Ouverture :</strong> 4 Février 2019</p>
+          <p><strong>Joueurs total :</strong> {{ total }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='info-serv col p-1 app-border-primary app-bg-secondary'>
+    <h4 class="text-center">En jeu</h4>
+    <div *ngIf="members">
+      <div class='app-bg-primary border border-dark mt-1 p-1' [innerHTML]="member.picture + member.name" *ngFor="let member of members">
+      </div>
+    </div>
+    <div *ngIf="!members">
+      Aucun joueur connecté
+    </div>
+  </div>
+</div>

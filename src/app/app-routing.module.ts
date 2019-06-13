@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ArticleListComponent } from './components/article/article-list/article-list.component';
 import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
 import { PageEventsComponent } from './components/pages/page-events/page-events.component';
 import { PageLoginComponent } from './components/pages/page-login/page-login.component';
@@ -9,7 +10,11 @@ import { PageMinecraftComponent } from './components/pages/page-minecraft/page-m
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 
 const routes: Routes = [
-  { path: 'minecraft', component: PageMinecraftComponent },
+  { path: 'minecraft', component: PageMinecraftComponent, children: [
+    { path: 'terrains', component: ArticleListComponent, data: {type: 'ground', design: 'card'} },
+    { path: 'plugins', component: ArticleListComponent, data: {type: 'plugin', design: 'row'} },
+    { path: '', pathMatch: 'full', redirectTo: 'terrains' },
+  ] },
   { path: 'evenements', component: PageEventsComponent },
   { path: 'membres', component: PageMembersComponent },
   { path: 'profil', component: PageProfilComponent },
