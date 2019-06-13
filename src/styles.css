@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    padding-top: 58px;
+}
+.container-fluid {
+    min-height: 731px;
+    background: url('public/img/bg-minecraft.jpg') no-repeat center fixed;
+    background-size: cover;
+}
+section {
+    border: #6EB7BF solid 2px;
+    background: white;
+    padding: .5rem !important;
+}
+.btn {
+    border-color: white;
+}
+p {
+    margin: 0;
+}
+a, a:hover {
+    color: #17a2b8;
+    text-decoration: none;
+}
+.app-content {
+    background: rgb(255, 255, 255, 0.7);
+}
+.app-bg-primary, .app-border-primary {
+    background: #17A2B8 !important;
+    color: white;
+}
+.app-bg-primary a:hover {
+    background: #138496 !important;
+    color: white;
+}
+.app-bg-secondary {
+    background: #6EB7BF !important;
+    color: black;
+}
+.app-border-primary {
+    border: solid 2px #17A2B8 !important;
+}
+.app-subnav .nav-link:hover, .app-subnav .nav-link.active {
+    background: white;
+    border: solid 2px #6EB7BF;
+    border-bottom: 0px;
+}
+.app-subnav section {
+    margin-top: -2px;
+}
+hr {
+    margin: 8px 0 8px 0;
+}

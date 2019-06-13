@@ -5,11 +5,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
+import { PageEventsComponent } from './components/pages/page-events/page-events.component';
+import { PageLoginComponent } from './components/pages/page-login/page-login.component';
+import { PageMembersComponent } from './components/pages/page-members/page-members.component';
+import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
+import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
+    HeaderComponent,
+    PageMinecraftComponent,
+    PageEventsComponent,
+    PageMembersComponent,
+    PageDashboardComponent,
+    PageProfilComponent,
+    PageLoginComponent,
   ],
   imports: [
     BrowserModule,
