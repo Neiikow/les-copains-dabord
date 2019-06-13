@@ -23,4 +23,10 @@ export class ArticleService {
   public getArticleByType(type: string): Observable<Article> {
     return this.http.get<Article>(this.url + type);
   }
+  public getArticleById(id: number): Observable<Article> {
+    return this.http.get<Article>(this.url + 'view/' + id);
+  }
+  public deleteArticle(id: number): Observable<Article> {
+    return this.http.delete<Article>(this.url + 'delete/' + id, httpOptions);
+  }
 }

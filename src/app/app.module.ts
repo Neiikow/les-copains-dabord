@@ -14,6 +14,7 @@ import { PageLoginComponent } from './components/pages/page-login/page-login.com
 import { PageMembersComponent } from './components/pages/page-members/page-members.component';
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
+import { ArticleViewComponent } from './components/article/article-view/article-view.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -28,6 +29,7 @@ import { PageProfilComponent } from './components/pages/page-profil/page-profil.
     PageLoginComponent,
     ArticlePresentationComponent,
     ArticleListComponent,
+    ArticleViewComponent,
   ],
   imports: [
     BrowserModule,

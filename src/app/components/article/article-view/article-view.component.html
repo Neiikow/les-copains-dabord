@@ -1,0 +1,26 @@
+<div id="article" class='d-flex' *ngIf="article">
+  <div class='col-md-10 p-0 pr-2'>
+    <div class='app-bg-secondary d-flex align-items-center font-italic p-2 rounded-top'>
+      <div class='col-md-4'>Auteur : {{ article.author }}</div>
+      <div class='col-md-4 text-center' *ngIf="article.type === 'ground'">Coordonnées : X{{ article.location_x }} / Y{{ article.location_y }}</div>
+      <div class='col-md-4 text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
+      <div class='col-md-4 text-right'>Posté le : {{ article.create_date }}</div>
+    </div>
+    <section>
+      <h1 class='text-center'>{{ article.title }}</h1>
+      <p>{{ article.content }}</p>
+    </section>
+  </div>
+  <div id="article-nav" class='col p-0'>
+    <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
+      <button class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+      <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
+    </div>
+    <section>
+      <h3 class='text-center' *ngIf="article.type === 'ground'">Terrains</h3>
+      <h3 class='text-center' *ngIf="article.type === 'plugin'">Plugins</h3>
+      <hr>
+      <p *ngFor="let article of articles" class='item-menu text-info p-1' (click)="getArticle(article.id)"><i class="fas fa-angle-right"></i> {{ article.title }}</p>
+    </section>
+  </div>
+</div>

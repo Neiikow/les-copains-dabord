@@ -1,0 +1,21 @@
+.item-menu:hover, #article-nav .btn {
+    cursor: pointer;
+    background: #6EB7BF;
+    color: white !important;
+}
+#article-nav .btn:hover {
+    background: #138496;
+    color: white !important;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+}
+#article-nav .btn {
+    border: none;
+    color: black !important;
+}
+#article-nav {
+    font-size: 14px;
+}
+#article section{
+    border-top: none;
+}
