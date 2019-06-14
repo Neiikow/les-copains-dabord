@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticleFormComponent } from './components/article/article-form/article-form.component';
 import { ArticleListComponent } from './components/article/article-list/article-list.component';
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
+import { EventFormComponent } from './components/event/event-form/event-form.component';
+import { EventListComponent } from './components/event/event-list/event-list.component';
+import { EventViewComponent } from './components/event/event-view/event-view.component';
 import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
 import { PageEventsComponent } from './components/pages/page-events/page-events.component';
 import { PageLoginComponent } from './components/pages/page-login/page-login.component';
@@ -21,7 +24,15 @@ const routes: Routes = [
   ] },
   { path: 'minecraft/terrains/:id', component: ArticleViewComponent, data: {type: 'ground'} },
   { path: 'minecraft/plugins/:id', component: ArticleViewComponent, data: {type: 'plugin'} },
-  { path: 'evenements', component: PageEventsComponent },
+  { path: 'evenements', component: PageEventsComponent, children: [
+    { path: 'bientot', component: EventListComponent, data: {status: 'active'} },
+    { path: 'archive', component: EventListComponent, data: {status: 'archive'} },
+    { path: 'nouveau', component: EventFormComponent, data: {edit: false} },
+    { path: 'editer/:id', component: EventFormComponent, data: {edit: true} },
+    { path: '', pathMatch: 'full', redirectTo: 'bientot' }
+  ] },
+  { path: 'evenements/bientot/:id', component: EventViewComponent, data: {status: 'active'} },
+  { path: 'evenements/archive/:id', component: EventViewComponent, data: {status: 'archive'} },
   { path: 'membres', component: PageMembersComponent },
   { path: 'profil', component: PageProfilComponent },
   { path: 'connexion', component: PageLoginComponent },

@@ -1,0 +1,6 @@
+form {
+    padding: 0 15px 0 15px;
+}
+.form-inline .form-group{
+    flex: auto;
+}

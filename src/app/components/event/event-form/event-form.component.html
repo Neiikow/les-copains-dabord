@@ -1,0 +1,40 @@
+<form *ngIf="event" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)" class="mb-2">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-4">
+        <label for="title">Titre</label>
+        <input type="text"class="form-control" id="title" formControlName="title" required>
+      </div>
+      <div class="col-4">
+        <label for="support">Support</label>
+        <select class="custom-select mr-sm-2" id="support" formControlName="support" required>
+          <option value="Minecraft">Minecraft</option>
+          <option value="Blind Test">Blind Test</option>
+          <option value="Jeux de rôles">Jeux de rôles</option>
+          <option value="Scriblio">Scriblio</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+      <div class="col-4">
+        <label>Date de l'évènement</label>
+        <div class="form-inline">
+          <div class="form-group">
+            <input type="date" class="form-control ml-1" id="date" formControlName="date" required>
+          </div>
+          <div class="form-group d-flex justify-content-end">
+            <input type="time" class="form-control ml-1" id="time" formControlName="time" required>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="content">Contenu du message</label>
+    <textarea class="form-control" id="content" rows="10" formControlName="content" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="dataForm.invalid">Publier</button>
+  <small class="text-muted" *ngIf="dataForm.invalid">
+    Veuillez completer tous les champs.
+  </small>
+</form>

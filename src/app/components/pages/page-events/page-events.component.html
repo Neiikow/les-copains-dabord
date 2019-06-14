@@ -1,3 +1,13 @@
-<p>
-  page-events works!
-</p>
+ <div class="app-subnav">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="bientot" class="nav-link">Bientôt</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="archive" class="nav-link">Archive</a>
+    </li>
+  </ul>
+  <section class="pb-0">
+    <router-outlet></router-outlet>
+  </section>
+</div>

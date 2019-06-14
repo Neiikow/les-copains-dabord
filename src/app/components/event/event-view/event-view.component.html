@@ -1,0 +1,10 @@
+<div class="jumbotron mt-2 mb-2 pt-3 pb-2" *ngIf="event">
+  <p>Titre : {{ event.title }}</p>
+  <p>Contenu : {{ event.content }}</p>
+  <p>Auteur : {{ event.author }}</p>
+  <p>Support : {{ event.support }}</p>
+  <p>Date : {{ event.date }} à {{ event.time }}h</p>
+  <a [routerLink]="['/evenements/editer/', event.id]" class="btn btn-sm btn-info">Editer</a>
+  <button class="btn btn-sm btn-info" (click)="delete(event)">Supprimer</button>
+  <button class="btn btn-sm btn-info" (click)="goBack()">Retour</button>
+</div>

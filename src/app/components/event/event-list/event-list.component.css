@@ -1,0 +1,9 @@
+img {
+    height: 60px;
+}
+.event {
+    cursor: pointer;
+}
+.event:hover {
+    background: #138496 !important;
+}
