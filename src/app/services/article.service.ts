@@ -26,6 +26,12 @@ export class ArticleService {
   public getArticleById(id: number): Observable<Article> {
     return this.http.get<Article>(this.url + 'view/' + id);
   }
+  public addArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.url + 'new', article, httpOptions);
+  }
+  public editArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.url + 'edit/' + article.id, article, httpOptions);
+  }
   public deleteArticle(id: number): Observable<Article> {
     return this.http.delete<Article>(this.url + 'delete/' + id, httpOptions);
   }

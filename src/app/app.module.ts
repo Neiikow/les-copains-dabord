@@ -15,6 +15,7 @@ import { PageMembersComponent } from './components/pages/page-members/page-membe
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
+import { ArticleFormComponent } from './components/article/article-form/article-form.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -30,6 +31,7 @@ import { ArticleViewComponent } from './components/article/article-view/article-
     ArticlePresentationComponent,
     ArticleListComponent,
     ArticleViewComponent,
+    ArticleFormComponent,
   ],
   imports: [
     BrowserModule,

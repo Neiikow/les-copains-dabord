@@ -1,0 +1,55 @@
+<form *ngIf="article" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)" class="mb-2">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-4">
+        <label for="title">Titre</label>
+        <input type="text"class="form-control" id="title" formControlName="title" required>
+      </div>
+      <div class="col row" *ngIf="type === 'ground'">
+        <div class="col">
+          <label>Coordonnées</label>
+          <div class="d-flex flex-nowrap form-inline">
+            <div class="form-group">
+              <label for="x">X :</label>
+              <input type="number" class="form-control w-75 ml-1" id="x" formControlName="location_x" required>
+            </div>
+            <div class="form-group">
+              <label for="y">Y :</label>
+              <input type="number" class="form-control w-75 ml-1" id="y" formControlName="location_y" required>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <label for="picture">Illustration</label>
+          <input type="url" class="form-control" id="picture" placeholder="Url de l'image" formControlName="picture" required>
+        </div>
+      </div>
+
+      <div class="col row" *ngIf="type === 'plugin'">
+        <div class="col d-flex">
+          <div class="form-group mr-4 mb-0">
+            <label for="version">Version</label>
+            <input type="text" class="form-control" id="version" formControlName="version" required>
+          </div>
+          <div class="form-group mb-0">
+            <label for="picture">Logo</label>
+            <input type="url" class="form-control" id="picture" placeholder="Url du logo" formControlName="picture" required>
+          </div>
+        </div>
+        <div class="col">
+          <label for="link">Site officiel</label>
+          <input type="url" class="form-control" id="link" placeholder="Url du site" formControlName="link" required>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="content">Contenu du message</label>
+    <textarea class="form-control" id="content" rows="10" formControlName="content" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="dataForm.invalid">Publier</button>
+  <small class="text-muted" *ngIf="dataForm.invalid">
+    Veuillez completer tous les champs.
+  </small>
+</form>

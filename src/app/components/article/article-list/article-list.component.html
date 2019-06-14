@@ -1,3 +1,7 @@
+<div class="mt-2 mb-2">
+  <a [routerLink]="['../nouveau/', type]" class="btn btn-info">Nouveau</a>
+</div>
+
 <div *ngIf="design === 'card'">
   <div class="card text-center mb-2" *ngFor="let article of articles">
     <div class="card-header app-bg-primary" [routerLink]="[article.id]">
@@ -12,7 +16,7 @@
 </div>
 
 <div *ngIf="design === 'row'">
-  <div class='app-bg-primary d-flex text-center align-items-center mb-2' *ngFor="let article of articles">
+  <div class='article-row app-bg-primary d-flex text-center align-items-center mb-2' *ngFor="let article of articles">
     <div class='content-row col-md-10 d-flex align-items-center' [routerLink]="[article.id]">
       <div class='p-2 col-md-1'><img src="{{ article.picture }}" height="60" alt="icone"></div>
       <div class='p-2 pl-3 col-md-10 text-left'>

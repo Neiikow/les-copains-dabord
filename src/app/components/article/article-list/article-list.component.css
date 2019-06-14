@@ -1,6 +1,9 @@
 .card-header {
     cursor: pointer;
 }
+.card-header:hover, .article-row:hover {
+    background: #138496 !important;
+}
 .card-body {
     background: no-repeat center;
     background-size: cover;

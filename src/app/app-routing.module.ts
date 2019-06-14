@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ArticleFormComponent } from './components/article/article-form/article-form.component';
 import { ArticleListComponent } from './components/article/article-list/article-list.component';
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
 import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'minecraft', component: PageMinecraftComponent, children: [
     { path: 'terrains', component: ArticleListComponent, data: {type: 'ground', design: 'card'} },
     { path: 'plugins', component: ArticleListComponent, data: {type: 'plugin', design: 'row'} },
+    { path: 'nouveau/:type', component: ArticleFormComponent, data: {edit: false} },
+    { path: 'editer/:id', component: ArticleFormComponent, data: {edit: true} },
     { path: '', pathMatch: 'full', redirectTo: 'terrains' },
   ] },
   { path: 'minecraft/terrains/:id', component: ArticleViewComponent, data: {type: 'ground'} },

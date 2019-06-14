@@ -4,7 +4,7 @@
       <div class='col-md-4'>Auteur : {{ article.author }}</div>
       <div class='col-md-4 text-center' *ngIf="article.type === 'ground'">Coordonnées : X{{ article.location_x }} / Y{{ article.location_y }}</div>
       <div class='col-md-4 text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
-      <div class='col-md-4 text-right'>Posté le : {{ article.create_date }}</div>
+      <div class='col-md-4 text-right'>{{ article.create_date }}</div>
     </div>
     <section>
       <h1 class='text-center'>{{ article.title }}</h1>
@@ -13,6 +13,7 @@
   </div>
   <div id="article-nav" class='col p-0'>
     <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
+        <a [routerLink]="['/minecraft', 'editer', article.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
       <button class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
       <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
     </div>
