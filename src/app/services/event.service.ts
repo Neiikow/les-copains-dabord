@@ -7,7 +7,7 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Access-Control-Allow-Origin': 'http://localhost:8888',
     'Content-Type': 'application/json',
-  })
+  }),
 };
 @Injectable({
   providedIn: 'root',

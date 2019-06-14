@@ -1,0 +1,12 @@
+table {
+    border: #17A2B8 solid 2px;
+}
+.table thead th {
+    border-bottom: 0;
+}
+td {
+    vertical-align: middle;
+}
+td, th {
+    text-align: center;
+}

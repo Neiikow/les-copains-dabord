@@ -13,6 +13,7 @@ import { EventFormComponent } from './components/event/event-form/event-form.com
 import { EventListComponent } from './components/event/event-list/event-list.component';
 import { EventViewComponent } from './components/event/event-view/event-view.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MemberListComponent } from './components/member/member-list/member-list.component';
 import { PageDashboardComponent } from './components/pages/page-dashboard/page-dashboard.component';
 import { PageEventsComponent } from './components/pages/page-events/page-events.component';
 import { PageLoginComponent } from './components/pages/page-login/page-login.component';
@@ -38,6 +39,7 @@ import { PageProfilComponent } from './components/pages/page-profil/page-profil.
     EventListComponent,
     EventFormComponent,
     EventViewComponent,
+    MemberListComponent,
   ],
   imports: [
     BrowserModule,
