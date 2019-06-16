@@ -20,4 +20,7 @@ export class MemberService {
   public getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.url);
   }
+  public addMember(member: Member): Observable<Member> {
+    return this.http.post<Member>(this.url + 'new', member, httpOptions);
+  }
 }

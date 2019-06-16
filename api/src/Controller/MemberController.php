@@ -25,4 +25,23 @@ Class MemberController extends Controller
         
         return $response;
     }
+    /**
+     * @Route("/members/new", name="member_create")
+     * @Method({"POST"})
+     */
+    public function new(Request $request)
+    {
+        $data = $request->getContent();
+        $member = $this->get('jms_serializer')->deserialize($data, Member::class, 'json');
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($member);
+        $em->flush();
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+        return $response;
+    }
 }

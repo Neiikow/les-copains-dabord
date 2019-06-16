@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticleFormComponent } from './components/article/article-form/article-form.component';
 import { ArticleListComponent } from './components/article/article-list/article-list.component';
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 import { EventFormComponent } from './components/event/event-form/event-form.component';
 import { EventListComponent } from './components/event/event-list/event-list.component';
 import { EventViewComponent } from './components/event/event-view/event-view.component';
@@ -29,13 +31,17 @@ const routes: Routes = [
     { path: 'archive', component: EventListComponent, data: {status: 'archive'} },
     { path: 'nouveau', component: EventFormComponent, data: {edit: false} },
     { path: 'editer/:id', component: EventFormComponent, data: {edit: true} },
-    { path: '', pathMatch: 'full', redirectTo: 'bientot' }
+    { path: '', pathMatch: 'full', redirectTo: 'bientot' },
   ] },
   { path: 'evenements/bientot/:id', component: EventViewComponent, data: {status: 'active'} },
   { path: 'evenements/archive/:id', component: EventViewComponent, data: {status: 'archive'} },
   { path: 'membres', component: PageMembersComponent },
   { path: 'profil', component: PageProfilComponent },
-  { path: 'connexion', component: PageLoginComponent },
+  { path: 'connexion', component: PageLoginComponent, children: [
+    { path: 'connexion', component: LoginComponent },
+    { path: 'inscription', component: SignupComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'connexion' },
+  ] },
   { path: 'dashboard', component: PageDashboardComponent },
   { path: '', redirectTo: 'minecraft', pathMatch: 'full' },
   { path: '**', redirectTo: 'minecraft', pathMatch: 'full' },

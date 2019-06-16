@@ -1,0 +1,27 @@
+<div class='row justify-content-center m-3'>
+  <div class="mb-2 col-6 text-center">
+    <form [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)" class="text-left">
+      <div class="form-group">
+        <label for="name">Pseudo</label>
+        <input type="text" class="form-control" id="name" formControlName="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" class="form-control" id="password" formControlName="password" required>
+      </div>
+      <div class="form-group">
+        <label for="password-conf">Confirmation</label>
+        <input type="password" class="form-control" id="password-conf" formControlName="passwordConf" required>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="dataForm.invalid">Inscription</button>
+      <small class="text-muted" *ngIf="dataForm.invalid">
+        <br>
+        Veuillez completer tous les champs.
+      </small>
+    </form>
+  </div>
+</div>

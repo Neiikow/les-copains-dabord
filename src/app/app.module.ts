@@ -9,6 +9,8 @@ import { ArticleFormComponent } from './components/article/article-form/article-
 import { ArticleListComponent } from './components/article/article-list/article-list.component';
 import { ArticlePresentationComponent } from './components/article/article-presentation/article-presentation.component';
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 import { EventFormComponent } from './components/event/event-form/event-form.component';
 import { EventListComponent } from './components/event/event-list/event-list.component';
 import { EventViewComponent } from './components/event/event-view/event-view.component';
@@ -40,6 +42,8 @@ import { PageProfilComponent } from './components/pages/page-profil/page-profil.
     EventFormComponent,
     EventViewComponent,
     MemberListComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
