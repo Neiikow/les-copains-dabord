@@ -7,12 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations\View;
 
 Class AuthController extends Controller
 {
     /**
      * @Route("/auth", name="auth")
      * @Method({"POST"})
+     * @View
      */
     public function auth(Request $request)
     {

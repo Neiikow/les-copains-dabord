@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations\View;
 
 Class ApiMcController extends Controller
 {
@@ -16,42 +17,40 @@ Class ApiMcController extends Controller
 
     /**
      * @Route("/apimc/status", name="status")
+     * @View
      */
     public function getStatus()
     {
         $status = file_get_contents($this->apiUrl.'statut.php?ip='.$this->ip.'&port='.$this->port);
-        $response = new Response($status);
-        $response->headers->set('Content-Type', 'text');
 
-        return $response;
+        return $status;
     }
 
     /**
      * @Route("/apimc/version", name="version")
+     * @View
      */
     public function getVersion()
     {
         $version = file_get_contents($this->apiUrl.'version.php?ip='.$this->ip.'&port='.$this->port);
-        $response = new Response($version);
-        $response->headers->set('Content-Type', 'text');
 
-        return $response;
+        return $version;
     }
 
     /**
      * @Route("/apimc/total", name="total")
+     * @View
      */
     public function getTotal()
     {
         $total = file_get_contents($this->apiUrl.'maxplayer.php?ip='.$this->ip.'&port='.$this->port);
-        $response = new Response($total);
-        $response->headers->set('Content-Type', 'text');
 
-        return $response;
+        return $total;
     }
 
     /**
      * @Route("/apimc/playerlist", name="playerlist")
+     * @View
      */
     public function getOnlineMembers()
     {
@@ -73,13 +72,9 @@ Class ApiMcController extends Controller
             }
             $membersList = json_encode($members);
 
-            $response = new Response($membersList);
-        } else {
-            $response = new Response();
+            return $membersList;
         }
-        
-        $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $data;
     }
 }

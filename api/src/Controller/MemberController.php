@@ -7,11 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations\View;
 
 Class MemberController extends Controller
 {
     /**
      * @Route("/members", name="members_show")
+     * @View
      */
     public function showAll()
     {
@@ -27,6 +29,7 @@ Class MemberController extends Controller
     /**
      * @Route("/members/new", name="member_create")
      * @Method({"POST"})
+     * @View
      */
     public function new(Request $request)
     {

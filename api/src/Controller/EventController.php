@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations\View;
 use Psr\Log\LoggerInterface;
 
 Class EventController extends Controller
@@ -14,6 +15,7 @@ Class EventController extends Controller
     /**
      * @Route("/events/new", name="event_create")
      * @Method({"POST"})
+     * @View
      */
     public function new(Request $request)
     {
@@ -23,15 +25,13 @@ Class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($event);
         $em->flush();
-        
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $event;
     }
     /**
      * @Route("/events/edit/{id}", name="event_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
+     * @View
      */
     public function edit($id, Request $request)
     {
@@ -48,14 +48,12 @@ Class EventController extends Controller
         $event->setTime($parsed_json->{'time'});
         $em->flush();
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $event;
     }
     /**
      * @Route("/events/delete/{id}", name="event_delete", requirements = {"id"="\d+"})
      * @Method({"DELETE"})
+     * @View
      */
     public function delete($id)
     {
@@ -70,14 +68,12 @@ Class EventController extends Controller
 
         $em->remove($event);
         $em->flush();
-        
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $event;
     }
     /**
      * @Route("/events/{status}", name="events_status", requirements = {"status"="[a-z,A-Z]+"})
+     * @View
      */
     public function showStatus($status)
     {
@@ -85,23 +81,14 @@ Class EventController extends Controller
             array('status' => $status)
         );
 
-        $data = $this->get('jms_serializer')->serialize($events, 'json');
-
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
+        return $events;
     }
     /**
      * @Route("/events/view/{id}", name="event_view", requirements = {"id"="\d+"})
+     * @View
      */
     public function showId(Event $event)
     {
-        $data = $this->get('jms_serializer')->serialize($event, 'json');
-
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $event;
     }
 }

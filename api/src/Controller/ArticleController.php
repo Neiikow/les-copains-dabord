@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations\View;
 use Psr\Log\LoggerInterface;
 
 Class ArticleController extends Controller
@@ -14,6 +15,7 @@ Class ArticleController extends Controller
     /**
      * @Route("/articles/new", name="article_create")
      * @Method({"POST"})
+     * @View
      */
     public function new(Request $request)
     {
@@ -23,15 +25,13 @@ Class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($article);
         $em->flush();
-        
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $article;
     }
     /**
      * @Route("/articles/edit/{id}", name="article_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
+     * @View
      */
     public function edit($id, Request $request)
     {
@@ -56,14 +56,12 @@ Class ArticleController extends Controller
         }
         $em->flush();
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $article;
     }
     /**
      * @Route("/articles/delete/{id}", name="article_delete", requirements = {"id"="\d+"})
      * @Method({"DELETE"})
+     * @View
      */
     public function delete($id)
     {
@@ -78,38 +76,27 @@ Class ArticleController extends Controller
 
         $em->remove($article);
         $em->flush();
-        
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $article;
     }
     /**
      * @Route("/articles/{type}", name="articles_type", requirements = {"type"="[a-z,A-Z]+"})
+     * @View
      */
     public function showType($type)
     {
         $articles = $this->getDoctrine()->getRepository('App:Article')->findBy(
             array('type' => $type)
         );
-
-        $data = $this->get('jms_serializer')->serialize($articles, 'json');
         
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
+        return $articles;
     }
     /**
      * @Route("/articles/view/{id}", name="article_id", requirements = {"id"="\d+"})
+     * @View
      */
     public function showId(Article $article)
     {
-        $data = $this->get('jms_serializer')->serialize($article, 'json');
-
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $article;
     }
 }
