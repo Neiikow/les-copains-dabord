@@ -2,10 +2,10 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use FOS\RestBundle\Controller\Annotations\View;
 use Psr\Log\LoggerInterface;
@@ -18,12 +18,10 @@ Class EventController extends Controller
      * @View(
      *  statusCode = 201
      * )
+     * @ParamConverter("event", converter="fos_rest.request_body")
      */
-    public function new(Request $request)
+    public function new(Event $event)
     {
-        $data = $request->getContent();
-        $event = $this->get('jms_serializer')->deserialize($data, Event::class, 'json');
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($event);
         $em->flush();

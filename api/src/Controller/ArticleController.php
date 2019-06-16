@@ -2,11 +2,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
 use Psr\Log\LoggerInterface;
 
@@ -18,12 +18,10 @@ Class ArticleController extends Controller
      * @View(
      *  statusCode = 201
      * )
+     * @ParamConverter("article", converter="fos_rest.request_body")
      */
-    public function new(Request $request)
+    public function new(Article $article)
     {
-        $data = $request->getContent();
-        $article = $this->get('jms_serializer')->deserialize($data, Article::class, 'json');
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($article);
         $em->flush();
