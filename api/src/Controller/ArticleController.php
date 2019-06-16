@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -32,11 +31,10 @@ Class ArticleController extends Controller
      * @Route("/articles/edit/{id}", name="article_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
      * @View
+     * @ParamConverter("article", converter="fos_rest.request_body")
      */
-    public function edit($id, Request $request)
+    public function edit($id, Article $article)
     {
-        $parsed_json = json_decode($request->getContent());
-
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository(Article::class)->find($id);        
         $type = $article->getType();

@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -32,11 +31,10 @@ Class EventController extends Controller
      * @Route("/events/edit/{id}", name="event_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
      * @View
+     * @ParamConverter("event", converter="fos_rest.request_body")
      */
-    public function edit($id, Request $request)
+    public function edit($id, Event $event)
     {
-        $parsed_json = json_decode($request->getContent());
-
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository(Event::class)->find($id);        
 
