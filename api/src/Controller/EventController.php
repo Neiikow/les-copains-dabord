@@ -15,7 +15,9 @@ Class EventController extends Controller
     /**
      * @Route("/events/new", name="event_create")
      * @Method({"POST"})
-     * @View
+     * @View(
+     *  statusCode = 201
+     * )
      */
     public function new(Request $request)
     {

@@ -29,7 +29,9 @@ Class MemberController extends Controller
     /**
      * @Route("/members/new", name="member_create")
      * @Method({"POST"})
-     * @View
+     * @View(
+     *  statusCode = 201
+     * )
      */
     public function new(Request $request)
     {

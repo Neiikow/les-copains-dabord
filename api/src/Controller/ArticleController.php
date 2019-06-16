@@ -15,7 +15,9 @@ Class ArticleController extends Controller
     /**
      * @Route("/articles/new", name="article_create")
      * @Method({"POST"})
-     * @View
+     * @View(
+     *  statusCode = 201
+     * )
      */
     public function new(Request $request)
     {
