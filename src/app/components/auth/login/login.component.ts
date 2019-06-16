@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +10,7 @@ export class LoginComponent implements OnInit {
   private dataForm: any;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router) { }
+    private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
     this.initForm();
