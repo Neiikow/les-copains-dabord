@@ -26,12 +26,11 @@ Class EventController extends Controller
         
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
     /**
-     * @Route("/events/edit/{id}", name="event_edit")
+     * @Route("/events/edit/{id}", name="event_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
      */
     public function edit($id, Request $request)
@@ -51,12 +50,11 @@ Class EventController extends Controller
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
     /**
-     * @Route("/events/delete/{id}", name="event_delete")
+     * @Route("/events/delete/{id}", name="event_delete", requirements = {"id"="\d+"})
      * @Method({"DELETE"})
      */
     public function delete($id)
@@ -75,12 +73,11 @@ Class EventController extends Controller
         
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
     /**
-     * @Route("/events/{status}", name="events_status")
+     * @Route("/events/{status}", name="events_status", requirements = {"status"="[a-z,A-Z]+"})
      */
     public function showStatus($status)
     {
@@ -92,12 +89,11 @@ Class EventController extends Controller
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
         
         return $response;
     }
     /**
-     * @Route("/events/view/{id}", name="event_view")
+     * @Route("/events/view/{id}", name="event_view", requirements = {"id"="\d+"})
      */
     public function showId(Event $event)
     {
@@ -105,7 +101,6 @@ Class EventController extends Controller
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }

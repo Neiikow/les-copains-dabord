@@ -21,7 +21,6 @@ Class MemberController extends Controller
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
         
         return $response;
     }
@@ -40,7 +39,6 @@ Class MemberController extends Controller
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }

@@ -62,6 +62,18 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "friendsofsymfony/rest-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "258300d52be6ad59b32a888d5ddafbf9638540ff"
+        },
+        "files": [
+            "config/packages/fos_rest.yaml"
+        ]
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -90,6 +102,15 @@
     },
     "phpcollection/phpcollection": {
         "version": "0.5.0"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.1"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
     },
     "phpoption/phpoption": {
         "version": "1.5.0"
@@ -210,6 +231,9 @@
     "symfony/http-kernel": {
         "version": "v4.2.7"
     },
+    "symfony/inflector": {
+        "version": "v4.2.9"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"
     },
@@ -221,6 +245,12 @@
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
+    },
+    "symfony/property-access": {
+        "version": "v4.2.9"
+    },
+    "symfony/property-info": {
+        "version": "v4.2.9"
     },
     "symfony/routing": {
         "version": "4.2",
@@ -237,7 +267,19 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v4.2.9"
+    },
+    "symfony/serializer": {
+        "version": "v4.2.9"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.2"
+    },
     "symfony/stopwatch": {
+        "version": "v4.2.9"
+    },
+    "symfony/templating": {
         "version": "v4.2.9"
     },
     "symfony/twig-bridge": {
@@ -291,5 +333,14 @@
     },
     "twig/twig": {
         "version": "v2.11.2"
+    },
+    "webmozart/assert": {
+        "version": "1.4.0"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
+    },
+    "willdurand/negotiation": {
+        "version": "v2.3.1"
     }
 }

@@ -26,13 +26,11 @@ Class ArticleController extends Controller
         
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
-
     /**
-     * @Route("/articles/edit/{id}", name="article_edit")
+     * @Route("/articles/edit/{id}", name="article_edit", requirements = {"id"="\d+"})
      * @Method({"POST"})
      */
     public function edit($id, Request $request)
@@ -41,24 +39,30 @@ Class ArticleController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository(Article::class)->find($id);        
+        $type = $article->getType();
 
         $article->setTitle($parsed_json->{'title'});
         $article->setContent($parsed_json->{'content'});
-        $article->setPicture($parsed_json->{'picture'});
         $article->setStatus($parsed_json->{'status'});
-        $article->setLocationX($parsed_json->{'location_x'});
-        $article->setLocationY($parsed_json->{'location_y'});
-        $article->setVersion($parsed_json->{'version'});
+        if ($type === 'ground') {
+            $article->setPicture($parsed_json->{'picture'});
+            $article->setLocationX($parsed_json->{'location_x'});
+            $article->setLocationY($parsed_json->{'location_y'});
+        }
+        if ($type === 'plugin') {
+            $article->setPicture($parsed_json->{'picture'});
+            $article->setLink($parsed_json->{'link'});
+            $article->setVersion($parsed_json->{'version'});
+        }
         $em->flush();
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
     /**
-     * @Route("/articles/delete/{id}", name="article_delete")
+     * @Route("/articles/delete/{id}", name="article_delete", requirements = {"id"="\d+"})
      * @Method({"DELETE"})
      */
     public function delete($id)
@@ -77,12 +81,11 @@ Class ArticleController extends Controller
         
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }
     /**
-     * @Route("/articles/{type}", name="articles_type")
+     * @Route("/articles/{type}", name="articles_type", requirements = {"type"="[a-z,A-Z]+"})
      */
     public function showType($type)
     {
@@ -94,12 +97,11 @@ Class ArticleController extends Controller
         
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
         
         return $response;
     }
     /**
-     * @Route("/articles/view/{id}", name="article_id")
+     * @Route("/articles/view/{id}", name="article_id", requirements = {"id"="\d+"})
      */
     public function showId(Article $article)
     {
@@ -107,7 +109,6 @@ Class ArticleController extends Controller
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
 
         return $response;
     }

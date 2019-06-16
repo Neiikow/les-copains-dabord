@@ -35,7 +35,7 @@ class Member
      */
     private $role;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $discord;
     /**
