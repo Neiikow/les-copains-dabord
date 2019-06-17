@@ -2,9 +2,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * @ORM\Entity
  * @ORM\Table()
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Article
 {
@@ -12,50 +16,66 @@ class Article
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $title;
     /**
      * @ORM\Column(type="text")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $content;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $author;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $picture;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $type;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $status;
     /**
      * @ORM\Column(type="integer")
+     * @Serializer\Expose
      */
     private $locationX;
     /**
      * @ORM\Column(type="integer")
+     * @Serializer\Expose
      */
     private $locationY;
     /**
      * @ORM\Column(type="text")
+     * @Serializer\Expose
      */
     private $link;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $version;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $createDate;
 

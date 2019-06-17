@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 
 Class EventController extends FOSRestController
 {
@@ -18,8 +19,12 @@ Class EventController extends FOSRestController
      * @Rest\View(StatusCode = 201)
      * @ParamConverter("event", converter="fos_rest.request_body")
      */
-    public function new(Event $event)
+    public function new(Event $event, ConstraintViolationList $violations)
     {
+        if (count($violations)) {
+            return $this->view($violations, Response::HTTP_BAD_REQUEST);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($event);
         $em->flush();
@@ -43,8 +48,12 @@ Class EventController extends FOSRestController
      * @Rest\View
      * @ParamConverter("event", converter="fos_rest.request_body")
      */
-    public function edit($id, Event $event)
+    public function edit($id, Event $event, ConstraintViolationList $violations)
     {
+        if (count($violations)) {
+            return $this->view($violations, Response::HTTP_BAD_REQUEST);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $data = $em->getRepository(Event::class)->find($id);        
 
@@ -54,7 +63,7 @@ Class EventController extends FOSRestController
         $data->setStatus($event->getStatus());
         $data->setDate($event->getDate());
         $data->setTime($event->getTime());
-        
+
         $em->flush();
 
         return $data;

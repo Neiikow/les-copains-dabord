@@ -2,9 +2,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table()
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Event
 {
@@ -12,38 +16,54 @@ class Event
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $title;
     /**
      * @ORM\Column(type="text")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $content;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $support;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $author;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $status;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $date;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $time;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $createDate;
 

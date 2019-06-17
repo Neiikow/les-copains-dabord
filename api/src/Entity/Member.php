@@ -2,9 +2,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * @ORM\Entity
  * @ORM\Table()
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Member
 {
@@ -12,34 +16,45 @@ class Member
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $name;
     /**
      * @ORM\Column(type="text")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $password;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
+     * @Assert\NotBlank
      */
     private $email;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $picture;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $role;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $discord;
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Expose
      */
     private $create_date;
 
