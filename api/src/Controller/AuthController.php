@@ -2,37 +2,36 @@
 namespace App\Controller;
 
 use App\Entity\Member;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-Class AuthController extends Controller
+Class AuthController extends FOSRestController
 {
     /**
-     * @Route("/auth", name="auth")
-     * @Method({"POST"})
-     * @View
+     * @Rest\Get(
+     *    path = "/auth",
+     *    name = "auth"
+     * )
+     * @Rest\View
      */
-    public function auth(Request $request)
+    public function auth(Member $member)
     {
-        $dataClient = $request->getContent();
-        $memberObj = $this->get('jms_serializer')->deserialize($dataClient, Member::class, 'json');
-        $member = $this->getDoctrine()->getRepository('App:Member')->findBy(
+        $datas = $this->getDoctrine()->getRepository('App:Member')->findBy(
             array(
-                'name' => $memberObj->getName(),
-                'password' => $memberObj->getPassword()
+                'name' => $member->getName(),
+                'password' => $member->getPassword()
             )
         );
-        if (!$member) {
+        if (!$datas) {
             $response = new Response();
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
         }
-        $data = $this->get('jms_serializer')->serialize($member, 'json');
+        $data = $this->get('jms_serializer')->serialize($datas, 'json');
         
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');

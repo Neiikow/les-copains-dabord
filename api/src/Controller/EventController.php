@@ -2,21 +2,20 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations\View;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-Class EventController extends Controller
+Class EventController extends FOSRestController
 {
     /**
-     * @Route("/events/new", name="event_create")
-     * @Method({"POST"})
-     * @View(
-     *  statusCode = 201
+     * @Rest\Post(
+     *    path = "/events/new",
+     *    name = "events_create"
      * )
+     * @Rest\View(StatusCode = 201)
      * @ParamConverter("event", converter="fos_rest.request_body")
      */
     public function new(Event $event)
@@ -28,9 +27,12 @@ Class EventController extends Controller
         return $event;
     }
     /**
-     * @Route("/events/edit/{id}", name="event_edit", requirements = {"id"="\d+"})
-     * @Method({"POST"})
-     * @View
+     * @Rest\Post(
+     *    path = "/events/edit/{id}",
+     *    name = "events_edit",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      * @ParamConverter("event", converter="fos_rest.request_body")
      */
     public function edit($id, Event $event)
@@ -49,9 +51,12 @@ Class EventController extends Controller
         return $event;
     }
     /**
-     * @Route("/events/delete/{id}", name="event_delete", requirements = {"id"="\d+"})
-     * @Method({"DELETE"})
-     * @View
+     * @Rest\Delete(
+     *    path = "/events/delete/{id}",
+     *    name = "events_delete",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      */
     public function delete($id)
     {
@@ -70,8 +75,12 @@ Class EventController extends Controller
         return $event;
     }
     /**
-     * @Route("/events/{status}", name="events_status", requirements = {"status"="[a-z,A-Z]+"})
-     * @View
+     * @Rest\Get(
+     *    path = "/events/{status}",
+     *    name = "events_status",
+     *    requirements = {"status"="[a-z,A-Z]+"}
+     * )
+     * @Rest\View
      */
     public function showStatus($status)
     {
@@ -82,8 +91,12 @@ Class EventController extends Controller
         return $events;
     }
     /**
-     * @Route("/events/view/{id}", name="event_view", requirements = {"id"="\d+"})
-     * @View
+     * @Rest\Get(
+     *    path = "/events/view/{id}",
+     *    name = "events_id",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      */
     public function showId(Event $event)
     {

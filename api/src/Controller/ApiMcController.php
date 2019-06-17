@@ -2,20 +2,21 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
-Class ApiMcController extends Controller
+Class ApiMcController extends FOSRestController
 {
     private $apiUrl = "https://minecraft-api.com/api/query/";
     private $ip = "mc70.boxtoplay.com";
     private $port = "27511";
 
     /**
-     * @Route("/apimc/status", name="status")
-     * @View
+     * @Rest\Get(
+     *    path = "/apimc/status",
+     *    name = "status"
+     * )
+     * @Rest\View
      */
     public function getStatus()
     {
@@ -25,8 +26,11 @@ Class ApiMcController extends Controller
     }
 
     /**
-     * @Route("/apimc/version", name="version")
-     * @View
+     * @Rest\Get(
+     *    path = "/apimc/version",
+     *    name = "version"
+     * )
+     * @Rest\View
      */
     public function getVersion()
     {
@@ -36,8 +40,11 @@ Class ApiMcController extends Controller
     }
 
     /**
-     * @Route("/apimc/total", name="total")
-     * @View
+     * @Rest\Get(
+     *    path = "/apimc/total",
+     *    name = "total"
+     * )
+     * @Rest\View
      */
     public function getTotal()
     {
@@ -47,8 +54,11 @@ Class ApiMcController extends Controller
     }
 
     /**
-     * @Route("/apimc/playerlist", name="playerlist")
-     * @View
+     * @Rest\Get(
+     *    path = "/apimc/playerlist",
+     *    name = "playerlist"
+     * )
+     * @Rest\View
      */
     public function getOnlineMembers()
     {

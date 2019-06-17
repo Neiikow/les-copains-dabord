@@ -2,21 +2,20 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\Annotations\View;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-Class ArticleController extends Controller
+Class ArticleController extends FOSRestController
 {
     /**
-     * @Route("/articles/new", name="article_create")
-     * @Method({"POST"})
-     * @View(
-     *  statusCode = 201
+     * @Rest\Post(
+     *    path = "/articles/new",
+     *    name = "articles_create"
      * )
+     * @Rest\View(StatusCode = 201)
      * @ParamConverter("article", converter="fos_rest.request_body")
      */
     public function new(Article $article)
@@ -28,9 +27,12 @@ Class ArticleController extends Controller
         return $article;
     }
     /**
-     * @Route("/articles/edit/{id}", name="article_edit", requirements = {"id"="\d+"})
-     * @Method({"POST"})
-     * @View
+     * @Rest\Post(
+     *    path = "/articles/edit/{id}",
+     *    name = "articles_edit",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      * @ParamConverter("article", converter="fos_rest.request_body")
      */
     public function edit($id, Article $article)
@@ -57,9 +59,12 @@ Class ArticleController extends Controller
         return $article;
     }
     /**
-     * @Route("/articles/delete/{id}", name="article_delete", requirements = {"id"="\d+"})
-     * @Method({"DELETE"})
-     * @View
+     * @Rest\Delete(
+     *    path = "/articles/delete/{id}",
+     *    name = "articles_delete",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      */
     public function delete($id)
     {
@@ -78,8 +83,12 @@ Class ArticleController extends Controller
         return $article;
     }
     /**
-     * @Route("/articles/{type}", name="articles_type", requirements = {"type"="[a-z,A-Z]+"})
-     * @View
+     * @Rest\Get(
+     *    path = "/articles/{type}",
+     *    name = "articles_type",
+     *    requirements = {"type"="[a-z,A-Z]+"}
+     * )
+     * @Rest\View
      */
     public function showType($type)
     {
@@ -90,8 +99,12 @@ Class ArticleController extends Controller
         return $articles;
     }
     /**
-     * @Route("/articles/view/{id}", name="article_id", requirements = {"id"="\d+"})
-     * @View
+     * @Rest\Get(
+     *    path = "/articles/view/{id}",
+     *    name = "articles_id",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
      */
     public function showId(Article $article)
     {

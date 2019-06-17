@@ -2,17 +2,20 @@
 namespace App\Controller;
 
 use App\Entity\Member;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-Class MemberController extends Controller
+Class MemberController extends FOSRestController
 {
     /**
-     * @Route("/members", name="members_show")
-     * @View
+     * @Rest\Get(
+     *    path = "/members",
+     *    name = "members_show"
+     * )
+     * @Rest\View
      */
     public function showAll()
     {
@@ -21,11 +24,11 @@ Class MemberController extends Controller
         return $members;
     }
     /**
-     * @Route("/members/new", name="member_create")
-     * @Method({"POST"})
-     * @View(
-     *  statusCode = 201
+     * @Rest\Post(
+     *    path = "/members/new",
+     *    name = "members_create"
      * )
+     * @Rest\View(StatusCode = 201)
      * @ParamConverter("member", converter="fos_rest.request_body")
      */
     public function new(Member $member)
