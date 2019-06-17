@@ -46,17 +46,18 @@ Class EventController extends FOSRestController
     public function edit($id, Event $event)
     {
         $em = $this->getDoctrine()->getManager();
-        $event = $em->getRepository(Event::class)->find($id);        
+        $data = $em->getRepository(Event::class)->find($id);        
 
-        $event->setTitle($parsed_json->{'title'});
-        $event->setContent($parsed_json->{'content'});
-        $event->setSupport($parsed_json->{'support'});
-        $event->setStatus($parsed_json->{'status'});
-        $event->setDate($parsed_json->{'date'});
-        $event->setTime($parsed_json->{'time'});
+        $data->setTitle($event->getTitle());
+        $data->setContent($event->getContent());
+        $data->setSupport($event->getSupport());
+        $data->setStatus($event->getStatus());
+        $data->setDate($event->getDate());
+        $data->setTime($event->getTime());
+        
         $em->flush();
 
-        return $event;
+        return $data;
     }
     /**
      * @Rest\Delete(

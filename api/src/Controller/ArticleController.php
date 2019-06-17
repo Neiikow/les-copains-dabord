@@ -46,25 +46,26 @@ Class ArticleController extends FOSRestController
     public function edit($id, Article $article)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository(Article::class)->find($id);        
+        $data = $em->getRepository(Article::class)->find($id);        
         $type = $article->getType();
 
-        $article->setTitle($parsed_json->{'title'});
-        $article->setContent($parsed_json->{'content'});
-        $article->setStatus($parsed_json->{'status'});
+        $data->setTitle($article->getTitle());
+        $data->setContent($article->getContent());
+        $data->setStatus($article->getStatus());
         if ($type === 'ground') {
-            $article->setPicture($parsed_json->{'picture'});
-            $article->setLocationX($parsed_json->{'location_x'});
-            $article->setLocationY($parsed_json->{'location_y'});
+            $data->setPicture($article->getPicture());
+            $data->setLocationX($article->getLocationX());
+            $data->setLocationY($article->getLocationY());
         }
         if ($type === 'plugin') {
-            $article->setPicture($parsed_json->{'picture'});
-            $article->setLink($parsed_json->{'link'});
-            $article->setVersion($parsed_json->{'version'});
+            $data->setPicture($article->getPicture());
+            $data->setLink($article->getLink());
+            $data->setVersion($article->getVersion());
         }
+
         $em->flush();
 
-        return $article;
+        return $data;
     }
     /**
      * @Rest\Delete(
