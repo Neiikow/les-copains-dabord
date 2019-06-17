@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
+use App\Exception\ResourceValidationException;
 
 Class MemberController extends FOSRestController
 {
@@ -22,7 +23,12 @@ Class MemberController extends FOSRestController
     public function new(Member $member, ConstraintViolationList $violations)
     {
         if (count($violations)) {
-            return $this->view($violations, Response::HTTP_BAD_REQUEST);
+            $message = 'Le JSON envoyé contient des données non valides.';
+            foreach ($violations as $violation) {
+                $message .= sprintf(" %s : %s", $violation->getPropertyPath(), $violation->getMessage());
+            }
+
+            throw new ResourceValidationException($message);
         }
 
         $em = $this->getDoctrine()->getManager();

@@ -12,3 +12,7 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+    exception:
+        enabled: true
+        codes: { App\Exception\ResourceValidationException: 400 }
+        exception_controller: 'fos_rest.exception.controller:showAction'
