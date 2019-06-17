@@ -24,7 +24,15 @@ Class ArticleController extends FOSRestController
         $em->persist($article);
         $em->flush();
 
-        return $article;
+        return $this->view(
+            $article,
+            Response::HTTP_CREATED,
+            ['Location' =>$this->generateUrl(
+                'articles_id',
+                ['id' => $article->getId(),
+                UrlGeneratorInterface::ABSOLUTE_URL])
+            ]
+        );
     }
     /**
      * @Rest\Post(

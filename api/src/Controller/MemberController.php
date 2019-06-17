@@ -11,19 +11,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 Class MemberController extends FOSRestController
 {
     /**
-     * @Rest\Get(
-     *    path = "/members",
-     *    name = "members_show"
-     * )
-     * @Rest\View
-     */
-    public function showAll()
-    {
-        $members = $this->getDoctrine()->getRepository('App:Member')->findAll();
-        
-        return $members;
-    }
-    /**
      * @Rest\Post(
      *    path = "/members/new",
      *    name = "members_create"
@@ -37,6 +24,39 @@ Class MemberController extends FOSRestController
         $em->persist($member);
         $em->flush();
 
+        return $this->view(
+            $member,
+            Response::HTTP_CREATED,
+            ['Location' =>$this->generateUrl(
+                'members_id',
+                ['id' => $member->getId(),
+                UrlGeneratorInterface::ABSOLUTE_URL])
+            ]
+        );
+    }
+    /**
+     * @Rest\Get(
+     *    path = "/members",
+     *    name = "members_show"
+     * )
+     * @Rest\View
+     */
+    public function showAll()
+    {
+        $members = $this->getDoctrine()->getRepository('App:Member')->findAll();
+        
+        return $members;
+    }
+    /**
+     * @Rest\Get(
+     *    path = "/members/view/{id}",
+     *    name = "members_id",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
+     */
+    public function showId(Member $member)
+    {
         return $member;
     }
 }

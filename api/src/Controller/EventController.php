@@ -24,7 +24,15 @@ Class EventController extends FOSRestController
         $em->persist($event);
         $em->flush();
 
-        return $event;
+        return $this->view(
+            $event,
+            Response::HTTP_CREATED,
+            ['Location' =>$this->generateUrl(
+                'events_id',
+                ['id' => $event->getId(),
+                UrlGeneratorInterface::ABSOLUTE_URL])
+            ]
+        );
     }
     /**
      * @Rest\Post(
