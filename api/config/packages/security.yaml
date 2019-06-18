@@ -1,0 +1,30 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        App\Entity\User: plaintext
+
+    role_hierarchy:
+        # member hérite de visitor
+        ROLE_MEMBER: ROLE_USER
+        # admin hérite de member
+        ROLE_ADMIN: ROLE_MEMBER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        # indique quel entité on utilise pour l'authentification et le champ qui sert d'identifiant
+        main:
+            entity:
+                class: App\Entity\User
+                property: username
+        
+    firewalls:
+        # gestion d'authentification en fonction des url
+        main:
+            anonymous: ~
+            logout: ~
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
+
+    access_control:
+        - { path: ^/members, roles: ROLE_MEMBER }
