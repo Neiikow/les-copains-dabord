@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Member;
+use App\Entity\User;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -11,18 +11,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 Class AuthController extends FOSRestController
 {
     /**
-     * @Rest\Get(
-     *    path = "/auth",
-     *    name = "auth"
+     * @Rest\Post(
+     *    path = "/login",
+     *    name = "login"
      * )
      * @Rest\View
      */
-    public function auth(Member $member)
+    public function login(User $user)
     {
-        $datas = $this->getDoctrine()->getRepository('App:Member')->findBy(
+        $datas = $this->getDoctrine()->getRepository('App:User')->findBy(
             array(
-                'name' => $member->getName(),
-                'password' => $member->getPassword()
+                'username' => $user->getUsername(),
+                'password' => $user->getPassword()
             )
         );
         if (!$datas) {
