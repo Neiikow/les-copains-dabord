@@ -45,7 +45,7 @@ Class UserController extends FOSRestController
                 $user,
                 Response::HTTP_CREATED,
                 ['Location' =>$this->generateUrl(
-                    'members_id',
+                    'users_id',
                     ['id' => $user->getId(),
                     UrlGeneratorInterface::ABSOLUTE_URL])
                 ]

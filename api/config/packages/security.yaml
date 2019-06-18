@@ -24,7 +24,8 @@ security:
             logout: ~
             guard:
                 authenticators:
-                    - App\Security\TokenAuthenticator
+                    - App\Security\LoginAuthenticator
+                entry_point: App\Security\LoginAuthenticator
 
     access_control:
-        - { path: ^/members, roles: ROLE_MEMBER }
+        - { path: ^/userss, roles: ROLE_MEMBER }
