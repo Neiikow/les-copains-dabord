@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use App\Exception\ResourceValidationException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 Class ArticleController extends FOSRestController
 {
@@ -118,6 +119,7 @@ Class ArticleController extends FOSRestController
      *    requirements = {"type"="[a-z,A-Z]+"}
      * )
      * @Rest\View
+     * @Security("has_role('ROLE_USER')")
      */
     public function showType($type)
     {

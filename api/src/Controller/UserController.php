@@ -11,12 +11,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use App\Exception\ResourceValidationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 Class UserController extends FOSRestController
 {
     /**
      * @Rest\Post(
-     *    path = "/users/register",
+     *    path = "/register",
      *    name = "users_register"
      * )
      * @Rest\View(StatusCode = 201)
@@ -62,7 +63,7 @@ Class UserController extends FOSRestController
     }
     /**
      * @Rest\Post(
-     *    path = "/users/login",
+     *    path = "/login",
      *    name = "users_login"
      * )
      * @Rest\View
@@ -77,7 +78,6 @@ Class UserController extends FOSRestController
      *    name = "users_profil"
      * )
      * @Rest\View
-     * IsGranted("ROLE_USER")
      */
     public function profile()
     {

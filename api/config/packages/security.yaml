@@ -1,8 +1,13 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        App\Entity\User:
+        App\Entity\User: #plaintext
             algorithm: argon2i
+
+    role_hierarchy:
+        ROLE_MEMBER: ROLE_USER
+        ROLE_ADMIN: [ROLE_USER, ROLE_MEMBER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         # indique quel entité on utilise pour l'authentification et le champ qui sert d'identifiant
@@ -17,7 +22,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
             anonymous: true
+            provider: main
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
@@ -25,4 +32,6 @@ security:
                 path: users_logout
 
     access_control:
-        # - { path: ^/userss, roles: ROLE_MEMBER }
+        - { path: ^/events, roles: ROLE_MEMBER }
+        - { path: ^/users, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
