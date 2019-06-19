@@ -3,13 +3,14 @@
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class LoginAuthenticator extends AbstractGuardAuthenticator
 {
@@ -53,7 +54,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         // pas d'accès à $this->json hors des controller, on utilise donc JsonResponse
         return new JsonResponse([
             'error' => $exception->getMessageKey()
-        ], 403);
+        ], 400);
     }
 
     // appelée lorsque la fonction checkCredentials renvoie true

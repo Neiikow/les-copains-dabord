@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Table(name="user")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @Serializer\ExclusionPolicy("ALL")
  */
 class User implements UserInterface
@@ -27,6 +28,12 @@ class User implements UserInterface
      * @Assert\NotBlank
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="json")
+     * @Serializer\Expose
+     */
+    private $roles = [];
 
     /**
      * @ORM\Column(name="password", type="string", length=255)
@@ -60,63 +67,56 @@ class User implements UserInterface
      */
     private $create_date;
 
-    /**
-     * @ORM\Column(name="salt", type="string", length=255)
-     * @Serializer\Expose
-     */
-    private $salt;
-
-    /**
-     * @ORM\Column(name="roles", type="string", length=255)
-     * @Serializer\Expose
-     */
-    private $roles;
-
-    public function getId() { return $this->id; }
-    public function getUsername() { return $this->username; }
-    public function getPassword() { return $this->password; }
-    public function getEmail() { return $this->email; }
-    public function getPicture() { return $this->picture; }
-    public function getDiscord() { return $this->discord; }
-    public function getCreateDate() { return $this->createDate; }
-    public function getSalt() { return $this->salt; }
-    public function getRoles() { return $this->roles; }
-
-    public function setId($id)
+    public function getId(): ?int { return $this->id; }
+    public function getUsername(): string { return (string) $this->username; }
+    public function getPassword(): string { return (string) $this->password; }
+    public function getEmail(): string { return (string) $this->email; }
+    public function getPicture(): string { return (string) $this->picture; }
+    public function getDiscord(): string { return (string) $this->discord; }
+    public function getCreateDate() { return $this->create_date; }
+    public function getSalt() { }
+    public function getRoles(): array
     {
-        $this->id = $id;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
-    public function setUsername($username)
+
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+        return $this;
     }
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
-    public function setPicture($picture)
+    public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+        return $this;
     }
-    public function setDiscord($discord)
+    public function setDiscord(string $discord): self
     {
         $this->discord = $discord;
+        return $this;
     }
-    public function setCreateDate($createDate)
+    public function setCreateDate($create_date)
     {
-        $this->createDate = $createDate;
+        $this->create_date = $create_date;
+        return $this;
     }
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-    public function setRoles($roles)
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+        return $this;
+    }
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
     }
 
     public function eraseCredentials() {}

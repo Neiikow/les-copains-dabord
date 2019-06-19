@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.10",
+        "doctrine/doctrine-migrations-bundle": "^2.0",
         "doctrine/orm": "^2.6",
         "friendsofsymfony/rest-bundle": "^2.5",
         "jms/serializer-bundle": "^2.4",

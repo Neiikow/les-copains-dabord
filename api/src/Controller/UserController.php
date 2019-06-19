@@ -54,11 +54,47 @@ Class UserController extends FOSRestController
         catch(UniqueConstraintViolationException $e)
         {
             $errors['code'] = 400;
-            $errors['message'] = "Pseudo ou email déjà utilisé...";
+            $errors['message'] = "Pseudo déjà utilisé...";
             return $this->json([
                 'errors' => $errors
             ], 400);
         }
+    }
+    /**
+     * @Rest\Post(
+     *    path = "/users/login",
+     *    name = "users_login"
+     * )
+     * @Rest\View
+     */
+    public function login()
+    {
+        return $this->json(['login' => true]);
+    }
+    /**
+     * @Rest\Get(
+     *    path = "/users/profil",
+     *    name = "users_profil"
+     * )
+     * @Rest\View
+     * IsGranted("ROLE_USER")
+     */
+    public function profile()
+    {
+        return $this->json([
+            'user' => $this->getUser()
+        ]);
+    }
+    /**
+     * @Rest\Get(
+     *    path = "/users/home",
+     *    name = "users_home"
+     * )
+     * @Rest\View
+     */
+    public function home()
+    {
+        return $this->json(['result' => true]);
     }
     /**
      * @Rest\Get(
