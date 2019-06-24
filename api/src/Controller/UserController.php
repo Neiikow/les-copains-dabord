@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use App\Exception\ResourceValidationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\EntityRepository;
 
 Class UserController extends FOSRestController
 {
     /**
      * @Rest\Post(
-     *    path = "/register",
-     *    name = "users_register"
+     *    path = "/api/register",
+     *    name = "api_register"
      * )
      * @Rest\View(StatusCode = 201)
      * @ParamConverter("user", converter="fos_rest.request_body")
@@ -43,51 +43,25 @@ Class UserController extends FOSRestController
             $em->persist($user);
             $em->flush();
             return $this->view(
-                $user,
+                'Bienvenue '.$user->getUsername().' !',
                 Response::HTTP_CREATED,
                 ['Location' =>$this->generateUrl(
                     'users_id',
-                    ['id' => $user->getId(),
-                    UrlGeneratorInterface::ABSOLUTE_URL])
+                    ['id' => $user->getId()])
                 ]
             );
         }
         catch(UniqueConstraintViolationException $e)
         {
-            $errors['code'] = 400;
-            $errors['message'] = "Pseudo déjà utilisé...";
+            $errors['message'] = "Pseudo déjà utilisé !";
             return $this->json([
                 'errors' => $errors
             ], 400);
         }
     }
     /**
-     * @Rest\Post(
-     *    path = "/login",
-     *    name = "users_login"
-     * )
-     * @Rest\View
-     */
-    public function login()
-    {
-        return $this->json(['login' => true]);
-    }
-    /**
      * @Rest\Get(
-     *    path = "/users/profil",
-     *    name = "users_profil"
-     * )
-     * @Rest\View
-     */
-    public function profile()
-    {
-        return $this->json([
-            'user' => $this->getUser()
-        ]);
-    }
-    /**
-     * @Rest\Get(
-     *    path = "/users/home",
+     *    path = "/api/users/home",
      *    name = "users_home"
      * )
      * @Rest\View
@@ -98,27 +72,39 @@ Class UserController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/users",
+     *    path = "/api/users",
      *    name = "users_show"
      * )
      * @Rest\View
      */
     public function showAll()
     {
-        $user = $this->getDoctrine()->getRepository('App:User')->findAll();
-        
-        return $user;
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('u.username, u.email, u.roles, u.discord, u.picture')
+            ->from('App:User', 'u');
+        $query = $queryBuilder->getQuery();
+        $results = $query->getResult();
+
+        return $results;
     }
     /**
      * @Rest\Get(
-     *    path = "/users/view/{id}",
+     *    path = "/api/users/view/{id}",
      *    name = "users_id",
      *    requirements = {"id"="\d+"}
      * )
      * @Rest\View
      */
-    public function showId(User $user)
+    public function showId($id)
     {
-        return $user;
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('u.username, u.email, u.roles, u.discord, u.picture')
+            ->from('App:User', 'u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id);
+        $query = $queryBuilder->getQuery();
+        $results = $query->getResult();
+
+        return $results;
     }
 }

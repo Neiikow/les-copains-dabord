@@ -14,7 +14,7 @@ Class EventController extends FOSRestController
 {
     /**
      * @Rest\Post(
-     *    path = "/events/new",
+     *    path = "/api/events/new",
      *    name = "events_create"
      * )
      * @Rest\View(StatusCode = 201)
@@ -47,7 +47,7 @@ Class EventController extends FOSRestController
     }
     /**
      * @Rest\Post(
-     *    path = "/events/edit/{id}",
+     *    path = "/api/events/edit/{id}",
      *    name = "events_edit",
      *    requirements = {"id"="\d+"}
      * )
@@ -81,7 +81,7 @@ Class EventController extends FOSRestController
     }
     /**
      * @Rest\Delete(
-     *    path = "/events/delete/{id}",
+     *    path = "/api/events/delete/{id}",
      *    name = "events_delete",
      *    requirements = {"id"="\d+"}
      * )
@@ -105,7 +105,7 @@ Class EventController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/events/{status}",
+     *    path = "/api/events/{status}",
      *    name = "events_status",
      *    requirements = {"status"="[a-z,A-Z]+"}
      * )
@@ -121,7 +121,7 @@ Class EventController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/events/view/{id}",
+     *    path = "/api/events/view/{id}",
      *    name = "events_id",
      *    requirements = {"id"="\d+"}
      * )

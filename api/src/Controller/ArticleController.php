@@ -15,7 +15,7 @@ Class ArticleController extends FOSRestController
 {
     /**
      * @Rest\Post(
-     *    path = "/articles/new",
+     *    path = "/api/articles/new",
      *    name = "articles_create"
      * )
      * @Rest\View(StatusCode = 201)
@@ -48,7 +48,7 @@ Class ArticleController extends FOSRestController
     }
     /**
      * @Rest\Post(
-     *    path = "/articles/edit/{id}",
+     *    path = "/api/articles/edit/{id}",
      *    name = "articles_edit",
      *    requirements = {"id"="\d+"}
      * )
@@ -90,7 +90,7 @@ Class ArticleController extends FOSRestController
     }
     /**
      * @Rest\Delete(
-     *    path = "/articles/delete/{id}",
+     *    path = "/api/articles/delete/{id}",
      *    name = "articles_delete",
      *    requirements = {"id"="\d+"}
      * )
@@ -114,7 +114,7 @@ Class ArticleController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/articles/{type}",
+     *    path = "/api/articles/{type}",
      *    name = "articles_type",
      *    requirements = {"type"="[a-z,A-Z]+"}
      * )
@@ -131,7 +131,7 @@ Class ArticleController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/articles/view/{id}",
+     *    path = "/api/articles/view/{id}",
      *    name = "articles_id",
      *    requirements = {"id"="\d+"}
      * )
@@ -139,6 +139,11 @@ Class ArticleController extends FOSRestController
      */
     public function showId(Article $article)
     {
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'Aucun article correspondant'
+            );
+        }
         return $article;
     }
 }

@@ -67,36 +67,43 @@ class User implements UserInterface
      */
     private $create_date;
 
-    public function getId(): ?int { return $this->id; }
-    public function getUsername(): string { return (string) $this->username; }
-    public function getPassword(): string { return (string) $this->password; }
-    public function getEmail(): string { return (string) $this->email; }
-    public function getPicture(): string { return (string) $this->picture; }
-    public function getDiscord(): string { return (string) $this->discord; }
+    /**
+     * @ORM\Column(name="token", type="text", length=5000)
+     * @Serializer\Expose
+     */
+    private $token;
+
+    public function getId() { return $this->id; }
+    public function getUsername() { return $this->username; }
+    public function getPassword() { return $this->password; }
+    public function getEmail() { return $this->email; }
+    public function getPicture() { return $this->picture; }
+    public function getDiscord() { return $this->discord; }
     public function getCreateDate() { return $this->create_date; }
+    public function getToken() { return $this->token; }  
     public function getSalt() { }
-    public function getRoles(): array
+    public function getRoles()
     {
         $roles = $this->roles;
         return array_unique($roles);
     }
 
-    public function setUsername(string $username): self
+    public function setUsername($username)
     {
         $this->username = $username;
         return $this;
     }
-    public function setEmail(string $email): self
+    public function setEmail(string $email)
     {
         $this->email = $email;
         return $this;
     }
-    public function setPicture(string $picture): self
+    public function setPicture(string $picture)
     {
         $this->picture = $picture;
         return $this;
     }
-    public function setDiscord(string $discord): self
+    public function setDiscord(string $discord)
     {
         $this->discord = $discord;
         return $this;
@@ -106,16 +113,21 @@ class User implements UserInterface
         $this->create_date = $create_date;
         return $this;
     }
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
         return $this;
     }
-    public function setPassword(string $password): self
+    public function setPassword(string $password)
     {
         $this->password = $password;
         return $this;
     }
-
+    public function setToken(string $token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+    
     public function eraseCredentials() {}
 }
