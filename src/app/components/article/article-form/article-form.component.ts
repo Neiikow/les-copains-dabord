@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
@@ -13,8 +13,9 @@ import { ArticleService } from 'src/app/services/article.service';
 export class ArticleFormComponent implements OnInit {
   private edit = false;
   private type: string;
-  private dataForm: any;
+  private dataForm: FormGroup;
   private article: Article;
+  private submitted = false;
 
   constructor(
     private articleService: ArticleService,
@@ -26,11 +27,17 @@ export class ArticleFormComponent implements OnInit {
     this.initParam();
   }
   private onSubmit(formData: Article): void {
-    if (this.edit) {
-      this.articleService.editArticle(formData).subscribe(e => this.location.back());
-    } else {
-      this.articleService.addArticle(formData).subscribe(e => this.location.back());
+    this.submitted = true;
+    if (this.dataForm.invalid) {
+      return;
     }
+
+    alert('L\'article ' + this.dataForm.value.title + ' a été posté !');
+    // if (this.edit) {
+    //   this.articleService.editArticle(formData).subscribe(e => this.location.back());
+    // } else {
+    //   this.articleService.addArticle(formData).subscribe(e => this.location.back());
+    // }
   }
   private initParam(): void {
     this.route.params.subscribe((param: {type: string, id: number}) => {
@@ -49,19 +56,31 @@ export class ArticleFormComponent implements OnInit {
     });
   }
   private initForm(data?: Article): void {
-    this.dataForm = this.formBuilder.group({
-      id: [this.edit ? data.id : null],
-      title: [this.edit ? data.title : null],
-      content: [this.edit ? data.content : null],
-      author: [this.edit ? data.author : null],
-      picture: [this.edit ? data.picture : null],
-      type: [this.edit ? data.type : this.type],
-      status: [this.edit ? data.status : 'online'],
-      location_x: [this.edit ? data.location_x : null],
-      location_y: [this.edit ? data.location_y : null],
-      version: [this.edit ? data.version : null],
-      link: [this.edit ? data.link : null],
-    });
+    if (this.type === 'ground') {
+      this.dataForm = this.formBuilder.group({
+        title: [this.edit ? data.title : null, Validators.required],
+        content: [this.edit ? data.content : null, Validators.required],
+        author: [this.edit ? data.author : null],
+        picture: [this.edit ? data.picture : null, Validators.required],
+        type: [this.edit ? data.type : this.type],
+        status: [this.edit ? data.status : 'online'],
+        location_x: [this.edit ? data.location_x : null, Validators.required],
+        location_y: [this.edit ? data.location_y : null, Validators.required],
+      });
+    }
+    if (this.type === 'plugin') {
+      this.dataForm = this.formBuilder.group({
+        title: [this.edit ? data.title : null, Validators.required],
+        content: [this.edit ? data.content : null, Validators.required],
+        author: [this.edit ? data.author : null],
+        picture: [this.edit ? data.picture : null, Validators.required],
+        type: [this.edit ? data.type : this.type],
+        status: [this.edit ? data.status : 'online'],
+        version: [this.edit ? data.version : null, Validators.required],
+        link: [this.edit ? data.link : null, Validators.required],
+      });
+    }
     this.article = this.dataForm.value;
   }
+  public get f(): any { return this.dataForm.controls; }
 }

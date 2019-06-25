@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/class/user';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,8 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  private dataForm: any;
+  private dataForm: FormGroup;
+  private submitted = false;
 
   constructor(
     private formBuilder: FormBuilder) { }
@@ -15,15 +17,20 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void {
     this.initForm();
   }
+  private onSubmit(formData: User): void {
+    this.submitted = true;
+    if (this.dataForm.invalid) {
+      return;
+    }
+
+    alert('Bon retour ' + this.dataForm.value.username + ' !');
+    //this.userService.addUser(formData).subscribe(e => this.router.navigate(['/profil']));
+  }
   private initForm(): void {
     this.dataForm = this.formBuilder.group({
-      discord: '',
-      email: '',
-      id: '',
-      password: '',
-      picture: '',
-      roles: ['ROLE_USER'],
-      username: '',
+      password: ['', Validators.required],
+      username: ['', Validators.required],
     });
   }
+  public get f(): any { return this.dataForm.controls; }
 }
