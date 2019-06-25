@@ -17,8 +17,8 @@ Class UserController extends FOSRestController
 {
     /**
      * @Rest\Post(
-     *    path = "/api/register",
-     *    name = "api_register"
+     *    path = "/api/users/register",
+     *    name = "users_register"
      * )
      * @Rest\View(StatusCode = 201)
      * @ParamConverter("user", converter="fos_rest.request_body")

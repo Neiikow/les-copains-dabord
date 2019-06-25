@@ -9,10 +9,10 @@ import { ArticleService } from 'src/app/services/article.service';
   templateUrl: './article-presentation.component.html',
 })
 export class ArticlePresentationComponent implements OnInit {
-  private members: object;
-  private status: string;
-  private version: string;
-  private total: string;
+  private players: object;
+  private status: object;
+  private version: object;
+  private total: object;
   private article: Article;
 
   constructor(
@@ -33,6 +33,6 @@ export class ArticlePresentationComponent implements OnInit {
     this.apimcService.getStatus().subscribe(status => this.status = status);
     this.apimcService.getVersion().subscribe(version => this.version = version);
     this.apimcService.getTotal().subscribe(total => this.total = total);
-    this.apimcService.getOnlineMembers().subscribe(members => this.members = members);
+    this.apimcService.getOnlinePlayers().subscribe(players => this.players = players);
   }
 }

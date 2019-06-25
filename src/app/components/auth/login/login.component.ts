@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
       discord: '',
       email: '',
       id: '',
-      name: '',
       password: '',
       picture: '',
-      role: 'membre',
+      roles: ['ROLE_USER'],
+      username: '',
     });
   }
 }

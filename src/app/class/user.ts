@@ -1,9 +1,9 @@
-export class Member {
+export class User {
     public id: number;
-    public name: string;
+    public username: string;
     public password: string;
     public email: string;
     public picture: string;
-    public role: string;
+    public roles: [];
     public discord: number;
 }

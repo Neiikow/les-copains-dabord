@@ -16,11 +16,11 @@
   </div>
   <div class='info-serv col p-1 app-border-primary app-bg-secondary'>
     <h4 class="text-center">En jeu</h4>
-    <div *ngIf="members">
-      <div class='app-bg-primary border border-dark mt-1 p-1' [innerHTML]="member.picture + member.name" *ngFor="let member of members">
+    <div *ngIf="players">
+      <div class='app-bg-primary border border-dark mt-1 p-1' [innerHTML]="player.name" *ngFor="let player of players">
       </div>
     </div>
-    <div *ngIf="!members">
+    <div *ngIf="!players">
       Aucun joueur connecté
     </div>
   </div>

@@ -10,6 +10,8 @@ Class ApiMcController extends FOSRestController
     private $apiUrl = "https://minecraft-api.com/api/query/";
     private $ip = "mc70.boxtoplay.com";
     private $port = "27511";
+    //private $ip = 'play.politicraft.fr';
+    //private $port = '25565';
 
     /**
      * @Rest\Get(
@@ -73,14 +75,11 @@ Class ApiMcController extends FOSRestController
             foreach ($matches as $value) {
                 $re = "#(<.*'>)(.*)#";
                 $member = [
-                    'picture'=>preg_replace($re, "$1", $value),
                     'name'=>preg_replace($re, "$2", $value),
                 ];
                 array_push($members, $member);
             }
-            $membersList = json_encode($members);
-
-            return $membersList;
+            return $members;
         }
 
         return $data;
