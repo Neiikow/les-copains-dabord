@@ -54,9 +54,7 @@ Class UserController extends FOSRestController
         catch(UniqueConstraintViolationException $e)
         {
             $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
-            return $this->json([
-                'errors' => $errors
-            ], 400);
+            return $this->json($errors, 400);
         }
     }
     /**

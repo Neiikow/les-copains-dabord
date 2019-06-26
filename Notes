@@ -6,8 +6,6 @@ token sont stockés en bdd dans le table user
 angular -> use un intercepteur pour les requetes (token)
 client renvoie sur l'url du refresh si il recoi une erreur à cause de l'expiration
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8888/les-copains-dabord/api/public/login_check -d '{"username":"test","password":"test"}'
-
 
 register -> creation + stock token en bdd + envoie token au client
 Requete depuis client -> envoie le token en header -> compare token reçu avec celui en bdd
@@ -15,3 +13,8 @@ Si token expiré -> renvoi au client une erreur -> Client renvoie le token sur l
 Deco -> Delete token et refeesh
 toutes les route debute par api/
 
+
+
+ANGULAR **************
+
+Légé problème userService lors du register et login (post<any>)

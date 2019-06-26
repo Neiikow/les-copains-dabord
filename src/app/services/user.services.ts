@@ -16,21 +16,27 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/users/';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/';
 
   constructor(private http: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url, httpOptions);
+    return this.http.get<User[]>(this.url + 'users', httpOptions);
   }
-  public addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url + 'register', user, httpOptions)
+  public getUser(user: User): Observable<User> {
+    return this.http.post<any>(this.url + 'login_check', user, httpOptions)
     .pipe(
       catchError(this.handleError),
     );
   }
+  public addUser(user: User): Observable<User> {
+    return this.http.post<any>(this.url + 'users/register', user, httpOptions)
+    .pipe(
+      catchError( this.handleError),
+    );
+  }
   private handleError(error: HttpErrorResponse): any {
-    const errorMsg = error.error.errors.message;
+    const errorMsg = error.error.message;
     return throwError(errorMsg);
   }
 }
