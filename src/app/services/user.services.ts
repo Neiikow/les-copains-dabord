@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { User } from '../class/user';
 
 const httpOptions = {
@@ -23,6 +24,13 @@ export class UserService {
     return this.http.get<User[]>(this.url, httpOptions);
   }
   public addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url + 'register', user, httpOptions);
+    return this.http.post<User>(this.url + 'register', user, httpOptions)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+  private handleError(error: HttpErrorResponse): any {
+    const errorMsg = error.error.errors.message;
+    return throwError(errorMsg);
   }
 }

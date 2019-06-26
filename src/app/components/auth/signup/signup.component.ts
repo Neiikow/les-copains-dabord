@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.services';
 export class SignupComponent {
   private dataForm: FormGroup;
   private submitted = false;
+  private error = false;
 
   constructor(
     private userService: UserService,
@@ -29,8 +30,14 @@ export class SignupComponent {
       return;
     }
 
-    alert('Bienvenue ' + this.dataForm.value.username + ' !');
-    //this.userService.addUser(formData).subscribe(e => this.router.navigate(['/profil']));
+    this.userService.addUser(formData).subscribe(
+      (next) => {
+        console.log(next);
+      },
+      (error) => {
+        this.error = error;
+      },
+    );
   }
   private initForm(): void {
     this.dataForm = this.formBuilder.group({

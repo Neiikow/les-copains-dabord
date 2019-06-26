@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { UserService } from 'src/app/services/user.services';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,9 @@ export class LoginComponent implements OnInit {
   private submitted = false;
 
   constructor(
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router) { }
 
   public ngOnInit(): void {
     this.initForm();
@@ -23,7 +27,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    alert('Bon retour ' + this.dataForm.value.username + ' !');
     //this.userService.addUser(formData).subscribe(e => this.router.navigate(['/profil']));
   }
   private initForm(): void {
