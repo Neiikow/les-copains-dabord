@@ -32,7 +32,14 @@ export class SignupComponent {
 
     this.userService.addUser(formData).subscribe(
       (next) => {
-        console.log(next);
+        this.userService.getUser(formData).subscribe(
+          (next) => {
+            console.log(next);
+          },
+          (error) => {
+            this.error = error;
+          },
+        );
       },
       (error) => {
         this.error = error;
