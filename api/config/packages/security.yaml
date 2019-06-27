@@ -37,6 +37,18 @@ security:
             security: false    
             anonymous: true    
 
+        apimc:
+            pattern: ^/apimc
+            stateless: true
+            security: false    
+            anonymous: true
+
+        articles:
+            pattern: ^/api/articles
+            stateless: true
+            security: false    
+            anonymous: true    
+
         refresh:
             pattern: ^/api/token/refresh
             stateless: true
@@ -53,9 +65,9 @@ security:
 
     access_control:
         - { path: ^/api/events, roles: ROLE_MEMBER }
-        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: ROLE_USER }
         - { path: ^/api/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

@@ -56,6 +56,7 @@ export class ArticleFormComponent implements OnInit {
     });
   }
   private initForm(data?: Article): void {
+    console.log(data);
     if (this.type === 'ground') {
       this.dataForm = this.formBuilder.group({
         title: [this.edit ? data.title : null, Validators.required],

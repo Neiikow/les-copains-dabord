@@ -119,7 +119,6 @@ Class ArticleController extends FOSRestController
      *    requirements = {"type"="[a-z,A-Z]+"}
      * )
      * @Rest\View
-     * @Security("has_role('ROLE_USER')")
      */
     public function showType($type)
     {

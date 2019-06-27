@@ -59,17 +59,6 @@ Class UserController extends FOSRestController
     }
     /**
      * @Rest\Get(
-     *    path = "/api/users/home",
-     *    name = "users_home"
-     * )
-     * @Rest\View
-     */
-    public function home()
-    {
-        return $this->json(['result' => true]);
-    }
-    /**
-     * @Rest\Get(
      *    path = "/api/users",
      *    name = "users_show"
      * )
@@ -93,16 +82,16 @@ Class UserController extends FOSRestController
      * )
      * @Rest\View
      */
-    public function showId($id)
+    public function showId(User $user)
     {
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
-            ->select('u.username, u.email, u.roles, u.discord, u.picture')
-            ->from('App:User', 'u')
-            ->where('u.id = :id')
-            ->setParameter('id', $id);
-        $query = $queryBuilder->getQuery();
-        $results = $query->getResult();
+        $user = [
+           'username' => $user->getUsername(),
+           'email' => $user->getEmail(),
+           'roles' => $user->getRoles(),
+           'discord' => $user->getDiscord(),
+           'picture' => $user->getPicture(),
+        ];
 
-        return $results;
+        return $user;
     }
 }

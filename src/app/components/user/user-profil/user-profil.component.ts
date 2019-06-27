@@ -14,6 +14,7 @@ export class UserProfilComponent implements OnInit {
   private dataForm: FormGroup;
   private submitted = false;
   private error = false;
+  private user: User;
 
   constructor(
     private userService: UserService,
@@ -22,7 +23,11 @@ export class UserProfilComponent implements OnInit {
     private router: Router) { }
 
   public ngOnInit(): void {
-    this.initForm();
+    this.userService.getUserById(Number(localStorage.getItem('id')))
+      .subscribe((user: User) => {
+        this.user = user;
+        this.initForm(user);
+    });
   }
   private onSubmit(formData: User): void {
     this.submitted = true;
@@ -30,17 +35,20 @@ export class UserProfilComponent implements OnInit {
     if (this.dataForm.invalid) {
       return ;
     }
+    console.log('modifié');
   }
-  private initForm(): void {
+  private initForm(data?: User): void {
     this.dataForm = this.formBuilder.group({
-      discord: ['', Validators.minLength(4)],
-      email: ['', Validators.email],
-      password: ['', Validators.minLength(4)],
+      discord: [data.discord, Validators.minLength(4)],
+      email: [data.email, Validators.email],
       passwordConf: '',
-      picture: '',
-      username: '',
+      passwordNew: ['', Validators.minLength(4)],
+      passwordOld: ['', Validators.minLength(4)],
+      picture: data.picture,
+      roles: data.roles,
+      username: data.username,
     }, {
-      validator: this.formValidator.confirmMatch('password', 'passwordConf'),
+      validator: this.formValidator.confirmMatch('passwordNew', 'passwordConf'),
     });
   }
   public get f(): any { return this.dataForm.controls; }

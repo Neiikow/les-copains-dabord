@@ -27,6 +27,9 @@ export class UserService {
       catchError(this.handleError),
     );
   }
+  public getUserById(id: number): Observable<User> {
+    return this.http.get<User>(this.url + 'users/view/' + id, httpOptions);
+  }
   public addUser(user: User): Observable<User> {
     return this.http.post<any>(this.url + 'register', user, httpOptions)
     .pipe(
