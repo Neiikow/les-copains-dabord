@@ -30,7 +30,7 @@ class JWTCreatedListener extends AuthenticationSuccessHandler
         $user = $event->getUser();
 
         $payload = $event->getData();
-        $payload['ip'] = $user->getId();
+        $payload['id'] = $user->getId();
         $payload['email'] = $user->getEmail();
         $payload['discord'] = $user->getDiscord();
         $payload['picture'] = $user->getPicture();

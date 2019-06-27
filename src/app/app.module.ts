@@ -1,9 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
-//import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-//import { TokenInterceptor } from './auth/token.interceptor';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +23,7 @@ import { PageMembersComponent } from './components/pages/page-members/page-membe
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -46,6 +46,7 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
     UserListComponent,
     LoginComponent,
     SignupComponent,
+    UserProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,11 +56,11 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
     HttpClientModule,
   ],
   providers: [
-    // {
-    //   multi: true,
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    // },
+    {
+      multi: true,
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+    },
   ],
 })
 export class AppModule { }

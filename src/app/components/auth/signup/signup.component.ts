@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
 import { UserService } from 'src/app/services/user.services';
 
@@ -10,16 +11,17 @@ import { UserService } from 'src/app/services/user.services';
   styleUrls: ['./signup.component.css'],
   templateUrl: './signup.component.html',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   private dataForm: FormGroup;
   private submitted = false;
   private error = false;
 
   constructor(
+    private authService: AuthService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private formValidator: FormValidatorService) { }
+    private formValidator: FormValidatorService,
+    private router: Router) { }
 
   public ngOnInit(): void {
     this.initForm();
@@ -34,7 +36,10 @@ export class SignupComponent {
       (next) => {
         this.userService.getUser(formData).subscribe(
           (next) => {
-            console.log(next);
+            const decodedToken = this.authService.getDecodedToken(next.token);
+            localStorage.setItem('token', next.token);
+            localStorage.setItem('id', decodedToken.id);
+            this.router.navigate(['/profil']);
           },
           (error) => {
             this.error = error;

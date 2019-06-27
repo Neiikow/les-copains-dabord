@@ -1,0 +1,64 @@
+<div class="app-bg-primary text-center p-1 mb-2">
+  <h1>[pseudo]</h1>
+</div>
+<div class='justify-content-center m-3'>
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)"  class="row text-left m-auto w-75">
+    <div class="mb-1 col-6">
+      <div *ngIf="submitted && error" class="text-center alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      <div class="form-group">
+        <label for="username">Pseudo</label>
+        <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors}">
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Pseudo requis</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': submitted && f.password.errors}">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+          <div *ngIf="f.password.errors.minlength">Mot de passe trop court</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password-conf">Confirmation</label>
+        <input type="password" class="form-control" id="password-conf" formControlName="passwordConf" [ngClass]="{'is-invalid': submitted && f.passwordConf.errors}">
+        <div *ngIf="submitted && f.passwordConf.errors" class="invalid-feedback">
+          <div *ngIf="f.passwordConf.errors.required">Confirmation requise</div>
+          <div *ngIf="f.passwordConf.errors.confirmMatch">Confirmation invalide</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-1 col-6">
+      <div *ngIf="submitted && error" class="text-center alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'is-invalid': submitted && f.email.errors}">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email requis</div>
+          <div *ngIf="f.email.errors.email">Email invalide</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="picture">Avatar</label>
+        <input type="text" class="form-control" id="picture" formControlName="picture" [ngClass]="{'is-invalid': submitted && f.picture.errors}">
+        <div *ngIf="submitted && f.picture.errors" class="invalid-feedback">
+          <div *ngIf="f.picture.errors.url">Url invalide</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="discord">Discord</label>
+        <input type="number" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord.errors}">
+        <div *ngIf="submitted && f.discord.errors" class="invalid-feedback">
+          <div *ngIf="f.discord.errors.maxlength">Valeur trop longue</div>
+          <div *ngIf="f.discord.errors.minlength">Valeur trop courte</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary m-auto">Modifier</button>
+  </form>
+</div>

@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   public login(): void {
-    this.authSub.next(true);
+    //this.authSub.next(true);
   }
 
   public logout(): void {
@@ -22,6 +22,13 @@ export class AuthService {
 
   public getToken(): string {
     return localStorage.getItem('token');
+  }
+  public getDecodedToken(token: string): any {
+    try {
+        return jwt_decode(token);
+    } catch (Error) {
+        return 'Decode error';
+    }
   }
   public isAuthenticated(): boolean {
     const token = this.getToken();

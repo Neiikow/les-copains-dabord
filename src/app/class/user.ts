@@ -6,4 +6,5 @@ export class User {
     public picture: string;
     public roles: [];
     public discord: number;
+    public token: string;
 }
