@@ -16,34 +16,35 @@ import { PageMembersComponent } from './components/pages/page-members/page-membe
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RolesGuardService } from './services/roles-guard.service';
 
 const routes: Routes = [
   { path: 'minecraft', component: PageMinecraftComponent, children: [
     { path: 'terrains', component: ArticleListComponent, data: {type: 'ground', design: 'card'} },
     { path: 'plugins', component: ArticleListComponent, data: {type: 'plugin', design: 'row'} },
-    { path: 'nouveau/:type', component: ArticleFormComponent, canActivate: [AuthGuardService], data: {edit: false} },
-    { path: 'editer/:id', component: ArticleFormComponent, canActivate: [AuthGuardService], data: {edit: true} },
+    { path: 'nouveau/:type', component: ArticleFormComponent, canActivate: [RolesGuardService], data: {edit: false, roles: 'ROLE_MEMBER'} },
+    { path: 'editer/:id', component: ArticleFormComponent, canActivate: [RolesGuardService], data: {edit: true, roles: 'ROLE_MEMBER'} },
     { path: '', pathMatch: 'full', redirectTo: 'terrains' },
   ] },
   { path: 'minecraft/terrains/:id', component: ArticleViewComponent, data: {type: 'ground'} },
   { path: 'minecraft/plugins/:id', component: ArticleViewComponent, data: {type: 'plugin'} },
-  { path: 'evenements', component: PageEventsComponent, canActivate: [AuthGuardService], children: [
+  { path: 'evenements', component: PageEventsComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_MEMBER'}, children: [
     { path: 'bientot', component: EventListComponent, data: {status: 'active'} },
     { path: 'archive', component: EventListComponent, data: {status: 'archive'} },
     { path: 'nouveau', component: EventFormComponent, data: {edit: false} },
     { path: 'editer/:id', component: EventFormComponent, data: {edit: true} },
     { path: '', pathMatch: 'full', redirectTo: 'bientot' },
   ] },
-  { path: 'evenements/bientot/:id', component: EventViewComponent, data: {status: 'active'} },
-  { path: 'evenements/archive/:id', component: EventViewComponent, data: {status: 'archive'} },
-  { path: 'membres', component: PageMembersComponent, canActivate: [AuthGuardService] },
+  { path: 'evenements/bientot/:id', component: EventViewComponent, canActivate: [RolesGuardService], data: {status: 'active', roles: 'ROLE_MEMBER'} },
+  { path: 'evenements/archive/:id', component: EventViewComponent, canActivate: [RolesGuardService], data: {status: 'archive', roles: 'ROLE_MEMBER'} },
+  { path: 'membres', component: PageMembersComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_USER'} },
   { path: 'profil', component: PageProfilComponent, canActivate: [AuthGuardService] },
   { path: 'connexion', component: PageLoginComponent, children: [
     { path: 'connexion', component: LoginComponent },
     { path: 'inscription', component: SignupComponent },
     { path: '', pathMatch: 'full', redirectTo: 'connexion' },
   ] },
-  { path: 'dashboard', component: PageDashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'dashboard', component: PageDashboardComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_ADMIN'} },
   { path: '', redirectTo: 'minecraft', pathMatch: 'full' },
   { path: '**', redirectTo: 'minecraft', pathMatch: 'full' },
 ];
@@ -57,6 +58,7 @@ const routes: Routes = [
   ],
   providers: [
     AuthGuardService,
+    RolesGuardService,
   ],
 })
 export class AppRoutingModule { }
