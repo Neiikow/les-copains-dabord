@@ -1,5 +1,5 @@
-<div *ngIf="user" class="app-bg-primary text-center mb-2">
-  <h1 class="p-1">{{ user.username }}</h1>
+<div class="app-bg-primary text-center mb-2">
+  <h1 class="p-1">Profil</h1>
 </div>
 <div class='justify-content-center m-3'>
   <form *ngIf="user" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)"  class="row text-left m-auto w-75">
@@ -23,11 +23,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="passwordNew">Nouveau mot de passe</label>
-        <input type="password" class="form-control" id="passwordNew" formControlName="passwordNew" [ngClass]="{'is-invalid': submitted && f.passwordNew.errors}">
-        <div *ngIf="submitted && f.passwordNew.errors" class="invalid-feedback">
-          <div *ngIf="f.passwordNew.errors.required">Mot de passe requis</div>
-          <div *ngIf="f.passwordNew.errors.minlength">Mot de passe trop court</div>
+        <label for="password">Nouveau mot de passe</label>
+        <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': submitted && f.password.errors}">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+          <div *ngIf="f.password.errors.minlength">Mot de passe trop court</div>
         </div>
       </div>
       <div class="form-group">
@@ -60,10 +60,15 @@
       </div>
       <div class="form-group">
         <label for="discord">Discord</label>
-        <input type="number" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord.errors}">
-        <div *ngIf="submitted && f.discord.errors" class="invalid-feedback">
-          <div *ngIf="f.discord.errors.maxlength">Valeur trop longue</div>
-          <div *ngIf="f.discord.errors.minlength">Valeur trop courte</div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">#</div>
+          </div>
+          <input type="number" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord.errors}">
+          <div *ngIf="submitted && f.discord.errors" class="invalid-feedback">
+            <div *ngIf="f.discord.errors.max">Valeur trop longue</div>
+            <div *ngIf="f.discord.errors.min">Valeur trop courte</div>
+          </div>
         </div>
       </div>
       <div class="form-group">

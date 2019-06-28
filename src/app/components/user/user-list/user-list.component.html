@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <th><img src="{{ user.picture }}" width="35" height="35" alt="avatar"></th>
+        <th><div class="d-flex justify-content-center"><img src="{{ user.picture }}" alt="avatar"></div></th>
         <td class='col text-left'>{{ user.username }}</td>
         <td>{{ user.roles }}</td>
         <td>#{{ user.discord }}</td>

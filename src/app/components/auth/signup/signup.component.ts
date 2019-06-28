@@ -32,9 +32,9 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.userService.addUser(formData).subscribe(
+    this.authService.register(formData).subscribe(
       (next) => {
-        this.userService.getUser(formData).subscribe(
+        this.authService.login(formData).subscribe(
           (next) => {
             const decodedToken = this.authService.getDecodedToken(next.token);
             localStorage.setItem('token', next.token);

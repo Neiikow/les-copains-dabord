@@ -16,8 +16,8 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/dashboard">Dashboard</a>
         <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/profil">Profil</a>
-        <a class="btn btn-info mr-2" routerLink="/connexion">Connexion</a>
-        <a class="btn btn-info" routerLink="/minecraft">Deconnexion</a>
+        <a class="btn btn-info mr-2" routerLink="/connexion" *ngIf="!(obs$ | async)">Connexion</a>
+        <a class="btn btn-info" routerLink="/minecraft" *ngIf="(obs$ | async)" (click)="logout()">Deconnexion</a>
       </div>
     </div>
   </div>

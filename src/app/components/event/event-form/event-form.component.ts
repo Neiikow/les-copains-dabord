@@ -31,12 +31,11 @@ export class EventFormComponent implements OnInit {
       return;
     }
 
-    alert('Event ' + this.dataForm.value.title + ' publié !');
-    // if (this.edit) {
-    //   this.eventService.editEvent(formData).subscribe(e => this.location.back());
-    // } else {
-    //   this.eventService.addEvent(formData).subscribe(e => this.location.back());
-    // }
+    if (this.edit) {
+      this.eventService.editEvent(formData).subscribe(e => this.location.back());
+    } else {
+      this.eventService.addEvent(formData).subscribe(e => this.location.back());
+    }
   }
   private initParam(): void {
     this.route.params.subscribe((param: {id: number}) => {

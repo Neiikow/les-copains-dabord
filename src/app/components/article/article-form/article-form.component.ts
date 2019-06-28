@@ -32,12 +32,11 @@ export class ArticleFormComponent implements OnInit {
       return;
     }
 
-    alert('L\'article ' + this.dataForm.value.title + ' a été posté !');
-    // if (this.edit) {
-    //   this.articleService.editArticle(formData).subscribe(e => this.location.back());
-    // } else {
-    //   this.articleService.addArticle(formData).subscribe(e => this.location.back());
-    // }
+    if (this.edit) {
+      this.articleService.editArticle(formData).subscribe(e => this.location.back());
+    } else {
+      this.articleService.addArticle(formData).subscribe(e => this.location.back());
+    }
   }
   private initParam(): void {
     this.route.params.subscribe((param: {type: string, id: number}) => {

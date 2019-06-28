@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { User } from '../class/user';
 
 const httpOptions = {
@@ -14,30 +13,17 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/users/';
 
   constructor(private http: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'users', httpOptions);
-  }
-  public getUser(user: User): Observable<User> {
-    return this.http.post<any>(this.url + 'login_check', user, httpOptions)
-    .pipe(
-      catchError(this.handleError),
-    );
+    return this.http.get<User[]>(this.url, httpOptions);
   }
   public getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.url + 'users/view/' + id, httpOptions);
+    return this.http.get<User>(this.url + 'view/' + id, httpOptions);
   }
-  public addUser(user: User): Observable<User> {
-    return this.http.post<any>(this.url + 'register', user, httpOptions)
-    .pipe(
-      catchError( this.handleError),
-    );
-  }
-  private handleError(error: HttpErrorResponse): any {
-    const errorMsg = error.error.message;
-    return throwError(errorMsg);
+  public editUser(user: User): Observable<User> {
+    return this.http.post<User>(this.url + 'edit/' + Number(localStorage.getItem('id')), user, httpOptions);
   }
 }

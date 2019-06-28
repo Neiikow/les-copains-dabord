@@ -58,6 +58,62 @@ Class UserController extends FOSRestController
         }
     }
     /**
+     * @Rest\Post(
+     *    path = "/api/users/edit/{id}",
+     *    name = "users_edit",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @ParamConverter("user", converter="fos_rest.request_body")
+     */
+    public function edit(UserPasswordEncoderInterface $passwordEncoder, User $user, $id, ConstraintViolationList $violations)
+    {
+        if (count($violations)) {
+            foreach ($violations as $violation) {
+                $message = sprintf(" %s : %s", $violation->getPropertyPath(), $violation->getMessage());
+            }
+            throw new ResourceValidationException($message);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $data = $em->getRepository(User::class)->find($id);
+        $data->setUsername($user->getUsername());
+        $data->setEmail($user->getEmail());
+
+        if ($user->getPassword()) {
+            $encodedPassword = $passwordEncoder->encodePassword(
+                $user,
+                $user->getPassword()
+            );
+            $data->setPassword($encodedPassword);
+        } else {
+            $user->setPassword($data->getPassword());
+        }
+        if ($user->getDiscord()) {
+            $data->setDiscord($user->getDiscord());
+        }
+        if ($user->getPicture()) {
+            $data->setPicture($user->getPicture());
+        }
+        
+        try
+        {
+            $em->flush();
+            return $this->view(
+                'Profil de '.$data->getUsername().' édité !',
+                Response::HTTP_CREATED,
+                ['Location' =>$this->generateUrl(
+                    'users_id',
+                    ['id' => $data->getId()])
+                ]
+            );
+        }
+        catch(UniqueConstraintViolationException $e)
+        {
+            $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
+            return $this->json($errors, 400);
+        }
+    }
+    /**
      * @Rest\Get(
      *    path = "/api/users",
      *    name = "users_show"

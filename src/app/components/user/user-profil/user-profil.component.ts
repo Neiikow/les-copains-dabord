@@ -35,20 +35,20 @@ export class UserProfilComponent implements OnInit {
     if (this.dataForm.invalid) {
       return ;
     }
-    console.log('modifié');
+    this.userService.editUser(formData).subscribe();
   }
   private initForm(data?: User): void {
     this.dataForm = this.formBuilder.group({
-      discord: [data.discord, Validators.minLength(4)],
+      discord: [data.discord, [Validators.min(1000), Validators.max(9999)]],
       email: [data.email, Validators.email],
+      password: ['', Validators.minLength(4)],
       passwordConf: '',
-      passwordNew: ['', Validators.minLength(4)],
       passwordOld: ['', Validators.minLength(4)],
       picture: data.picture,
-      roles: data.roles,
+      roles: this.formBuilder.array(data.roles),
       username: data.username,
     }, {
-      validator: this.formValidator.confirmMatch('passwordNew', 'passwordConf'),
+      validator: this.formValidator.confirmMatch('password', 'passwordConf'),
     });
   }
   public get f(): any { return this.dataForm.controls; }

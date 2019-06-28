@@ -38,7 +38,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(name="password", type="string", length=255)
      * @Serializer\Expose
-     * @Assert\NotBlank
      */
     private $password;
 

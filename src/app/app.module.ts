@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TokenInterceptor } from './auth/token.interceptor';
 
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleFormComponent } from './components/article/article-form/article-form.component';
@@ -54,6 +55,14 @@ import { UserProfilComponent } from './components/user/user-profil/user-profil.c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:4200'],
+      },
+    }),
   ],
   providers: [
     {

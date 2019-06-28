@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-article-view',
@@ -16,7 +17,8 @@ export class ArticleViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
-    private location: Location) { }
+    private location: Location,
+    private authService: AuthService) { }
 
   public ngOnInit(): void {
     this.getArticles();
@@ -33,8 +35,10 @@ export class ArticleViewComponent implements OnInit {
       .subscribe((article: Article) => this.article = article);
   }
   private delete(article: Article): void {
-    this.articleService.deleteArticle(article.id).subscribe();
-    this.location.back();
+    if (this.authService.isAuthenticated()) {
+      this.articleService.deleteArticle(article.id).subscribe();
+      this.location.back();
+    }
   }
   private goBack(): void {
     this.location.back();

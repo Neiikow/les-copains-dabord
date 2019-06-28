@@ -10,3 +10,11 @@ td {
 td, th {
     text-align: center;
 }
+tbody th div {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+}
+tbody th img {
+    height: 40px;
+}
