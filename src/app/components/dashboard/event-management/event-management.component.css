@@ -1,0 +1,35 @@
+table {
+    border: #17A2B8 solid 2px;
+    font-size: 14px;
+    text-align: center;
+}
+.table thead th {
+    border-bottom: 0;
+}
+td, th {
+    vertical-align: middle;
+    
+}
+td p {
+    max-width: 400px;
+}
+td, tbody th {
+    padding: 0;
+}
+tbody th div {
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+}
+tbody th img {
+    height: 30px;
+}
+.event .btn:hover {
+    color: #f8d7da;
+    background: #721c24;
+}
+.event .btn {
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}

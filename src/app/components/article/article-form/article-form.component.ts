@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
@@ -55,29 +55,30 @@ export class ArticleFormComponent implements OnInit {
     });
   }
   private initForm(data?: Article): void {
-    console.log(data);
     if (this.type === 'ground') {
       this.dataForm = this.formBuilder.group({
-        title: [this.edit ? data.title : null, Validators.required],
-        content: [this.edit ? data.content : null, Validators.required],
         author: [this.edit ? data.author : null],
-        picture: [this.edit ? data.picture : null, Validators.required],
-        type: [this.edit ? data.type : this.type],
-        status: [this.edit ? data.status : 'online'],
+        content: [this.edit ? data.content : null, Validators.required],
+        id: this.edit ? data.id : null,
         location_x: [this.edit ? data.location_x : null, Validators.required],
         location_y: [this.edit ? data.location_y : null, Validators.required],
+        picture: [this.edit ? data.picture : null, Validators.required],
+        status: [this.edit ? data.status : 'online'],
+        title: [this.edit ? data.title : null, Validators.required],
+        type: [this.edit ? data.type : this.type],
       });
     }
     if (this.type === 'plugin') {
       this.dataForm = this.formBuilder.group({
-        title: [this.edit ? data.title : null, Validators.required],
-        content: [this.edit ? data.content : null, Validators.required],
         author: [this.edit ? data.author : null],
-        picture: [this.edit ? data.picture : null, Validators.required],
-        type: [this.edit ? data.type : this.type],
-        status: [this.edit ? data.status : 'online'],
-        version: [this.edit ? data.version : null, Validators.required],
+        content: [this.edit ? data.content : null, Validators.required],
+        id: this.edit ? data.id : null,
         link: [this.edit ? data.link : null, Validators.required],
+        picture: [this.edit ? data.picture : null, Validators.required],
+        status: [this.edit ? data.status : 'online'],
+        title: [this.edit ? data.title : null, Validators.required],
+        type: [this.edit ? data.type : this.type],
+        version: [this.edit ? data.version : null, Validators.required],
       });
     }
     this.article = this.dataForm.value;

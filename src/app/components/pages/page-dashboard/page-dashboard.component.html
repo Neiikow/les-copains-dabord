@@ -1,3 +1,16 @@
-<p>
-  page-dashboard works!
-</p>
+<div class="app-subnav">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="articles" class="nav-link">Articles</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="events" class="nav-link">Evenements</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="membres" class="nav-link">Membres</a>
+    </li>
+  </ul>
+  <section class="pb-0">
+    <router-outlet></router-outlet>
+  </section>
+</div>

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { EventService } from 'src/app/services/event.service';
@@ -52,6 +52,7 @@ export class EventFormComponent implements OnInit {
   }
   private initForm(data?: Event): void {
     this.dataForm = this.formBuilder.group({
+      id: this.edit ? data.id : null,
       title: [this.edit ? data.title : null, Validators.required],
       content: [this.edit ? data.content : null, Validators.required],
       support: [this.edit ? data.support : null, Validators.required],

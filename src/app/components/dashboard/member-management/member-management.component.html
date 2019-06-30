@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="table table-hover bg-white mb-2">
+    <thead class="text-white app-bg-primary">
+      <tr>
+        <th></th>
+        <th>Avatar</th>
+        <th class='text-left'>Pseudo</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th>Discord</th>
+        <th>Inscription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="user" *ngFor="let user of users">
+        <td><button class="btn col alert-danger" (click)="delete()" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
+        <th><div class="d-flex justify-content-center m-auto"><img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="avatar"></div></th>
+        <td class='text-left'>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.roles }}</td>
+        <td>#{{ user.discord }}</td>
+        <td>{{ user.createDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

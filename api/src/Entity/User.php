@@ -64,7 +64,7 @@ class User implements UserInterface
      * @ORM\Column(name="createDate", type="string", length=255)
      * @Serializer\Expose
      */
-    private $create_date;
+    private $createDate;
 
     /**
      * @ORM\Column(name="token", type="text", length=5000)
@@ -78,7 +78,7 @@ class User implements UserInterface
     public function getEmail() { return $this->email; }
     public function getPicture() { return $this->picture; }
     public function getDiscord() { return $this->discord; }
-    public function getCreateDate() { return $this->create_date; }
+    public function getCreateDate() { return $this->createDate; }
     public function getToken() { return $this->token; }  
     public function getSalt() { }
     public function getRoles()
@@ -107,9 +107,9 @@ class User implements UserInterface
         $this->discord = $discord;
         return $this;
     }
-    public function setCreateDate($create_date)
+    public function setCreateDate($createDate)
     {
-        $this->create_date = $create_date;
+        $this->createDate = $createDate;
         return $this;
     }
     public function setRoles(array $roles)

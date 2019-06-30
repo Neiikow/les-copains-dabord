@@ -25,6 +25,11 @@ import { PageMinecraftComponent } from './components/pages/page-minecraft/page-m
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
+import { AccessDeniedComponent } from './components/error/access-denied/access-denied.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
+import { ArticleManagementComponent } from './components/dashboard/article-management/article-management.component';
+import { EventManagementComponent } from './components/dashboard/event-management/event-management.component';
+import { MemberManagementComponent } from './components/dashboard/member-management/member-management.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -48,6 +53,11 @@ import { UserProfilComponent } from './components/user/user-profil/user-profil.c
     LoginComponent,
     SignupComponent,
     UserProfilComponent,
+    AccessDeniedComponent,
+    NotFoundComponent,
+    ArticleManagementComponent,
+    EventManagementComponent,
+    MemberManagementComponent,
   ],
   imports: [
     BrowserModule,

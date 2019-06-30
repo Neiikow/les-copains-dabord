@@ -17,6 +17,12 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
+  public getArticles(): Observable<Article[]> {
+    const article = this.http.get<Article[]>(this.url, httpOptions);
+    console.log(article);
+    
+    return this.http.get<Article[]>(this.url, httpOptions);
+  }
   public getArticlesByType(type: string): Observable<Article[]> {
     return this.http.get<Article[]>(this.url + type, httpOptions);
   }

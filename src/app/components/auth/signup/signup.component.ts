@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
-import { UserService } from 'src/app/services/user.services';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +17,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private formBuilder: FormBuilder,
     private formValidator: FormValidatorService,
     private router: Router) { }

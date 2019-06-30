@@ -47,6 +47,13 @@ export class AuthService {
     localStorage.clear();
   }
 
+  public edit(user: User): Observable<User> {
+    return this.http.post<any>(this.url + 'edit/' + Number(localStorage.getItem('id')), user, httpOptions)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
   public getToken(): string {
     return localStorage.getItem('token');
   }

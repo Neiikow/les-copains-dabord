@@ -59,8 +59,8 @@ Class UserController extends FOSRestController
     }
     /**
      * @Rest\Post(
-     *    path = "/api/users/edit/{id}",
-     *    name = "users_edit",
+     *    path = "/api/edit/{id}",
+     *    name = "edit",
      *    requirements = {"id"="\d+"}
      * )
      * @ParamConverter("user", converter="fos_rest.request_body")
@@ -123,7 +123,7 @@ Class UserController extends FOSRestController
     public function showAll()
     {
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
-            ->select('u.username, u.email, u.roles, u.discord, u.picture')
+            ->select('u.username, u.email, u.roles, u.discord, u.picture, u.createDate')
             ->from('App:User', 'u');
         $query = $queryBuilder->getQuery();
         $results = $query->getResult();
@@ -146,6 +146,7 @@ Class UserController extends FOSRestController
            'roles' => $user->getRoles(),
            'discord' => $user->getDiscord(),
            'picture' => $user->getPicture(),
+           'createDate' => $user->getCreateDate(),
         ];
 
         return $user;

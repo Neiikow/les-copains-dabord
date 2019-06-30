@@ -145,4 +145,17 @@ Class ArticleController extends FOSRestController
         }
         return $article;
     }
+    /**
+     * @Rest\Get(
+     *    path = "/api/articles",
+     *    name = "articles_list",
+     * )
+     * @Rest\View
+     */
+    public function showAll()
+    {
+        $articles = $this->getDoctrine()->getRepository('App:Article')->findAll();
+
+        return $articles;
+    }
 }

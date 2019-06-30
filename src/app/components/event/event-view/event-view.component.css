@@ -1,0 +1,31 @@
+.item-menu:hover, #event-nav .nav-link {
+    cursor: pointer;
+    background: #6EB7BF;
+    color: white !important;
+}
+#event-nav .btn:hover {
+    background: #138496;
+}
+#event-nav .nav-link:hover {
+    color: white !important;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+}
+#event-nav .nav-link {
+    border: none;
+    color: black !important;
+}
+#event-nav {
+    font-size: 14px;
+}
+#event section{
+    border-top: none;
+}
+.picture {
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+}
+.picture img {
+    height: 25px;
+}

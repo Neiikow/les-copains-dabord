@@ -131,4 +131,17 @@ Class EventController extends FOSRestController
     {
         return $event;
     }
+    /**
+     * @Rest\Get(
+     *    path = "/api/events",
+     *    name = "events_list",
+     * )
+     * @Rest\View
+     */
+    public function showAll()
+    {
+        $events = $this->getDoctrine()->getRepository('App:Event')->findAll();
+
+        return $events;
+    }
 }

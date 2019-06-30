@@ -1,10 +1,45 @@
-<div class="jumbotron mt-2 mb-2 pt-3 pb-2" *ngIf="event">
-  <p>Titre : {{ event.title }}</p>
-  <p>Contenu : {{ event.content }}</p>
-  <p>Auteur : {{ event.author }}</p>
-  <p>Support : {{ event.support }}</p>
-  <p>Date : {{ event.date }} à {{ event.time }}h</p>
-  <a [routerLink]="['/evenements/editer/', event.id]" class="btn btn-sm btn-info">Editer</a>
-  <button class="btn btn-sm btn-info" (click)="delete(event)">Supprimer</button>
-  <button class="btn btn-sm btn-info" (click)="goBack()">Retour</button>
+<div id="event" class='d-flex' *ngIf="event">
+  <div class='col-md-10 p-0 pr-2'>
+    <div class='app-bg-secondary d-flex align-items-center font-italic p-2 rounded-top'>
+      <div class='col-md-4'>Auteur : {{ event.author }}</div>
+      <div class='col-md-4 text-center'>{{ event.support }}</div>
+      <div class='col-md-4 text-right'>{{ event.date }} {{ event.time }}</div>
+    </div>
+    <section>
+      <h1 class='text-center'>{{ event.title }}</h1>
+      <p>{{ event.content }}</p>
+    </section>
+  </div>
+  <div id="event-nav" class='col p-0'>
+    <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
+        <a [routerLink]="['/evenements', 'editer', event.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
+      <button class="nav-link btn col" (click)="delete(event)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+      <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
+    </div>
+    <section>
+      <h4 class='text-center'>Participants</h4>
+      <hr>
+      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
+        <div class='picture d-flex justify-content-center'>
+          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
+        </div>
+        <div class="pl-1">Neiikow</div>
+      </div>
+      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
+        <div class='picture d-flex justify-content-center'>
+          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
+        </div>
+        <div class="pl-1">Neiikow</div>
+      </div>
+      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
+        <div class='picture d-flex justify-content-center'>
+          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
+        </div>
+        <div class="pl-1">Neiikow</div>
+      </div>
+      <div class='app-bg-primary border border-dark mt-1 p-1' [innerHTML]="member.picture" *ngFor="let member of members">{{ member.username }}</div>
+      <hr>
+      <button class="btn btn-sm btn-info w-100 " (click)="subscribe()">Je participe !</button>
+    </section>
+  </div>
 </div>

@@ -23,7 +23,4 @@ export class UserService {
   public getUserById(id: number): Observable<User> {
     return this.http.get<User>(this.url + 'view/' + id, httpOptions);
   }
-  public editUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url + 'edit/' + Number(localStorage.getItem('id')), user, httpOptions);
-  }
 }

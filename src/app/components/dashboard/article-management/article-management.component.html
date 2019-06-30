@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="table table-hover bg-white mb-2">
+    <thead class="text-white app-bg-primary">
+      <tr>
+        <th></th>
+        <th class='text-left'>Titre</th>
+        <th>Contenu</th>
+        <th>Type</th>
+        <th>Auteur</th>
+        <th>Création</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="article" *ngFor="let article of articles">
+        <td><button class="btn col alert-danger" (click)="delete()" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
+        <td class='text-left pl-1'>{{ article.title }}</td>
+        <td>
+          <p class="text-truncate">{{ article.content }}</p>
+        </td>
+        <td>{{ article.type }}</td>
+        <td>{{ article.author }}</td>
+        <td>{{ article.createDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

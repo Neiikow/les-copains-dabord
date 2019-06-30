@@ -17,6 +17,11 @@ import { PageMinecraftComponent } from './components/pages/page-minecraft/page-m
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { RolesGuardService } from './services/roles-guard.service';
+import { AccessDeniedComponent } from './components/error/access-denied/access-denied.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
+import { ArticleManagementComponent } from './components/dashboard/article-management/article-management.component';
+import { EventManagementComponent } from './components/dashboard/event-management/event-management.component';
+import { MemberManagementComponent } from './components/dashboard/member-management/member-management.component';
 
 const routes: Routes = [
   { path: 'minecraft', component: PageMinecraftComponent, children: [
@@ -35,8 +40,10 @@ const routes: Routes = [
     { path: 'editer/:id', component: EventFormComponent, data: {edit: true} },
     { path: '', pathMatch: 'full', redirectTo: 'bientot' },
   ] },
-  { path: 'evenements/bientot/:id', component: EventViewComponent, canActivate: [RolesGuardService], data: {status: 'active', roles: 'ROLE_MEMBER'} },
-  { path: 'evenements/archive/:id', component: EventViewComponent, canActivate: [RolesGuardService], data: {status: 'archive', roles: 'ROLE_MEMBER'} },
+  { path: 'evenements/bientot/:id', component: EventViewComponent,
+    canActivate: [RolesGuardService], data: {status: 'active', roles: 'ROLE_MEMBER'} },
+  { path: 'evenements/archive/:id', component: EventViewComponent,
+    canActivate: [RolesGuardService], data: {status: 'archive', roles: 'ROLE_MEMBER'} },
   { path: 'membres', component: PageMembersComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_USER'} },
   { path: 'profil', component: PageProfilComponent, canActivate: [AuthGuardService] },
   { path: 'connexion', component: PageLoginComponent, children: [
@@ -44,7 +51,14 @@ const routes: Routes = [
     { path: 'inscription', component: SignupComponent },
     { path: '', pathMatch: 'full', redirectTo: 'connexion' },
   ] },
-  { path: 'dashboard', component: PageDashboardComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_ADMIN'} },
+  { path: 'dashboard', component: PageDashboardComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_ADMIN'}, children: [
+    { path: 'articles', component: ArticleManagementComponent },
+    { path: 'events', component: EventManagementComponent },
+    { path: 'membres', component: MemberManagementComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'articles' },
+  ] },
+  { path: 'acces-refuse', component: AccessDeniedComponent, canActivate: [AuthGuardService] },
+  { path: 'utilisateur-inconnu', component: NotFoundComponent },
   { path: '', redirectTo: 'minecraft', pathMatch: 'full' },
   { path: '**', redirectTo: 'minecraft', pathMatch: 'full' },
 ];
