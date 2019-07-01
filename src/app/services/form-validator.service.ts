@@ -19,4 +19,11 @@ export class FormValidatorService {
             }
         };
     }
+    public getDate(): string {
+        const day = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+        const month = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juill.', 'Aout', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+        const currentMonth = month[new Date().getMonth()];
+        const currentDay = day[new Date().getDay() - 1];
+        return  currentDay + ' ' + new Date().getDate() + ' ' + currentMonth + ' ' + new Date().getFullYear();
+    }
 }

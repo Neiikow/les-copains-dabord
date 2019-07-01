@@ -9,21 +9,19 @@ BACKEND **************
 
 FRONTEND **************
 -> Régler le problème de rafraichissement de page
--> Changer l'affichage des roles
 -> Prendre en compte l'ancien mot de passe lors d'un changement de mot de passe
 -> S'inscrire à un event
 -> Se désinscrire à un event
 -> Renvoyer automatiquement le refresh token à l'api si le token est expiré
--> Changer le format de la date
 -> Afficher les boutons d'actions seulement si on a les droits
 -> Pagination des joueurs en ligne
 -> Pagination des articles/events
--> Enregistrer l'auteur d'un article automatiquement avec l'utilisateur connecté
 -> Modifier seulement ses posts si on est pas admin
 -> Adapter l'affichage pour petit et moyen écran
 -> Empecher la connexion/inscription si déjà connecté
 -> Message de confirmation avant suppression d'un élément
 -> Vérification des normes html5: titre pour chaque session etc...
+-> Revoir le menu des articles et le changement d'url
 
 SI J'AI LE TEMPS **************
 -> Choisir un avatar depuis son bureau

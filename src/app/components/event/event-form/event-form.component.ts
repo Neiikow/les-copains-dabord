@@ -4,6 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { EventService } from 'src/app/services/event.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormValidatorService } from 'src/app/services/form-validator.service';
 
 @Component({
   selector: 'app-event-form',
@@ -18,8 +20,10 @@ export class EventFormComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private formValidator: FormValidatorService,
     private location: Location) {}
 
   public ngOnInit(): void {
@@ -51,15 +55,20 @@ export class EventFormComponent implements OnInit {
     });
   }
   private initForm(data?: Event): void {
+    const payload = this.authService.getDecodedToken(this.authService.getToken());
+    const author = payload.username;
+    const date = this.formValidator.getDate();
+
     this.dataForm = this.formBuilder.group({
       id: this.edit ? data.id : null,
       title: [this.edit ? data.title : null, Validators.required],
       content: [this.edit ? data.content : null, Validators.required],
       support: [this.edit ? data.support : null, Validators.required],
       status: [this.edit ? data.status : 'active'],
-      author: [this.edit ? data.author : null],
+      author: [this.edit ? data.author : author],
       date: [this.edit ? data.date : null, Validators.required],
       time: [this.edit ? data.time : null, Validators.required],
+      create_date: [this.edit ? data.createDate : date],
     });
     this.event = this.dataForm.value;
   }

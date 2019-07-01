@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormValidatorService } from 'src/app/services/form-validator.service';
 
 @Component({
   selector: 'app-article-form',
@@ -19,7 +21,9 @@ export class ArticleFormComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
+    private authService: AuthService,
     private route: ActivatedRoute,
+    private formValidator: FormValidatorService,
     private formBuilder: FormBuilder,
     private location: Location) { }
 
@@ -55,9 +59,13 @@ export class ArticleFormComponent implements OnInit {
     });
   }
   private initForm(data?: Article): void {
+    const payload = this.authService.getDecodedToken(this.authService.getToken());
+    const author = payload.username;
+    const date = this.formValidator.getDate();
+
     if (this.type === 'ground') {
       this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : null],
+        author: [this.edit ? data.author : author],
         content: [this.edit ? data.content : null, Validators.required],
         id: this.edit ? data.id : null,
         location_x: [this.edit ? data.location_x : null, Validators.required],
@@ -66,11 +74,12 @@ export class ArticleFormComponent implements OnInit {
         status: [this.edit ? data.status : 'online'],
         title: [this.edit ? data.title : null, Validators.required],
         type: [this.edit ? data.type : this.type],
+        create_date: [this.edit ? data.createDate : date],
       });
     }
     if (this.type === 'plugin') {
       this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : null],
+        author: [this.edit ? data.author : author],
         content: [this.edit ? data.content : null, Validators.required],
         id: this.edit ? data.id : null,
         link: [this.edit ? data.link : null, Validators.required],
@@ -79,15 +88,17 @@ export class ArticleFormComponent implements OnInit {
         title: [this.edit ? data.title : null, Validators.required],
         type: [this.edit ? data.type : this.type],
         version: [this.edit ? data.version : null, Validators.required],
+        create_date: [this.edit ? data.createDate : date],
       });
     }
     if (this.type === 'presentation') {
       this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : null],
+        author: [this.edit ? data.author : author],
         content: [this.edit ? data.content : null, Validators.required],
         id: this.edit ? data.id : null,
         title: [this.edit ? data.title : null, Validators.required],
         type: [this.edit ? data.type : this.type],
+        create_date: [this.edit ? data.createDate : date],
       });
     }
     this.article = this.dataForm.value;
