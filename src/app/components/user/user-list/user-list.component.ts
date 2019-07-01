@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/class/user';
+import { Roles } from 'src/app/enum/roles.enum';
 import { UserService } from 'src/app/services/user.services';
 
 @Component({
@@ -9,6 +10,7 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class UserListComponent implements OnInit {
   private users: User[];
+  private roles = Roles;
 
   constructor(
     private userService: UserService) { }
@@ -19,6 +21,14 @@ export class UserListComponent implements OnInit {
 
   public getUsers(): void {
     this.userService.getUsers()
-      .subscribe(users => this.users = users);
+      .subscribe(users => {
+        users.forEach(user => {
+          this.setLastRole(user.roles);
+        });
+        this.users = users;
+      });
+  }
+  private setLastRole(roles): void {
+    
   }
 }

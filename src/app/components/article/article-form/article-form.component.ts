@@ -81,6 +81,15 @@ export class ArticleFormComponent implements OnInit {
         version: [this.edit ? data.version : null, Validators.required],
       });
     }
+    if (this.type === 'presentation') {
+      this.dataForm = this.formBuilder.group({
+        author: [this.edit ? data.author : null],
+        content: [this.edit ? data.content : null, Validators.required],
+        id: this.edit ? data.id : null,
+        title: [this.edit ? data.title : null, Validators.required],
+        type: [this.edit ? data.type : this.type],
+      });
+    }
     this.article = this.dataForm.value;
   }
   public get f(): any { return this.dataForm.controls; }

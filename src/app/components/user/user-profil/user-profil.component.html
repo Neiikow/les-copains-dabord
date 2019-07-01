@@ -64,7 +64,7 @@
           <div class="input-group-prepend">
             <div class="input-group-text">#</div>
           </div>
-          <input type="number" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord.errors}">
+          <input type="text" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord && f.discord.errors}">
           <div *ngIf="submitted && f.discord.errors" class="invalid-feedback">
             <div *ngIf="f.discord.errors.max">Valeur trop longue</div>
             <div *ngIf="f.discord.errors.min">Valeur trop courte</div>
@@ -76,6 +76,6 @@
         <input type="text" class="form-control" id="roles" formControlName="roles" readonly>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary m-auto">Modifier</button>
+    <button type="submit" class="btn btn-info m-auto">Modifier</button>
   </form>
 </div>

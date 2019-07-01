@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { EventService } from 'src/app/services/event.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-event-list',
@@ -13,6 +14,7 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private authService: AuthService,
     private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
@@ -23,5 +25,10 @@ export class EventListComponent implements OnInit {
     const status = this.route.snapshot.data['status'];
     this.eventService.getEventsByStatus(status)
       .subscribe(events => this.events = events);
+  }
+  private isAuth(): boolean {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }
   }
 }

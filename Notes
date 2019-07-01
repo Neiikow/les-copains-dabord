@@ -1,20 +1,47 @@
-lors du login -> renvoie le token dans le header et le refresh token
-refresh token -> refresh la date de validation (remember me)
-token sont stockés en bdd dans le table user
+BACKEND **************
+-> Enregistrer le token dans user lors de la connexion
+-> Comparer le token dans le header et dans la bdd pour chaque requête
+-> Actualiser le token lors du refresh
+-> Terminer la mise en place de refresh token
+-> Supprimer le token et refresh token lors de la déconnexion
+-> Documenter l'api
+-> Nettoyer les bundles inutiles
 
+FRONTEND **************
+-> Régler le problème de rafraichissement de page
+-> Changer l'affichage des roles
+-> Prendre en compte l'ancien mot de passe lors d'un changement de mot de passe
+-> S'inscrire à un event
+-> Se désinscrire à un event
+-> Renvoyer automatiquement le refresh token à l'api si le token est expiré
+-> Changer le format de la date
+-> Afficher les boutons d'actions seulement si on a les droits
+-> Pagination des joueurs en ligne
+-> Pagination des articles/events
+-> Enregistrer l'auteur d'un article automatiquement avec l'utilisateur connecté
+-> Modifier seulement ses posts si on est pas admin
+-> Adapter l'affichage pour petit et moyen écran
+-> Empecher la connexion/inscription si déjà connecté
+-> Message de confirmation avant suppression d'un élément
+-> Vérification des normes html5: titre pour chaque session etc...
 
-angular -> use un intercepteur pour les requetes (token)
-client renvoie sur l'url du refresh si il recoi une erreur à cause de l'expiration
+SI J'AI LE TEMPS **************
+-> Choisir un avatar depuis son bureau
+-> Editeur de texte
+-> Modifier l'affichage du menu profil/connexion/deconnexion
+-> Mise au propre du css
 
+SESSION MENTOR **************
+-> Légé problème userService lors du register et login (post<any>)
+    post -> envoie / <any> -> retour
+-> Problème avec le formBuilder du profil
+    StandBy
+-> Rajouter des champs au formBuilder en fonction du context
+    Voir avec les control
+-> Changer l'affichage des roles (enumeration ?)
+-> Stockage des informations de l'utilisateur connecté (juste token ? Dans le session ?)
+    Ne pas stocker l'id dans le storage -> Décoder le token à chaque manip
+-> Ancien mot de passe du profil
+    Rename le ps old 
 
-register -> creation + stock token en bdd + envoie token au client
-Requete depuis client -> envoie le token en header -> compare token reçu avec celui en bdd
-Si token expiré -> renvoi au client une erreur -> Client renvoie le token sur l'url refresh ->
-Deco -> Delete token et refeesh
-toutes les route debute par api/
-
-
-
-ANGULAR **************
-
-Légé problème userService lors du register et login (post<any>)
+Si pas de token -> Ne pas envoyer authorization

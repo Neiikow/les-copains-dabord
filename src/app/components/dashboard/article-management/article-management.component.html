@@ -3,6 +3,7 @@
     <thead class="text-white app-bg-primary">
       <tr>
         <th></th>
+        <th></th>
         <th class='text-left'>Titre</th>
         <th>Contenu</th>
         <th>Type</th>
@@ -12,14 +13,15 @@
     </thead>
     <tbody>
       <tr class="article" *ngFor="let article of articles">
-        <td><button class="btn col alert-danger" (click)="delete()" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
+        <td><button class="delete btn col alert-danger" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
+        <td><a [routerLink]="['/minecraft', 'editer', article.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
         <td class='text-left pl-1'>{{ article.title }}</td>
         <td>
           <p class="text-truncate">{{ article.content }}</p>
         </td>
-        <td>{{ article.type }}</td>
+        <td>{{ types[article.type] }}</td>
         <td>{{ article.author }}</td>
-        <td>{{ article.createDate }}</td>
+        <td>{{ article.create_date }}</td>
       </tr>
     </tbody>
   </table>

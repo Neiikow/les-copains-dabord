@@ -114,6 +114,30 @@ Class UserController extends FOSRestController
         }
     }
     /**
+     * @Rest\Delete(
+     *    path = "/api/users/delete/{id}",
+     *    name = "users_delete",
+     *    requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
+     */
+    public function delete($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'Aucun utilisateur correspondant à l\'id : '.$id
+            );
+        }
+
+        $em->remove($user);
+        $em->flush();
+
+        return $user;
+    }
+    /**
      * @Rest\Get(
      *    path = "/api/users",
      *    name = "users_show"
@@ -123,7 +147,7 @@ Class UserController extends FOSRestController
     public function showAll()
     {
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
-            ->select('u.username, u.email, u.roles, u.discord, u.picture, u.createDate')
+            ->select('u.id, u.username, u.email, u.roles, u.discord, u.picture, u.createDate')
             ->from('App:User', 'u');
         $query = $queryBuilder->getQuery();
         $results = $query->getResult();
@@ -141,6 +165,7 @@ Class UserController extends FOSRestController
     public function showId(User $user)
     {
         $user = [
+           'id' => $user->getId(),
            'username' => $user->getUsername(),
            'email' => $user->getEmail(),
            'roles' => $user->getRoles(),

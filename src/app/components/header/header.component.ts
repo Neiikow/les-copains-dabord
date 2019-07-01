@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.css'],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent { 
+export class HeaderComponent {
   public obs$: Observable<boolean>;
 
   constructor(private authService: AuthService) {}

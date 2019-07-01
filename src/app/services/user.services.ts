@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../class/user';
@@ -22,5 +22,8 @@ export class UserService {
   }
   public getUserById(id: number): Observable<User> {
     return this.http.get<User>(this.url + 'view/' + id, httpOptions);
+  }
+  public deleteUser(id: number): Observable<User> {
+    return this.http.delete<User>(this.url + 'delete/' + id, httpOptions);
   }
 }

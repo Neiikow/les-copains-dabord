@@ -1,4 +1,4 @@
-<div class="mt-2 mb-2">
+<div *ngIf="isAuth()" class="mt-2 mb-2">
   <a routerLink="../nouveau" class="btn btn-info">Nouveau</a>
 </div>
 
@@ -8,6 +8,6 @@
     <h6>{{ event.title }}</h6>
     <p class="text-truncate">{{ event.content }}</p>
   </div>
-  <div class='p-2 col-md-2'>Proposé par {{ event.author }}</div>
-  <div class='p-2 col-md-2'>Date : {{ event.day }}/{{ event.month }}/{{ event.year }} à {{ event.hour }}h{{ event.min }}</div>
+  <div class='p-2 col-md-2'>Proposé par<br>{{ event.author }}</div>
+  <div class='p-2 col-md-2'>Le {{ event.date }}<br>à {{ event.time }}h</div>
 </div>

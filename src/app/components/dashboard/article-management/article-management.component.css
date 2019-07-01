@@ -11,7 +11,7 @@ td, th {
     
 }
 td p {
-    max-width: 400px;
+    max-width: 300px;
 }
 td, tbody th {
     padding: 0;
@@ -24,9 +24,13 @@ tbody th div {
 tbody th img {
     height: 30px;
 }
-.article .btn:hover {
+.delete:hover {
     color: #f8d7da;
     background: #721c24;
+}
+.edit:hover {
+    color: #d1ecf1;
+    background: #0c5460;
 }
 .article .btn {
     border: none;

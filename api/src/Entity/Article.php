@@ -74,7 +74,7 @@ class Article
      */
     private $version;
     /**
-     * @ORM\Column(name="createDate", type="string")
+     * @ORM\Column(type="string")
      * @Serializer\Expose
      */
     private $createDate;

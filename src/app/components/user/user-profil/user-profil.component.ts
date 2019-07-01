@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/class/user';
+import { Roles } from 'src/app/enum/roles.enum';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
 import { UserService } from 'src/app/services/user.services';
 import { AuthService } from 'src/app/services/auth.service';
@@ -53,7 +54,7 @@ export class UserProfilComponent implements OnInit {
       passwordConf: '',
       passwordOld: ['', Validators.minLength(4)],
       picture: data.picture,
-      roles: this.formBuilder.array(data.roles),
+      roles: Roles[data.roles[data.roles.length - 1]],
       username: data.username,
     }, {
       validator: this.formValidator.confirmMatch('password', 'passwordConf'),

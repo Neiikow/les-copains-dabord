@@ -18,8 +18,7 @@
       <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
     </div>
     <section>
-      <h3 class='text-center' *ngIf="article.type === 'ground'">Terrains</h3>
-      <h3 class='text-center' *ngIf="article.type === 'plugin'">Plugins</h3>
+      <h3 class='text-center'>{{ types[article.type] }}s</h3>
       <hr>
       <p *ngFor="let article of articles" class='item-menu text-info p-1' (click)="getArticle(article.id)"><i class="fas fa-angle-right"></i> {{ article.title }}</p>
     </section>

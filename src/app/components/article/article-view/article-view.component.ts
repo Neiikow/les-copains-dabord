@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
+import { Types } from 'src/app/enum/types.enum';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ArticleViewComponent implements OnInit {
   private article: Article;
   private articles: Article[];
+  private types = Types;
 
   constructor(
     private route: ActivatedRoute,

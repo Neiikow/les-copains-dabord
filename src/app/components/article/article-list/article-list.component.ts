@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-article-list',
@@ -15,6 +16,7 @@ export class ArticleListComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
+    private authService: AuthService,
     private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
@@ -25,5 +27,10 @@ export class ArticleListComponent implements OnInit {
   private getArticles(): void {
     this.articleService.getArticlesByType(this.type)
       .subscribe(articles => this.articles = articles);
+  }
+  private isAuth(role: string): boolean {
+    if (this.authService.haveRoles(role)) {
+      return true;
+    }
   }
 }
