@@ -55,7 +55,7 @@ export class EventFormComponent implements OnInit {
     });
   }
   private initForm(data?: Event): void {
-    const payload = this.authService.getDecodedToken(this.authService.getToken());
+    const payload = this.authService.getDecodedToken();
     const author = payload.username;
     const date = this.formValidator.getDate();
 

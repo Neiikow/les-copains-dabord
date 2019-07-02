@@ -11,8 +11,7 @@ export class RolesGuardService implements CanActivate {
 
   public canActivate(route: ActivatedRouteSnapshot): boolean {
     const roles = route.data.roles;
-    const token = this.authService.getToken();
-    const decodedToken = this.authService.getDecodedToken(token);
+    const decodedToken = this.authService.getDecodedToken();
 
     if (!this.authService.isAuthenticated() || !decodedToken.roles.find((value: string) => value === roles)) {
       this.router.navigate(['/acces-refuse']);

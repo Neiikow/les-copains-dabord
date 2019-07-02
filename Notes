@@ -29,17 +29,17 @@ SI J'AI LE TEMPS **************
 -> Modifier l'affichage du menu profil/connexion/deconnexion
 -> Mise au propre du css
 
-SESSION MENTOR **************
--> Légé problème userService lors du register et login (post<any>)
-    post -> envoie / <any> -> retour
+SESSION MENTOR (01/07/19) **************
 -> Problème avec le formBuilder du profil
     StandBy
 -> Rajouter des champs au formBuilder en fonction du context
     Voir avec les control
--> Changer l'affichage des roles (enumeration ?)
 -> Stockage des informations de l'utilisateur connecté (juste token ? Dans le session ?)
     Ne pas stocker l'id dans le storage -> Décoder le token à chaque manip
 -> Ancien mot de passe du profil
     Rename le ps old 
 
-Si pas de token -> Ne pas envoyer authorization
+SESSION MENTOR (08/07/19) **************
+-> Récap session précédente
+    - Fait : Si pas de token -> Ne pas envoyer authorization
+    - Fait : Changer l'affichage des roles (enumeration ?)

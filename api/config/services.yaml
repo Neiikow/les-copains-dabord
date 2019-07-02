@@ -41,3 +41,8 @@ services:
         class: App\EventListener\AuthenticationFailureListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+    
+    acme_api.event.jwt_invalid_listener:
+        class: App\EventListener\JWTInvalidListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }

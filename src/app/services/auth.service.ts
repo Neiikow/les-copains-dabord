@@ -58,7 +58,8 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  public getDecodedToken(token: string): any {
+  public getDecodedToken(): any {
+    const token = this.getToken();
     try {
         return jwt_decode(token);
     } catch (Error) {
@@ -80,7 +81,7 @@ export class AuthService {
   public haveRoles(role: string): boolean {
     if (this.getToken()) {
       const token = this.getToken();
-      const decodedToken = this.getDecodedToken(token);
+      const decodedToken = this.getDecodedToken();
 
       if (!this.isAuthenticated() || !decodedToken.roles.find((value: string) => value === role)) {
         return false;

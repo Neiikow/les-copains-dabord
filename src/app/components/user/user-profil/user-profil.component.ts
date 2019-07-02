@@ -25,7 +25,9 @@ export class UserProfilComponent implements OnInit {
     private formValidator: FormValidatorService) { }
 
   public ngOnInit(): void {
-    this.userService.getUserById(Number(localStorage.getItem('id')))
+    const payload = this.authService.getDecodedToken();
+    const id = payload.id;
+    this.userService.getUserById(id)
       .subscribe((user: User) => {
         this.user = user;
         this.initForm(user);

@@ -40,7 +40,7 @@ security:
         apimc:
             pattern: ^/apimc
             stateless: true
-            security: false    
+            security: false   
             anonymous: true
 
         articles:

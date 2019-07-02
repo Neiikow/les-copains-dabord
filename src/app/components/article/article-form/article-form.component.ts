@@ -59,7 +59,7 @@ export class ArticleFormComponent implements OnInit {
     });
   }
   private initForm(data?: Article): void {
-    const payload = this.authService.getDecodedToken(this.authService.getToken());
+    const payload = this.authService.getDecodedToken();
     const author = payload.username;
     const date = this.formValidator.getDate();
 
