@@ -53,7 +53,12 @@ export class AuthService {
       catchError(this.handleError),
     );
   }
-
+  public passwordOldMatch(user: User): Observable<User> {
+    return this.http.post<any>(this.url + 'users/match', user)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
   public getToken(): string {
     return localStorage.getItem('token');
   }
@@ -92,6 +97,8 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse): any {
+    console.log(error);
+    
     const errorMsg = error.error.message;
     return throwError(errorMsg);
   }

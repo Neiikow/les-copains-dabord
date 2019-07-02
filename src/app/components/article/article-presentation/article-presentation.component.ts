@@ -15,6 +15,9 @@ export class ArticlePresentationComponent implements OnInit {
   private total: object;
   private article: Article;
 
+  private test = ['Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 
+  'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player'];
+
   constructor(
     private articleService: ArticleService,
     private apimcService: ApiMcService) { }

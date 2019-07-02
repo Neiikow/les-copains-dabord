@@ -30,6 +30,11 @@
         {{ player.name }}
       </div>
     </div>
+    <div *ngIf="tests">
+      <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let t of test">
+        {{ t }}
+      </div>
+    </div>
     <div *ngIf="!players">
       Aucun joueur connecté
     </div>

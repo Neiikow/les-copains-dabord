@@ -35,14 +35,38 @@ export class UserProfilComponent implements OnInit {
   }
   private onSubmit(formData: User): void {
     this.submitted = true;
-
-    console.log(formData);
     if (this.dataForm.invalid) {
       return ;
     }
+    if (this.dataForm.value.password || this.dataForm.value.passwordOld) {
+      if (this.dataForm.value.password && this.dataForm.value.passwordOld) {
+        const passwordNew = this.dataForm.value.password;
+        const passwordOld = this.dataForm.value.passwordOld;
+
+        formData.password = passwordOld;
+        this.authService.passwordOldMatch(formData).subscribe(
+          (next) => {
+            formData.password = passwordNew;
+            this.edit(formData);
+            return;
+          },
+          (error) => {
+            this.error = error;
+            return;
+          },
+        );
+      } else {
+        this.error = true;
+        return;
+      }
+    } else {
+      this.edit(formData);
+    }
+  }
+  private edit(formData): void {
     this.authService.edit(formData).subscribe(
       (next) => {
-        //this.edited = next;
+        this.edited = next;
       },
       (error) => {
         this.error = error;
@@ -52,14 +76,14 @@ export class UserProfilComponent implements OnInit {
   private initForm(data?: User): void {
     this.dataForm = this.formBuilder.group({
       id: data.id,
-      discord: [data.discord ? data.discord : null, [Validators.min(1000), Validators.max(9999)]],
+      discord: [data.discord, Validators.maxLength(4)],
       email: [data.email, Validators.email],
       password: ['', Validators.minLength(4)],
       passwordConf: '',
       passwordOld: ['', Validators.minLength(4)],
       picture: data.picture,
       roles: this.formBuilder.array([Roles[data.roles[data.roles.length - 1]]]),
-      username: data.username,
+      username: [data.username, Validators.required],
     }, {
       validator: this.formValidator.confirmMatch('password', 'passwordConf'),
     });

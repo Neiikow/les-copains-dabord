@@ -20,7 +20,7 @@ FRONTEND **************
 -> Adapter l'affichage pour petit et moyen écran
 -> Empecher la connexion/inscription si déjà connecté
 -> Message de confirmation avant suppression d'un élément
--> Vérification des normes html5: titre pour chaque session etc...
+-> Vérification des normes html5: titre pour chaque section etc...
 -> Revoir le menu des articles et le changement d'url
 
 SI J'AI LE TEMPS **************
@@ -32,8 +32,6 @@ SI J'AI LE TEMPS **************
 SESSION MENTOR (01/07/19) **************
 -> Problème avec le formBuilder du profil
     StandBy
--> Rajouter des champs au formBuilder en fonction du context
-    Voir avec les control
 -> Ancien mot de passe du profil
     Rename le ps old 
 
@@ -42,5 +40,6 @@ SESSION MENTOR (08/07/19) **************
     - Fait : Si pas de token -> Ne pas envoyer authorization
     - Fait : Changer l'affichage des roles (enumeration ?)
     - Fait : Ne pas stocker l'id dans le storage -> Décoder le token à chaque manip
+    - Fait : Rajouter des champs au formBuilder en fonction du context
 -> A Voir
     - Gestion et affichage role dans le profil

@@ -176,4 +176,37 @@ Class UserController extends FOSRestController
 
         return $user;
     }
+    /**
+     * @Rest\Post(
+     *    path = "/api/users/match",
+     *    name = "match_password",
+     * )
+     * @Rest\View
+     * @ParamConverter("user", converter="fos_rest.request_body")
+     */
+    public function passwordMatch(UserPasswordEncoderInterface $passwordEncoder, User $user)
+    {
+        
+        $id = $user->getId();
+        $em = $this->getDoctrine()->getManager();
+        $userMatch = $em->getRepository(User::class)->find($id);
+
+        if (!$userMatch) {
+            throw $this->createNotFoundException(
+                'Aucun utilisateur correspondant à l\'id : '.$id
+            );
+        }
+
+        $encodedPassword = $passwordEncoder->encodePassword(
+            $userMatch,
+            $user->getPassword()
+        );
+        if ($encodedPassword !== $userMatch->getPassword()) {
+            throw $this->createNotFoundException(
+                'Ancien mot de passe incorrect'
+            );
+        } else {
+            return true;
+        }
+    }
 }
