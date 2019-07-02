@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   public edit(user: User): Observable<User> {
-    return this.http.post<any>(this.url + 'edit/' + Number(localStorage.getItem('id')), user, httpOptions)
+    return this.http.post<any>(this.url + 'edit/' + user.id, user, httpOptions)
     .pipe(
       catchError(this.handleError),
     );

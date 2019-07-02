@@ -36,6 +36,7 @@ export class UserProfilComponent implements OnInit {
   private onSubmit(formData: User): void {
     this.submitted = true;
 
+    console.log(formData);
     if (this.dataForm.invalid) {
       return ;
     }
@@ -50,13 +51,14 @@ export class UserProfilComponent implements OnInit {
   }
   private initForm(data?: User): void {
     this.dataForm = this.formBuilder.group({
+      id: data.id,
       discord: [data.discord ? data.discord : null, [Validators.min(1000), Validators.max(9999)]],
       email: [data.email, Validators.email],
       password: ['', Validators.minLength(4)],
       passwordConf: '',
       passwordOld: ['', Validators.minLength(4)],
       picture: data.picture,
-      roles: Roles[data.roles[data.roles.length - 1]],
+      roles: this.formBuilder.array([Roles[data.roles[data.roles.length - 1]]]),
       username: data.username,
     }, {
       validator: this.formValidator.confirmMatch('password', 'passwordConf'),

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
@@ -63,43 +63,33 @@ export class ArticleFormComponent implements OnInit {
     const author = payload.username;
     const date = this.formValidator.getDate();
 
+    this.dataForm = this.formBuilder.group({
+      author: [this.edit ? data.author : author],
+      content: [this.edit ? data.content : null, Validators.required],
+      create_date: [this.edit ? data.createDate : date],
+      id: this.edit ? data.id : null,
+      title: [this.edit ? data.title : null, Validators.required],
+      type: [this.edit ? data.type : this.type],
+    });
     if (this.type === 'ground') {
-      this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : author],
-        content: [this.edit ? data.content : null, Validators.required],
-        id: this.edit ? data.id : null,
-        location_x: [this.edit ? data.location_x : null, Validators.required],
-        location_y: [this.edit ? data.location_y : null, Validators.required],
-        picture: [this.edit ? data.picture : null, Validators.required],
-        status: [this.edit ? data.status : 'online'],
-        title: [this.edit ? data.title : null, Validators.required],
-        type: [this.edit ? data.type : this.type],
-        create_date: [this.edit ? data.createDate : date],
-      });
+      this.dataForm.addControl(
+        'location_x', new FormControl(this.edit ? data.location_x : null, Validators.required));
+      this.dataForm.addControl(
+        'location_y', new FormControl(this.edit ? data.location_y : null, Validators.required));
+      this.dataForm.addControl(
+        'picture', new FormControl(this.edit ? data.picture : null, Validators.required));
+      this.dataForm.addControl(
+        'status', new FormControl(this.edit ? data.status : 'online'));
     }
     if (this.type === 'plugin') {
-      this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : author],
-        content: [this.edit ? data.content : null, Validators.required],
-        id: this.edit ? data.id : null,
-        link: [this.edit ? data.link : null, Validators.required],
-        picture: [this.edit ? data.picture : null, Validators.required],
-        status: [this.edit ? data.status : 'online'],
-        title: [this.edit ? data.title : null, Validators.required],
-        type: [this.edit ? data.type : this.type],
-        version: [this.edit ? data.version : null, Validators.required],
-        create_date: [this.edit ? data.createDate : date],
-      });
-    }
-    if (this.type === 'presentation') {
-      this.dataForm = this.formBuilder.group({
-        author: [this.edit ? data.author : author],
-        content: [this.edit ? data.content : null, Validators.required],
-        id: this.edit ? data.id : null,
-        title: [this.edit ? data.title : null, Validators.required],
-        type: [this.edit ? data.type : this.type],
-        create_date: [this.edit ? data.createDate : date],
-      });
+      this.dataForm.addControl(
+        'link', new FormControl(this.edit ? data.link : null, Validators.required));
+      this.dataForm.addControl(
+        'picture', new FormControl(this.edit ? data.picture : null, Validators.required));
+      this.dataForm.addControl(
+        'status', new FormControl(this.edit ? data.status : 'online'));
+      this.dataForm.addControl(
+        'version', new FormControl(this.edit ? data.version : null, Validators.required));
     }
     this.article = this.dataForm.value;
   }

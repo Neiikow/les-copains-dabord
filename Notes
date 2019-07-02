@@ -34,8 +34,6 @@ SESSION MENTOR (01/07/19) **************
     StandBy
 -> Rajouter des champs au formBuilder en fonction du context
     Voir avec les control
--> Stockage des informations de l'utilisateur connecté (juste token ? Dans le session ?)
-    Ne pas stocker l'id dans le storage -> Décoder le token à chaque manip
 -> Ancien mot de passe du profil
     Rename le ps old 
 
@@ -43,3 +41,6 @@ SESSION MENTOR (08/07/19) **************
 -> Récap session précédente
     - Fait : Si pas de token -> Ne pas envoyer authorization
     - Fait : Changer l'affichage des roles (enumeration ?)
+    - Fait : Ne pas stocker l'id dans le storage -> Décoder le token à chaque manip
+-> A Voir
+    - Gestion et affichage role dans le profil
