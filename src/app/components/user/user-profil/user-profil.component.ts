@@ -15,7 +15,7 @@ export class UserProfilComponent implements OnInit {
   private dataForm: FormGroup;
   private submitted = false;
   private error = false;
-  private edited = false;
+  private edited: string;
   private user: User;
 
   constructor(
@@ -52,24 +52,48 @@ export class UserProfilComponent implements OnInit {
           },
           (error) => {
             this.error = error;
+            setTimeout(
+              () => {
+                this.error = false;
+                clearInterval();
+              }, 3000,
+            );
             return;
           },
         );
       } else {
         this.error = true;
+        setTimeout(
+          () => {
+            this.error = false;
+            clearInterval();
+          }, 3000,
+        );
         return;
       }
     } else {
       this.edit(formData);
     }
   }
-  private edit(formData): void {
+  private edit(formData: User): void {
     this.authService.edit(formData).subscribe(
       (next) => {
-        this.edited = next;
+        this.edited = String(next);
+        setTimeout(
+          () => {
+            this.edited = null;
+            clearInterval();
+          }, 3000,
+        );
       },
       (error) => {
         this.error = error;
+        setTimeout(
+          () => {
+            this.error = false;
+            clearInterval();
+          }, 3000,
+        );
       },
     );
   }

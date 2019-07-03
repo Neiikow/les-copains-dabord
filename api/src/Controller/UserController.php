@@ -98,8 +98,9 @@ Class UserController extends FOSRestController
         try
         {
             $em->flush();
-            return $this->view(
-                'Profil de '.$data->getUsername().' édité !',
+            $msg = 'Profil de '.$data->getUsername().' édité !';
+            return $this->json(
+                $msg,
                 Response::HTTP_CREATED,
                 ['Location' =>$this->generateUrl(
                     'users_id',

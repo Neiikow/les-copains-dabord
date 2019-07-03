@@ -19,25 +19,9 @@
     <section>
       <h4 class='text-center'>Participants</h4>
       <hr>
-      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
-        <div class='picture d-flex justify-content-center'>
-          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
-        </div>
-        <div class="pl-1">Neiikow</div>
+      <div *ngIf='subscribers'>
+        <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let subscriber of subscribers">{{ subscriber.username }}</div>
       </div>
-      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
-        <div class='picture d-flex justify-content-center'>
-          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
-        </div>
-        <div class="pl-1">Neiikow</div>
-      </div>
-      <div class='app-bg-primary border border-dark mt-1 p-1 d-flex flex-nowrap align-items-center'>
-        <div class='picture d-flex justify-content-center'>
-          <img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="icone">
-        </div>
-        <div class="pl-1">Neiikow</div>
-      </div>
-      <div class='app-bg-primary border border-dark mt-1 p-1' [innerHTML]="member.picture" *ngFor="let member of members">{{ member.username }}</div>
       <hr>
       <button class="btn btn-sm btn-info w-100 " (click)="subscribe()">Je participe !</button>
     </section>

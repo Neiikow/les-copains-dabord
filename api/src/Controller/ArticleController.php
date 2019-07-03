@@ -41,8 +41,7 @@ Class ArticleController extends FOSRestController
             Response::HTTP_CREATED,
             ['Location' =>$this->generateUrl(
                 'articles_id',
-                ['id' => $article->getId(),
-                UrlGeneratorInterface::ABSOLUTE_URL])
+                ['id' => $article->getId()])
             ]
         );
     }

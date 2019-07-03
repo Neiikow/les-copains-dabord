@@ -97,8 +97,6 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse): any {
-    console.log(error);
-    
     const errorMsg = error.error.message;
     return throwError(errorMsg);
   }
