@@ -52,7 +52,6 @@ export class ArticleViewComponent implements OnInit {
     }
   }
   private goBack(): void {
-    console.log(this.article);
     this.location.back();
   }
 }

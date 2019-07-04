@@ -20,7 +20,7 @@
     <section>
       <h3 class='text-center'>{{ types[article.type] }}s</h3>
       <hr>
-      <p *ngFor="let article of articles" class='item-menu text-info p-1' (click)="getArticle(article.id)"><i class="fas fa-angle-right"></i> {{ article.title }}</p>
+      <div *ngFor="let article of articles"><a class='item-menu text-info p-1' [routerLink]="['../', article.id]"><i class="fas fa-angle-right"></i> {{ article.title }}</a></div>
     </section>
   </div>
 </div>
