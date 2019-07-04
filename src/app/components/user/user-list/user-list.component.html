@@ -12,7 +12,7 @@
       <tr *ngFor="let user of users">
         <th><div class="d-flex justify-content-center"><img src="{{ user.picture }}" alt="avatar"></div></th>
         <td class='col text-left'>{{ user.username }}</td>
-        <td>{{ roles[user.roles[user.roles.length - 1]] }}</td>
+        <td>{{ user.roles }}</td>
         <td><span *ngIf="user.discord">#{{ user.discord }}</span></td>
       </tr>
     </tbody>

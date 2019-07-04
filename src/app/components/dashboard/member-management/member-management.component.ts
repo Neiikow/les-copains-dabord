@@ -23,12 +23,21 @@ export class MemberManagementComponent implements OnInit {
 
   public getUsers(): void {
     this.userService.getUsers()
-      .subscribe(users => this.users = users);
+    .subscribe(users => {
+      users.forEach(user => {
+        user.roles = [this.setLastRole(user.roles, user)];
+      });
+      this.users = users;
+    });
   }
   private delete(user: User): void {
     if (this.authService.isAuthenticated()) {
       this.userService.deleteUser(user.id).subscribe();
       this.getUsers();
     }
+  }
+  private setLastRole(roles: [string], user: User): string {
+    const role = user.roles[user.roles.length - 1];
+    return Roles[role];
   }
 }

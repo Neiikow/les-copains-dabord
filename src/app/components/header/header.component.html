@@ -14,10 +14,10 @@
         <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/membres">Membres</a>
       </div>
       <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/dashboard" *ngIf="isAuth('ROLE_ADMIN')">Dashboard</a>
-        <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/profil" *ngIf="(obs$ | async)">Profil</a>
-        <a class="btn btn-info mr-2" routerLink="/connexion" *ngIf="!(obs$ | async)">Connexion</a>
-        <a class="btn btn-info" routerLink="/minecraft" *ngIf="(obs$ | async)" (click)="logout()">Deconnexion</a>
+        <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/dashboard" *ngIf="haveRoles('ROLE_ADMIN')">Dashboard</a>
+        <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/profil" *ngIf="isAuth()">Profil</a>
+        <a class="btn btn-info mr-2" routerLink="/connexion" *ngIf="!isAuth()">Connexion</a>
+        <a class="btn btn-info" routerLink="/minecraft" *ngIf="isAuth()" (click)="logout()">Deconnexion</a>
       </div>
     </div>
   </div>

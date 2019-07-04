@@ -6,6 +6,11 @@ import { ArticleListComponent } from './components/article/article-list/article-
 import { ArticleViewComponent } from './components/article/article-view/article-view.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { ArticleManagementComponent } from './components/dashboard/article-management/article-management.component';
+import { EventManagementComponent } from './components/dashboard/event-management/event-management.component';
+import { MemberManagementComponent } from './components/dashboard/member-management/member-management.component';
+import { AccessDeniedComponent } from './components/error/access-denied/access-denied.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
 import { EventFormComponent } from './components/event/event-form/event-form.component';
 import { EventListComponent } from './components/event/event-list/event-list.component';
 import { EventViewComponent } from './components/event/event-view/event-view.component';
@@ -17,11 +22,6 @@ import { PageMinecraftComponent } from './components/pages/page-minecraft/page-m
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { RolesGuardService } from './services/roles-guard.service';
-import { AccessDeniedComponent } from './components/error/access-denied/access-denied.component';
-import { NotFoundComponent } from './components/error/not-found/not-found.component';
-import { ArticleManagementComponent } from './components/dashboard/article-management/article-management.component';
-import { EventManagementComponent } from './components/dashboard/event-management/event-management.component';
-import { MemberManagementComponent } from './components/dashboard/member-management/member-management.component';
 
 const routes: Routes = [
   { path: 'minecraft', component: PageMinecraftComponent, children: [

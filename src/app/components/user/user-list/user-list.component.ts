@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class UserListComponent implements OnInit {
   private users: User[];
-  private roles = Roles;
+  private role: string;
 
   constructor(
     private userService: UserService) { }
@@ -23,12 +23,13 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(users => {
         users.forEach(user => {
-          this.setLastRole(user.roles);
+          user.roles = [this.setLastRole(user.roles, user)];
         });
         this.users = users;
       });
   }
-  private setLastRole(roles): void {
-    
+  private setLastRole(roles: [string], user: User): string {
+    const role = user.roles[user.roles.length - 1];
+    return Roles[role];
   }
 }

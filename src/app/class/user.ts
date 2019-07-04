@@ -4,7 +4,7 @@ export class User {
     public password: string;
     public email: string;
     public picture: string;
-    public roles: [];
+    public roles: [string];
     public discord: number;
     public token: string;
 }

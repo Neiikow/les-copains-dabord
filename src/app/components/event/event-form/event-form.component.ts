@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { EventService } from 'src/app/services/event.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -24,7 +24,8 @@ export class EventFormComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private formValidator: FormValidatorService,
-    private location: Location) {}
+    private location: Location,
+    public router: Router) {}
 
   public ngOnInit(): void {
     this.initParam();
@@ -45,8 +46,13 @@ export class EventFormComponent implements OnInit {
     this.route.params.subscribe((param: {id: number}) => {
       if (param.id) {
         this.eventService.getEventById(param.id)
-          .subscribe(article => {
-            this.initForm(article);
+          .subscribe(event => {
+            const payload = this.authService.getDecodedToken();
+            if ((event.author !== payload.username) && !this.authService.haveRoles('ROLE_ADMIN')) {
+              this.router.navigate(['/acces-refuse']);
+              return;
+            }
+            this.initForm(event);
           });
         this.edit = this.route.snapshot.data['edit'];
       } else {

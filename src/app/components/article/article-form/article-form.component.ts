@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,7 +25,8 @@ export class ArticleFormComponent implements OnInit {
     private route: ActivatedRoute,
     private formValidator: FormValidatorService,
     private formBuilder: FormBuilder,
-    private location: Location) { }
+    private location: Location,
+    public router: Router) { }
 
   public ngOnInit(): void {
     this.initParam();
@@ -51,6 +52,11 @@ export class ArticleFormComponent implements OnInit {
       if (param.id) {
         this.articleService.getArticleById(param.id)
           .subscribe((article: Article) => {
+            const payload = this.authService.getDecodedToken();
+            if ((article.author !== payload.username) && !this.authService.haveRoles('ROLE_ADMIN')) {
+              this.router.navigate(['/acces-refuse']);
+              return;
+            }
             this.type = article.type;
             this.initForm(article);
           });

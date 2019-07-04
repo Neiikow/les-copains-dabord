@@ -17,7 +17,7 @@
         <th><div class="d-flex justify-content-center m-auto"><img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="avatar"></div></th>
         <td class='text-left'>{{ user.username }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ roles[user.roles[user.roles.length - 1]] }}</td>
+        <td>{{ user.roles }}</td>
         <td><span *ngIf="user.discord">#{{ user.discord }}</span></td>
         <td>{{ user.createDate }}</td>
       </tr>
