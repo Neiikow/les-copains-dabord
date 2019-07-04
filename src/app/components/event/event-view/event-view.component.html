@@ -12,18 +12,22 @@
   </div>
   <div id="event-nav" class='col p-0'>
     <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
-        <a [routerLink]="['/evenements', 'editer', event.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
-      <button class="nav-link btn col" (click)="delete(event)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+        <a *ngIf="isAuth('ROLE_ADMIN')" [routerLink]="['/evenements', 'editer', event.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
+      <button *ngIf="isAuth('ROLE_ADMIN')" class="nav-link btn col" (click)="delete(event)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
       <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
     </div>
     <section>
       <h4 class='text-center'>Participants</h4>
-      <hr>
       <div *ngIf='subscribers'>
-        <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let subscriber of subscribers">{{ subscriber.username }}</div>
+        <hr>
+        <div>
+          <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let subscriber of subscribers">{{ subscriber.username }}</div>
+        </div>
       </div>
-      <hr>
-      <button class="btn btn-sm btn-info w-100 " (click)="subscribe()">Je participe !</button>
+      <div *ngIf="!isSub">
+        <hr>
+        <button class="btn btn-sm btn-info w-100 " (click)="subscribe()">Je participe !</button>    
+      </div>
     </section>
   </div>
 </div>

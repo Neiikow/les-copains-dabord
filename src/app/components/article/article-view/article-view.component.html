@@ -13,8 +13,8 @@
   </div>
   <div id="article-nav" class='col p-0'>
     <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
-      <a [routerLink]="['/minecraft', 'editer', article.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
-      <button class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+      <a *ngIf="isAuth('ROLE_ADMIN')" [routerLink]="['/minecraft', 'editer', article.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
+      <button *ngIf="isAuth('ROLE_ADMIN')" class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
       <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
     </div>
     <section>

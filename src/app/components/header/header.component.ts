@@ -18,4 +18,9 @@ export class HeaderComponent {
   public logout(): void {
     this.authService.logout();
   }
+  private isAuth(role: string): boolean {
+    if (this.authService.haveRoles(role)) {
+      return true;
+    }
+  }
 }

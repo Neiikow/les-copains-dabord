@@ -8,10 +8,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 Class ApiMcController extends FOSRestController
 {
     private $apiUrl = "https://minecraft-api.com/api/query/";
-    private $ip = "mc70.boxtoplay.com";
-    private $port = "27511";
-    //private $ip = 'play.politicraft.fr';
-    //private $port = '25565';
+    //private $ip = "mc70.boxtoplay.com";
+    //private $port = "27511";
+    private $ip = 'play.politicraft.fr';
+    private $port = '25565';
 
     /**
      * @Rest\Get(

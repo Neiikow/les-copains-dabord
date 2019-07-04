@@ -41,10 +41,9 @@ export class EventService {
     return this.http.get<EventSubscribers>(this.url + 'subscribers/' + id, httpOptions);
   }
   public subscribe(eventId: number, userId: number): Observable<Event> {
-    const subscribe = new EventSubscribe();
-    subscribe.event_id = eventId;
-    subscribe.user_id = userId;
-
-    return this.http.post<Event>(this.url + 'subscribe', subscribe, httpOptions);
+    const subscriber = new EventSubscribe();
+    subscriber.event_id = eventId;
+    subscriber.user_id = userId;
+    return this.http.post<Event>(this.url + 'subscribe', subscriber, httpOptions);
   }
 }

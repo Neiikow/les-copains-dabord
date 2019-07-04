@@ -72,30 +72,6 @@ Class EventSubscriberController extends FOSRestController
         );
     }
     /**
-     * @Rest\Post(
-     *    path = "/api/events/unsubscribe",
-     *    name = "events_unsubscribe",
-     * )
-     * @Rest\View
-     * @ParamConverter("eventSubscriber", converter="fos_rest.request_body")
-     */
-    public function unsubscribe(EventSubscriber $eventSub, ConstraintViolationList $violations)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'Aucun utilisateur correspondant à l\'id : '.$id
-            );
-        }
-
-        $em->remove($user);
-        $em->flush();
-
-        return $user;
-    }
-    /**
      * @Rest\Get(
      *    path = "/api/events/subscribers/{id}",
      *    name = "events_subscribers",
@@ -120,9 +96,7 @@ Class EventSubscriberController extends FOSRestController
              ];
             array_push($subscribers, $subscriber);
         }
-        if (!$subscribers) {
-            return 'Aucun utilisateur abonné à cet event';
-        }
+
         return $subscribers;
     }
     /**

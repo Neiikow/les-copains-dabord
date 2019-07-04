@@ -26,8 +26,8 @@ export class EventListComponent implements OnInit {
     this.eventService.getEventsByStatus(status)
       .subscribe(events => this.events = events);
   }
-  private isAuth(): boolean {
-    if (this.authService.isAuthenticated()) {
+  private isAuth(role: string): boolean {
+    if (this.authService.haveRoles(role)) {
       return true;
     }
   }

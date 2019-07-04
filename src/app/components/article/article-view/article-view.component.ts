@@ -42,7 +42,17 @@ export class ArticleViewComponent implements OnInit {
       this.location.back();
     }
   }
+  private isAuth(role: string): boolean {
+    if (this.authService.haveRoles(role)) {
+      return true;
+    }
+    const payload = this.authService.getDecodedToken();
+    if (this.article.author === payload.username) {
+      return true;
+    }
+  }
   private goBack(): void {
+    console.log(this.article);
     this.location.back();
   }
 }
