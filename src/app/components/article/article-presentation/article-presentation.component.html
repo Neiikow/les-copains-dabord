@@ -24,18 +24,33 @@
     </div>
   </div>
   <div class='info-serv col p-1 app-border-primary app-bg-secondary'>
-    <h4 class="text-center">En jeu (<span *ngIf="players">{{ players.length }}</span>)</h4>
-    <div *ngIf="players">
-      <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let player of players">
-        {{ player.name }}
+    <h4 class="text-center">En jeu <span *ngIf="players">({{ players.length }})</span></h4>
+    <div *ngIf="pageItems">
+      <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let item of pageItems">
+        {{ item.name }}
+      </div>
+      <hr>
+      <div class="d-flex">
+        <div *ngIf="pagin.pages && pagin.pages.length" class="btn-group btn-group-sm m-auto" role="group" aria-label="pages">
+          <a class="btn btn-info btn-sm" (click)="setPage(1)">
+            <i class="fas fa-angle-double-left"></i>
+          </a>
+          <a class="btn btn-info btn-sm" (click)="setPage(pagin.currentPage - 1)" aria-label="Previous">
+            <i class="fas fa-angle-left"></i>
+          </a>
+          <p class="btn btn-info btn-sm">
+            {{pagin.currentPage}}
+          </p>
+          <a class="btn btn-info btn-sm" (click)="setPage(pagin.currentPage + 1)" aria-label="Next">
+            <i class="fas fa-angle-right"></i>
+          </a>
+          <a class="btn btn-info btn-sm" (click)="setPage(pagin.totalPages)">
+            <i class="fas fa-angle-double-right"></i>
+          </a>
+        </div>
       </div>
     </div>
-    <div *ngIf="tests">
-      <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let t of test">
-        {{ t }}
-      </div>
-    </div>
-    <div *ngIf="!players">
+    <div *ngIf="!pageItems">
       Aucun joueur connecté
     </div>
   </div>

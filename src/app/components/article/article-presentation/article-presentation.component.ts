@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/class/article';
 import { ApiMcService } from 'src/app/services/api-mc.service';
 import { ArticleService } from 'src/app/services/article.service';
+import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-article-presentation',
@@ -9,18 +10,18 @@ import { ArticleService } from 'src/app/services/article.service';
   templateUrl: './article-presentation.component.html',
 })
 export class ArticlePresentationComponent implements OnInit {
-  private players: object;
+  private players: any;
   private status: object;
   private version: object;
   private total: object;
   private article: Article;
-
-  private test = ['Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 
-  'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player', 'Player'];
+  private pagin: any;
+  private pageItems: any;
 
   constructor(
     private articleService: ArticleService,
-    private apimcService: ApiMcService) { }
+    private apimcService: ApiMcService,
+    private paginService: PaginationService) { }
 
   public ngOnInit(): void {
     this.getArticle();
@@ -36,6 +37,13 @@ export class ArticlePresentationComponent implements OnInit {
     this.apimcService.getStatus().subscribe(status => this.status = status);
     this.apimcService.getVersion().subscribe(version => this.version = version);
     this.apimcService.getTotal().subscribe(total => this.total = total);
-    this.apimcService.getOnlinePlayers().subscribe(players => this.players = players);
+    this.apimcService.getOnlinePlayers().subscribe(players => {
+      this.players = players;
+      this.setPage(1, 5);
+    });
+  }
+  private setPage(page: number, pageSize: number): void {
+    this.pagin = this.paginService.getPager(this.players.length, page, pageSize);
+    this.pageItems = this.players.slice(this.pagin.startIndex, this.pagin.endIndex + 1);
   }
 }

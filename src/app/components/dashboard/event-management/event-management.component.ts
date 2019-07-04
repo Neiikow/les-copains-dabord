@@ -24,8 +24,9 @@ export class EventManagementComponent implements OnInit {
   }
   private delete(event: Event): void {
     if (this.authService.isAuthenticated()) {
-      this.eventService.deleteEvent(event.id).subscribe();
-      this.getEvents();
+      this.eventService.deleteEvent(event.id).subscribe(next => {
+        this.getEvents();
+      });
     }
   }
 }

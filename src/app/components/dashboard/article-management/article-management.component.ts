@@ -26,8 +26,9 @@ export class ArticleManagementComponent implements OnInit {
   }
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
-      this.articleService.deleteArticle(article.id).subscribe();
-      this.getArticles();
+      this.articleService.deleteArticle(article.id).subscribe(next => {
+        this.getArticles();
+      });
     }
   }
 }

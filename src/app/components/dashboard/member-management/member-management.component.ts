@@ -32,8 +32,9 @@ export class MemberManagementComponent implements OnInit {
   }
   private delete(user: User): void {
     if (this.authService.isAuthenticated()) {
-      this.userService.deleteUser(user.id).subscribe();
-      this.getUsers();
+      this.userService.deleteUser(user.id).subscribe(next => {
+        this.getUsers();
+      });
     }
   }
   private setLastRole(roles: [string], user: User): string {
