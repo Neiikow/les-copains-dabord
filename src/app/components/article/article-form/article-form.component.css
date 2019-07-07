@@ -1,6 +1,27 @@
+@media (max-width: 768px) {
+    .x label, .y label {
+       margin: 0;
+    }
+    .x, .y {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+    }
+    .title, .grp {
+        margin-bottom: 1em;
+    }
+    .invalid-gps {
+        margin-top: .10em;
+    }
+}
 form {
     padding: 0 15px 0 15px;
 }
 .form-inline .form-group{
     flex: auto;
+}
+.invalid-gps {
+    font-size: 80%;
+    color: #dc3545;
+    margin-top: .25em;
 }

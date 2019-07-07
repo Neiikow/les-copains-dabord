@@ -12,12 +12,12 @@ export class HeaderComponent {
   public logout(): void {
     this.authService.logout();
   }
-  private haveRoles(role: string): boolean {
+  public haveRoles(role: string): boolean {
     if (this.authService.haveRoles(role)) {
       return true;
     }
   }
-  private isAuth(): boolean {
+  public isAuth(): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     }

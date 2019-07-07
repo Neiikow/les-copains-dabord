@@ -1,3 +1,27 @@
+@media (max-width: 768px) {
+    .row {
+        margin-bottom: 10px;
+    }
+    .new {
+        display: flex;
+        justify-content: center;
+    }
+    .content-card {
+        display: none;
+    }
+    .card-body {
+        height: 100px;
+    }
+    h4 {
+        font-size: 16px;
+    }
+    .sm-none {
+        display: none;
+    }
+    .content {
+        padding: 5px !important;
+    }
+}
 .card-header {
     cursor: pointer;
 }
@@ -20,6 +44,7 @@ img {
 }
 .content-row {
     cursor: pointer;
+    padding: 0;
 }
 a, a:hover {
     color: white;

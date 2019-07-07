@@ -1,3 +1,4 @@
+DATABASE_URL=mysql://dbu115415:Endless91-@db5000100716.hosting-data.io/dbs95231
 BACKEND **************
 -> Enregistrer le token dans user lors de la connexion
 -> Comparer le token dans le header et dans la bdd pour chaque requête
@@ -12,7 +13,6 @@ FRONTEND **************
 -> Adapter l'affichage pour petit et moyen écran
 -> Renvoyer automatiquement le refresh token à l'api si le token est expiré
 -> Modification des roles
--> Pagination des articles/events
 
         SI J'AI LE TEMPS **************
         -> Choisir un avatar depuis son bureau
@@ -34,3 +34,4 @@ SESSION MENTOR (08/07/19) **************
 -> A Voir
     - Gestion et affichage role dans le profil
     - Format discord 0001 : regex ?
+    - Problème avec Coordonnées requise

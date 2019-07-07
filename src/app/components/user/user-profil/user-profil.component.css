@@ -1,0 +1,8 @@
+@media (max-width: 960px) {
+    h1 {
+        font-size: 26px;
+    }
+    .app-form {
+        width: 100% !important;
+    }
+}

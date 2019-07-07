@@ -1,5 +1,5 @@
 <div class='row justify-content-center m-3'>
-    <div class="mb-2 col-6 text-center">
+    <div class="mb-2 col-mb-6 p-0 text-center">
         <form [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)" class="text-left">
         <div *ngIf="submitted && error" class="text-center alert alert-danger" role="alert">
             {{ error }}

@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './event-management.component.html',
 })
 export class EventManagementComponent implements OnInit {
-  private events: Event[];
+  public events: Event[];
 
   constructor(
     private eventService: EventService,

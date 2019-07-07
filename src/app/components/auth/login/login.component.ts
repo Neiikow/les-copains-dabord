@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user.services';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  private dataForm: FormGroup;
-  private submitted = false;
-  private error = false;
+  public dataForm: FormGroup;
+  public submitted = false;
+  public error = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void {
     this.initForm();
   }
-  private onSubmit(formData: User): void {
+  public onSubmit(formData: User): void {
     this.submitted = true;
     if (this.dataForm.invalid) {
       return;

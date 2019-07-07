@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.services';
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit {
-  private users: User[];
+  public users: User[];
   private role: string;
 
   constructor(

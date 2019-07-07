@@ -1,14 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../class/user';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:8888',
-    'Content-Type': 'application/json',
-  }),
-};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,12 +13,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url, httpOptions);
+    return this.http.get<User[]>(this.url);
   }
   public getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.url + 'view/' + id, httpOptions);
+    return this.http.get<User>(this.url + 'view/' + id);
   }
   public deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(this.url + 'delete/' + id, httpOptions);
+    return this.http.delete<User>(this.url + 'delete/' + id);
   }
 }

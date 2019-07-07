@@ -1,39 +1,40 @@
 <form *ngIf="event" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)" class="mb-2">
   <div class="form-group">
     <div class="row">
-      <div class="col-4">
+      <div class="title col-md-4 col-sm-12">
         <label for="title">Titre</label>
         <input type="text"class="form-control" id="title" formControlName="title" [ngClass]="{'is-invalid': submitted && f.title.errors}">
         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
           <div *ngIf="f.title.errors.required">Titre requis</div>
         </div>
       </div>
-      <div class="col-4">
-        <label for="support">Support</label>
-        <select class="custom-select mr-sm-2" id="support" formControlName="support" [ngClass]="{'is-invalid': submitted && f.support.errors}">
-          <option value="Minecraft">Minecraft</option>
-          <option value="Blind Test">Blind Test</option>
-          <option value="Jeux de rôles">Jeux de rôles</option>
-          <option value="Scriblio">Scriblio</option>
-          <option value="Autre">Autre</option>
-        </select>
-        <div *ngIf="submitted && f.support.errors" class="invalid-feedback">
-          <div *ngIf="f.support.errors.required">Support requis</div>
-        </div>
-      </div>
-      <div class="col-4">
-        <label>Date de l'évènement</label>
-        <div class="form-inline">
-          <div class="form-group">
-            <input type="date" class="form-control ml-1" id="date" formControlName="date" [ngClass]="{'is-invalid': submitted && f.date.errors}">
-            <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
-              <div *ngIf="f.date.errors.required">Date requise</div>
+      <div class="col-md-8 col-sm-12">
+        <div class="row">
+          <div class="grp col-md-6">
+            <label>Date de l'évènement</label>
+            <div class="event-date d-flex form-inline">
+              <div class="form-group">
+                <input type="date" class="form-control" id="date" formControlName="date" [ngClass]="{'is-invalid': submitted && f.date.errors}">
+              </div>
+              <div class="time form-group">
+                <input type="time" class="form-control mt-1" id="time" formControlName="time" [ngClass]="{'is-invalid': submitted && f.time.errors}">
+              </div>
+            </div>
+            <div *ngIf="submitted && (f.date.errors || f.time.errors)" class="invalid-date">
+              <div *ngIf="f.date.errors.required || f.time.errors">Date requise</div>
             </div>
           </div>
-          <div class="form-group d-flex justify-content-end">
-            <input type="time" class="form-control ml-1" id="time" formControlName="time" [ngClass]="{'is-invalid': submitted && f.time.errors}">
-            <div *ngIf="submitted && f.time.errors" class="invalid-feedback">
-              <div *ngIf="f.time.errors.required">Heure requise</div>
+          <div class="col-md-6">
+            <label for="support">Support</label>
+            <select class="custom-select mr-sm-2" id="support" formControlName="support" [ngClass]="{'is-invalid': submitted && f.support.errors}">
+              <option value="Minecraft">Minecraft</option>
+              <option value="Blind Test">Blind Test</option>
+              <option value="Jeux de rôles">Jeux de rôles</option>
+              <option value="Scriblio">Scriblio</option>
+              <option value="Autre">Autre</option>
+            </select>
+            <div *ngIf="submitted && f.support.errors" class="invalid-feedback">
+              <div *ngIf="f.support.errors.required">Support requis</div>
             </div>
           </div>
         </div>

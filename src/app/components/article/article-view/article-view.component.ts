@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './article-view.component.html',
 })
 export class ArticleViewComponent implements OnInit {
-  private article: Article;
+  public article: Article;
   private articles: Article[];
   private types = Types;
 

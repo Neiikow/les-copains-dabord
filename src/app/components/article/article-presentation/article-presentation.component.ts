@@ -10,13 +10,13 @@ import { PaginationService } from 'src/app/services/pagination.service';
   templateUrl: './article-presentation.component.html',
 })
 export class ArticlePresentationComponent implements OnInit {
-  private players: any;
+  public players: any;
+  public pageItems: any;
+  public article: Article;
   private status: object;
   private version: object;
   private total: object;
-  private article: Article;
   private pagin: any;
-  private pageItems: any;
 
   constructor(
     private articleService: ArticleService,

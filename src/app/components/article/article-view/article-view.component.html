@@ -1,17 +1,17 @@
-<div id="article" class='d-flex' *ngIf="article">
-  <div class='col-md-10 p-0 pr-2'>
-    <div class='app-bg-secondary d-flex align-items-center font-italic p-2 rounded-top'>
-      <div class='col-md-4'>Auteur : {{ article.author }}</div>
-      <div class='col-md-4 text-center' *ngIf="article.type === 'ground'">Coordonnées : X:{{ article.location_x }} / Y:{{ article.location_y }}</div>
-      <div class='col-md-4 text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
-      <div class='col-md-4 text-right'>{{ article.create_date }}</div>
+<div class='d-flex flex-wrap' *ngIf="article">
+  <div id="article" class='col-md-10 col-sm-12 p-0 pr-2'>
+    <div class='info app-bg-secondary d-flex flex-wrap align-items-center font-italic p-2 rounded-top'>
+      <div class='col'>Auteur : {{ article.author }}</div>
+      <div class='col text-center' *ngIf="article.type === 'ground'">Coordonnées : X:{{ article.location_x }} / Y:{{ article.location_y }}</div>
+      <div class='col text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
+      <div class='col text-right'>{{ article.create_date }}</div>
     </div>
     <section>
       <h1 class='text-center'>{{ article.title }}</h1>
       <p>{{ article.content }}</p>
     </section>
   </div>
-  <div id="article-nav" class='col p-0'>
+  <div id="article-nav" class='col-md-2 col-sm-12 p-0'>
     <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
       <a *ngIf="isAuth('ROLE_ADMIN')" [routerLink]="['/minecraft', 'editer', article.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
       <button *ngIf="isAuth('ROLE_ADMIN')" class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
@@ -20,7 +20,11 @@
     <section>
       <h3 class='text-center'>{{ types[article.type] }}s</h3>
       <hr>
-      <div *ngFor="let article of articles"><a class='item-menu text-info p-1' [routerLink]="['../', article.id]"><i class="fas fa-angle-right"></i> {{ article.title }}</a></div>
+      <div *ngFor="let article of articles">
+        <a class='item-menu text-info p-1' [routerLink]="['../', article.id]">
+          <i class="fas fa-angle-right"></i>{{ article.title }}
+        </a>
+      </div>
     </section>
   </div>
 </div>

@@ -8,8 +8,8 @@
   <div *ngIf="submitted && edited" class="text-center alert alert-success" role="alert">
     {{ edited }}
   </div>
-  <form *ngIf="user" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)"  class="row text-left m-auto w-75">
-    <div class="mb-1 col-6">
+  <form *ngIf="user" [formGroup]="dataForm" (ngSubmit)="onSubmit(dataForm.value)"  class="app-form row text-left m-auto w-75">
+    <div class="mb-1 col-md-6 col-sm-12">
       <div class="form-group">
         <label for="username">Pseudo</label>
         <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors}">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="mb-1 col-6">
+    <div class="mb-1 col-md-6 col-sm-12">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'is-invalid': submitted && f.email.errors}">
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="roles">Role</label>
+        <label for="roles">Rang</label>
         <input type="text" class="form-control" id="roles" formControlName="roles" readonly>
       </div>
     </div>

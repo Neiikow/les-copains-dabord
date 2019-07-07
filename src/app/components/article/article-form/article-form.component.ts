@@ -13,10 +13,10 @@ import { FormValidatorService } from 'src/app/services/form-validator.service';
   templateUrl: './article-form.component.html',
 })
 export class ArticleFormComponent implements OnInit {
+  public article: Article;
   private edit = false;
   private type: string;
   private dataForm: FormGroup;
-  private article: Article;
   private submitted = false;
 
   constructor(

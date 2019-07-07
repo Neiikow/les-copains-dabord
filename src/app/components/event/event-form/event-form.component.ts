@@ -13,9 +13,9 @@ import { FormValidatorService } from 'src/app/services/form-validator.service';
   templateUrl: './event-form.component.html',
 })
 export class EventFormComponent implements OnInit {
+  public event: Event;
   private edit = false;
   private dataForm: any;
-  private event: Event;
   private submitted = false;
 
   constructor(

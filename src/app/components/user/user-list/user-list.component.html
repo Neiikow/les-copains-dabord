@@ -2,15 +2,15 @@
   <table class="table table-hover bg-white mb-0">
     <thead class="text-white app-bg-primary">
       <tr>
-        <th></th>
+        <th class="img"></th>
         <th class='text-left'>Pseudo</th>
-        <th>Rôle</th>
+        <th>Rang</th>
         <th>Discord</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <th><div class="d-flex justify-content-center"><img src="{{ user.picture }}" alt="avatar"></div></th>
+        <th class="img"><div class="d-flex justify-content-center"><img src="{{ user.picture }}" alt="avatar"></div></th>
         <td class='col text-left'>{{ user.username }}</td>
         <td>{{ user.roles }}</td>
         <td><span *ngIf="user.discord">#{{ user.discord }}</span></td>

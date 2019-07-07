@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as jwt_decode from 'jwt-decode';
@@ -6,12 +6,6 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../class/user';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:8888',
-    'Content-Type': 'application/json',
-  }),
-};
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +22,7 @@ export class AuthService {
   }
 
   public register(user: User): Observable<User> {
-    return this.http.post<any>(this.url + 'register', user, httpOptions)
+    return this.http.post<any>(this.url + 'register', user)
     .pipe(
       catchError(this.handleError),
     );
@@ -36,7 +30,7 @@ export class AuthService {
 
   public login(user: User): Observable<User> {
     this.authSub.next(true);
-    return this.http.post<any>(this.url + 'login_check', user, httpOptions)
+    return this.http.post<any>(this.url + 'login_check', user)
     .pipe(
       catchError(this.handleError),
     );
@@ -48,7 +42,7 @@ export class AuthService {
   }
 
   public edit(user: User): Observable<User> {
-    return this.http.post<any>(this.url + 'edit/' + user.id, user, httpOptions)
+    return this.http.post<any>(this.url + 'edit/' + user.id, user)
     .pipe(
       catchError(this.handleError),
     );

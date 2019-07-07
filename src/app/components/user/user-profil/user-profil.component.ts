@@ -12,11 +12,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './user-profil.component.html',
 })
 export class UserProfilComponent implements OnInit {
+  public submitted = false;
+  public error = false;
+  public edited: string;
+  public user: User;
   private dataForm: FormGroup;
-  private submitted = false;
-  private error = false;
-  private edited: string;
-  private user: User;
 
   constructor(
     private userService: UserService,

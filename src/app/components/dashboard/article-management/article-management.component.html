@@ -4,24 +4,24 @@
       <tr>
         <th></th>
         <th></th>
-        <th class='text-left'>Titre</th>
-        <th>Contenu</th>
-        <th>Type</th>
-        <th>Auteur</th>
-        <th>Création</th>
+        <th class='text-center'>Titre</th>
+        <th class="app-d-none">Contenu</th>
+        <th class="app-d-none">Type</th>
+        <th class="app-d-none">Auteur</th>
+        <th class="app-d-none">Création</th>
       </tr>
     </thead>
     <tbody>
       <tr class="article" *ngFor="let article of articles">
         <td><button class="delete btn col alert-danger" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
         <td><a [routerLink]="['/minecraft', 'editer', article.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
-        <td class='text-left pl-1'>{{ article.title }}</td>
-        <td>
+        <td class='text-left text-truncate pl-1'>{{ article.title }}</td>
+        <td class="app-d-none">
           <p class="text-truncate">{{ article.content }}</p>
         </td>
-        <td>{{ types[article.type] }}</td>
-        <td>{{ article.author }}</td>
-        <td>{{ article.create_date }}</td>
+        <td class="app-d-none">{{ types[article.type] }}</td>
+        <td class="app-d-none">{{ article.author }}</td>
+        <td class="app-d-none">{{ article.create_date }}</td>
       </tr>
     </tbody>
   </table>

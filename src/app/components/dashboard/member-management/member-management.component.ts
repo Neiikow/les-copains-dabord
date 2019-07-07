@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.services';
   templateUrl: './member-management.component.html',
 })
 export class MemberManagementComponent implements OnInit {
-  private users: User[];
+  public users: User[];
   private roles = Roles;
 
   constructor(

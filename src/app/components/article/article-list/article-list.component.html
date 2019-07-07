@@ -1,30 +1,53 @@
-<div *ngIf="isAuth('ROLE_MEMBER')" class="mt-2 mb-2">
-  <a [routerLink]="['../nouveau/', type]" class="btn btn-info">Nouveau</a>
-</div>
-
-<div *ngIf="design === 'card'">
-  <div class="card text-center mb-2" *ngFor="let article of articles">
-    <div class="card-header app-bg-primary" [routerLink]="[article.id]">
-      <h4 class="m-0">{{ article.title }}</h4>
-    </div>
-    <div class="card-body" [style.background-image]="'url('+article.picture+')'">
-      <div class='content-card w-50 m-auto'>
-        <p class="card-text p-3">{{ article.content }}</p>
-      </div>
+<div class="row">
+  <div *ngIf="isAuth('ROLE_MEMBER')" class="new mt-2 mb-2 col-md-3 col-sm-12">
+    <a [routerLink]="['../nouveau/', type]" class="btn btn-info">Nouveau</a>
+  </div>
+  <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+    <div *ngIf="pagin" class="btn-group" role="group" aria-label="pages">
+      <a class="btn btn-info" (click)="setPage(1, pagin.pageSize)">
+        <i class="fas fa-angle-double-left"></i>
+      </a>
+      <a class="btn btn-info" (click)="setPage(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
+        <i class="fas fa-angle-left"></i>
+      </a>
+      <p class="btn btn-info">
+        {{pagin.currentPage}} / {{ pagin.totalPages }}
+      </p>
+      <a class="btn btn-info" (click)="setPage(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
+        <i class="fas fa-angle-right"></i>
+      </a>
+      <a class="btn btn-info" (click)="setPage(pagin.totalPages, pagin.pageSize)">
+        <i class="fas fa-angle-double-right"></i>
+      </a>
     </div>
   </div>
 </div>
 
-<div *ngIf="design === 'row'">
-  <div class='article-row app-bg-primary d-flex text-center align-items-center mb-2' *ngFor="let article of articles">
-    <div class='content-row col-md-10 d-flex align-items-center' [routerLink]="[article.id]">
-      <div class='p-2 col-md-1'><img src="{{ article.picture }}" height="60" alt="icone"></div>
-      <div class='p-2 pl-3 col-md-10 text-left'>
-        <h6>{{ article.title }}</h6>
-        <p class="text-truncate">{{ article.content }}</p>
+<div *ngIf="pageItems">
+  <div *ngIf="design === 'card'">
+    <div class="card text-center mb-2" *ngFor="let item of pageItems">
+      <div class="card-header app-bg-primary" [routerLink]="[item.id]">
+        <h4 class="m-0">{{ item.title }}</h4>
       </div>
-      <div class='p-2 col-md-1'>{{ article.version }}</div>
+      <div class="card-body" [style.background-image]="'url('+item.picture+')'">
+        <div class='content-card w-50 m-auto'>
+          <p class="card-text p-3">{{ item.content }}</p>
+        </div>
+      </div>
     </div>
-    <div class='p-2 col'><a href="{{ article.link }}" target="blank">Site officiel</a></div>
+  </div>
+  
+  <div *ngIf="design === 'row'">
+    <div class='article-row app-bg-primary d-flex text-center align-items-center mb-2' *ngFor="let item of pageItems">
+      <div class='content-row col-md-10 col-sm-12 d-flex align-items-center' [routerLink]="[item.id]">
+        <div class='icone sm-none p-2 col-md-1'><img src="{{ item.picture }}" height="60" alt="icone"></div>
+        <div class='content p-2 pl-3 col-md-10 col-sm-12 text-left'>
+          <h6>{{ item.title }}</h6>
+          <p class="text-truncate">{{ item.content }}</p>
+        </div>
+        <div class='sm-none p-2 col-md-1'>{{ item.version }}</div>
+      </div>
+      <div class='sm-none p-2 col-md-2'><a href="{{ item.link }}" target="blank">Site officiel</a></div>
+    </div>
   </div>
 </div>

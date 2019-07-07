@@ -4,24 +4,24 @@
       <tr>
         <th></th>
         <th></th>
-        <th class='text-left'>Titre</th>
-        <th>Contenu</th>
-        <th>Support</th>
-        <th>Auteur</th>
-        <th>Date</th>
+        <th class='text-center'>Titre</th>
+        <th class="app-d-none">Contenu</th>
+        <th class="app-d-none">Support</th>
+        <th class="app-d-none">Auteur</th>
+        <th class="app-d-none">Date</th>
       </tr>
     </thead>
     <tbody>
       <tr class="event" *ngFor="let event of events">
         <td><button class="delete btn col alert-danger" (click)="delete(event)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
         <td><a [routerLink]="['/evenements', 'editer', event.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
-        <td class='text-left pl-1'>{{ event.title }}</td>
-        <td>
+        <td class='text-left text-truncate pl-1'>{{ event.title }}</td>
+        <td class="app-d-none">
           <p class="text-truncate">{{ event.content }}</p>
         </td>
-        <td>{{ event.support }}</td>
-        <td>{{ event.author }}</td>
-        <td>{{ event.create_date }}</td>
+        <td class="app-d-none">{{ event.support }}</td>
+        <td class="app-d-none">{{ event.author }}</td>
+        <td class="app-d-none">{{ event.create_date }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,3 +1,18 @@
+@media (max-width: 768px) {
+    .row {
+        margin-bottom: 10px;
+    }
+    .new {
+        display: flex;
+        justify-content: center;
+    }
+    .sm-none {
+        display: none;
+    }
+    .content {
+        padding: 5px !important;
+    }
+}
 img {
     height: 60px;
 }

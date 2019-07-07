@@ -1,19 +1,19 @@
-<div class="d-flex">
-  <div class='col-md-10'>
+<div class="d-flex flex-wrap">
+  <div class='col-md-10 col-sm-12'>
     <div *ngFor="let article of article">
       <h1 class="text-center">{{ article.title }}</h1>
       <p>{{ article.content }}</p>
       <div class="font-italic text-secondary font-weight-light">
         <hr>
-        <div class="d-flex justify-content-between">
-          <p>
+        <div class="d-flex flex-wrap justify-content-between">
+          <p class="pr-1">
             <strong>Status : </strong>
             <span *ngIf="status">{{ status }}</span>
           </p>
-          <p *ngIf="version">
+          <p *ngIf="version" class="pr-1">
             <strong>Version : </strong>{{ version }}
           </p>
-          <p>
+          <p class="pr-1">
             <strong>Ouverture : </strong>4 Février 2019
           </p>
           <p *ngIf="total">
@@ -23,28 +23,28 @@
       </div>
     </div>
   </div>
-  <div class='info-serv col p-1 app-border-primary app-bg-secondary'>
+  <div class='info-serv col-md-2 col-sm-12 p-1 app-border-primary app-bg-secondary'>
     <h4 class="text-center">En jeu <span *ngIf="players">({{ players.length }})</span></h4>
     <div *ngIf="pageItems">
       <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let item of pageItems">
         {{ item.name }}
       </div>
       <hr>
-      <div class="d-flex">
-        <div *ngIf="pagin.pages && pagin.pages.length" class="btn-group btn-group-sm m-auto" role="group" aria-label="pages">
-          <a class="btn btn-info btn-sm" (click)="setPage(1)">
+      <div class="d-flex justify-content-center">
+        <div *ngIf="pagin.pages && pagin.pages.length" class="btn-group btn-group-sm" role="group" aria-label="pages">
+          <a class="btn btn-info" (click)="setPage(1, pagin.pageSize)">
             <i class="fas fa-angle-double-left"></i>
           </a>
-          <a class="btn btn-info btn-sm" (click)="setPage(pagin.currentPage - 1)" aria-label="Previous">
+          <a class="btn btn-info" (click)="setPage(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
             <i class="fas fa-angle-left"></i>
           </a>
-          <p class="btn btn-info btn-sm">
+          <p class="btn btn-info">
             {{pagin.currentPage}}
           </p>
-          <a class="btn btn-info btn-sm" (click)="setPage(pagin.currentPage + 1)" aria-label="Next">
+          <a class="btn btn-info" (click)="setPage(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
             <i class="fas fa-angle-right"></i>
           </a>
-          <a class="btn btn-info btn-sm" (click)="setPage(pagin.totalPages)">
+          <a class="btn btn-info" (click)="setPage(pagin.totalPages, pagin.pageSize)">
             <i class="fas fa-angle-double-right"></i>
           </a>
         </div>

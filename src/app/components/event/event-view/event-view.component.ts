@@ -13,7 +13,7 @@ import { count } from 'rxjs/operators';
   templateUrl: './event-view.component.html',
 })
 export class EventViewComponent implements OnInit {
-  private event: Event;
+  public event: Event;
   private subscribers: EventSubscribers;
   private isSub = false;
 

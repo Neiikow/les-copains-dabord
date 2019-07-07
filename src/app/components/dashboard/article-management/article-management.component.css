@@ -1,3 +1,17 @@
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    tbody {
+        font-size: 12px;
+    }
+    th, td {
+        padding: 3px;
+    }
+    .app-d-none {
+        display: none;
+    }
+}
 table {
     border: #17A2B8 solid 2px;
     font-size: 14px;

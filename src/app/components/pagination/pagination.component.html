@@ -1,0 +1,17 @@
+<div *ngIf="pagin" class="btn-group" role="group" aria-label="pages">
+  <a class="btn btn-info" (click)="setPage(1, pagin.pageSize)">
+    <i class="fas fa-angle-double-left"></i>
+  </a>
+  <a class="btn btn-info" (click)="setPage(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
+    <i class="fas fa-angle-left"></i>
+  </a>
+  <p class="btn btn-info">
+    {{pagin.currentPage}} / {{ pagin.totalPages }}
+  </p>
+  <a class="btn btn-info" (click)="setPage(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
+    <i class="fas fa-angle-right"></i>
+  </a>
+  <a class="btn btn-info" (click)="setPage(pagin.totalPages, pagin.pageSize)">
+    <i class="fas fa-angle-double-right"></i>
+  </a>
+</div>

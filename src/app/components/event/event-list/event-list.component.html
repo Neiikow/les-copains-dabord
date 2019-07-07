@@ -1,13 +1,18 @@
-<div *ngIf="isAuth('ROLE_MEMBER')" class="mt-2 mb-2">
-  <a routerLink="../nouveau" class="btn btn-info">Nouveau</a>
+<div class="row">
+  <div *ngIf="isAuth('ROLE_MEMBER')" class="new mt-2 mb-2 col-md-3 col-sm-12">
+    <a routerLink="../nouveau" class="btn btn-info">Nouveau</a>
+  </div>
+  <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+    <app-pagination [pagin]="pagin" [items]="events"></app-pagination>
+  </div>
 </div>
 
-<div class='app-bg-primary event d-flex align-items-center text-center align-items-center mb-2' [routerLink]="[event.id]" *ngFor="let event of events">
-  <div class='p-2 col-md-1'><img src="{{ event.picture }}" height="60" alt="icone"></div>
-  <div class='p-2 pl-3 col-md-7 text-left'>
-    <h6>{{ event.title }}</h6>
-    <p class="text-truncate">{{ event.content }}</p>
+<div class='app-bg-primary event d-flex align-items-center text-center mb-2' [routerLink]="[item.id]" *ngFor="let item of pageItems">
+  <div class='sm-none p-2 col-md-1'><img src="{{ item.picture }}" height="60" alt="icone"></div>
+  <div class='content p-2 pl-3 col-md-7 text-left'>
+    <h6>{{ item.title }}</h6>
+    <p class="text-truncate">{{ item.content }}</p>
   </div>
-  <div class='p-2 col-md-2'>Proposé par<br>{{ event.author }}</div>
-  <div class='p-2 col-md-2'>Le {{ event.date }}<br>à {{ event.time }}h</div>
+  <div class='sm-none p-2 col-md-2'>Proposé par<br>{{ item.author }}</div>
+  <div class='sm-none p-2 col-md-2'>Le {{ item.date }}<br>à {{ item.time }}h</div>
 </div>

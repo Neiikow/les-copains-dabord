@@ -1,6 +1,39 @@
+@media (max-width: 768px) {
+    .title, .grp {
+        margin-bottom: 1em;
+    }
+    .event-date div {
+        margin: 0;
+    }
+    .event-date input {
+        width: 100%;
+    }
+    .event-date .time {
+        margin: auto;
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+}
+@media (max-width: 401px) {
+    .event-date .time {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
 form {
     padding: 0 15px 0 15px;
 }
 .form-inline .form-group{
     flex: auto;
+}
+.invalid-date {
+    font-size: 80%;
+    color: #dc3545;
+    margin-top: .25em;
+}
+input {
+    height: 38px;
+}
+.event-date input {
+    margin: 0 !important;
 }
