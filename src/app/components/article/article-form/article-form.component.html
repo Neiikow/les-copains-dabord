@@ -23,7 +23,7 @@
               </div>
             </div>
             <div *ngIf="submitted && (f.location_x.errors || f.location_y.errors)" class="invalid-gps">
-              <div *ngIf="f.location_x.errors.required || f.location_y.errors.required">Coordonnées requise</div>
+              <div *ngIf="(f.location_x.errors && f.location_x.errors.required) || (f.location_y.errors && f.location_y.errors.required)">Coordonnées requise</div>
             </div>
           </div>
           <div class="col-md-6">

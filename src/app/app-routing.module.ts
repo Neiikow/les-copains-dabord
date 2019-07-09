@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'evenements/archive/:id', component: EventViewComponent,
     canActivate: [RolesGuardService], data: {status: 'archive', roles: 'ROLE_MEMBER'} },
   { path: 'membres', component: PageMembersComponent, canActivate: [RolesGuardService], data: {roles: 'ROLE_USER'} },
-  { path: 'profil', component: PageProfilComponent, canActivate: [AuthGuardService] },
+  { path: 'profil/:id', component: PageProfilComponent, canActivate: [AuthGuardService] },
   { path: 'connexion', component: PageLoginComponent, children: [
     { path: 'connexion', component: LoginComponent },
     { path: 'inscription', component: SignupComponent },

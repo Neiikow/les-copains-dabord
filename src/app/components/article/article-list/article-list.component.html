@@ -1,6 +1,8 @@
-<div class="row">
-  <div *ngIf="isAuth('ROLE_MEMBER')" class="new mt-2 mb-2 col-md-3 col-sm-12">
-    <a [routerLink]="['../nouveau/', type]" class="btn btn-info">Nouveau</a>
+<div class="row mb-2">
+  <div class="new col-md-3 col-sm-12">
+    <div *ngIf="isAuth('ROLE_MEMBER')">
+      <a [routerLink]="['../nouveau/', type]" class="btn btn-info">Nouveau</a>
+    </div>
   </div>
   <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
     <div *ngIf="pagin" class="btn-group" role="group" aria-label="pages">

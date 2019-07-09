@@ -3,6 +3,7 @@
     <thead class="text-white app-bg-primary">
       <tr>
         <th></th>
+        <th></th>
         <th class="app-d-none">Avatar</th>
         <th class='text-left'>Pseudo</th>
         <th class="app-d-none">Email</th>
@@ -13,8 +14,9 @@
     </thead>
     <tbody>
       <tr class="user" *ngFor="let user of users">
-        <td><button class="btn col alert-danger" (click)="delete(user)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
-        <th class="app-d-none"><div class="d-flex justify-content-center m-auto"><img src="https://banner2.kisspng.com/20180404/krq/kisspng-youtube-google-play-cumbia-sunglasses-emoji-5ac518fed6d799.20851679152286643088.jpg" alt="avatar"></div></th>
+        <td><button class="delete btn col alert-danger" (click)="delete(user)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
+        <td><a [routerLink]="['/profil', user.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
+        <th class="app-d-none"><div class="d-flex justify-content-center m-auto"><img src="{{ user.picture }}" alt="avatar"></div></th>
         <td class='text-left pl-1'>{{ user.username }}</td>
         <td class="app-d-none">{{ user.email }}</td>
         <td>{{ user.roles }}</td>

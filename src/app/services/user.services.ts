@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../class/user';
 
-
 @Injectable({
   providedIn: 'root',
 })

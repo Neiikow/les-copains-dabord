@@ -15,7 +15,7 @@
       </div>
       <div class="navbar-nav">
         <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/dashboard" *ngIf="haveRoles('ROLE_ADMIN')">Dashboard</a>
-        <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/profil" *ngIf="isAuth()">Profil</a>
+        <a class="nav-item nav-link" routerLinkActive="active"  [routerLink]="['/profil', id]" *ngIf="isAuth()">Profil</a>
         <a class="btn btn-info mr-2" routerLink="/connexion" *ngIf="!isAuth()">Connexion</a>
         <a class="btn btn-info" routerLink="/minecraft" *ngIf="isAuth()" (click)="logout()">Deconnexion</a>
       </div>

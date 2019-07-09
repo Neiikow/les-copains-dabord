@@ -39,6 +39,7 @@ export class ArticleViewComponent implements OnInit {
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
       this.articleService.deleteArticle(article.id).subscribe();
+      this.getArticles();
       this.location.back();
     }
   }

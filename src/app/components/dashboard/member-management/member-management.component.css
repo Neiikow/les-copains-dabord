@@ -34,7 +34,7 @@ tbody th div {
 tbody th img {
     height: 30px;
 }
-.user .btn:hover {
+.delete:hover {
     color: #f8d7da;
     background: #721c24;
 }
@@ -42,4 +42,8 @@ tbody th img {
     border: none;
     border-radius: 0;
     cursor: pointer;
+}
+.edit:hover {
+    color: #d1ecf1;
+    background: #0c5460;
 }

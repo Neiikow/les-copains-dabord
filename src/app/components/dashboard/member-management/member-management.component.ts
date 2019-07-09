@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class MemberManagementComponent implements OnInit {
   public users: User[];
-  private roles = Roles;
+  private rolesEnum = Roles;
 
   constructor(
     private userService: UserService,
@@ -25,7 +25,7 @@ export class MemberManagementComponent implements OnInit {
     this.userService.getUsers()
     .subscribe(users => {
       users.forEach(user => {
-        user.roles = [this.setLastRole(user.roles, user)];
+        user.roles = Roles[user.roles[0]];
       });
       this.users = users;
     });
@@ -36,9 +36,5 @@ export class MemberManagementComponent implements OnInit {
         this.getUsers();
       });
     }
-  }
-  private setLastRole(roles: [string], user: User): string {
-    const role = user.roles[user.roles.length - 1];
-    return Roles[role];
   }
 }

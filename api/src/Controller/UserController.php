@@ -73,11 +73,12 @@ Class UserController extends FOSRestController
             }
             throw new ResourceValidationException($message);
         }
-
         $em = $this->getDoctrine()->getManager();
         $data = $em->getRepository(User::class)->find($id);
+
         $data->setUsername($user->getUsername());
         $data->setEmail($user->getEmail());
+        $data->setRoles($user->getRoles());
 
         if ($user->getPassword()) {
             $encodedPassword = $passwordEncoder->encodePassword(
@@ -95,8 +96,7 @@ Class UserController extends FOSRestController
             $data->setPicture($user->getPicture());
         }
         
-        try
-        {
+        try {
             $em->flush();
             $msg = 'Profil de '.$data->getUsername().' édité !';
             return $this->json(
@@ -108,8 +108,7 @@ Class UserController extends FOSRestController
                 ]
             );
         }
-        catch(UniqueConstraintViolationException $e)
-        {
+        catch(UniqueConstraintViolationException $e) {
             $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
             return $this->json($errors, 400);
         }
@@ -209,5 +208,17 @@ Class UserController extends FOSRestController
         } else {
             return true;
         }
+    }
+    /**
+     * @Rest\Post(
+     *    path = "/api/login",
+     *    name = "api_login",
+     * )
+     * @Rest\View
+     * @ParamConverter("user", converter="fos_rest.request_body")
+     */
+    public function login(User $user)
+    {
+        return $user;
     }
 }

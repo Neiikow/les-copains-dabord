@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class LoginComponent implements OnInit {
   public dataForm: FormGroup;
+  public id = false;
   public submitted = false;
   public error = false;
 
@@ -33,7 +34,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(formData).subscribe(
       (next) => {
         localStorage.setItem('token', next.token);
-        this.router.navigate(['/profil']);
+        if (this.authService.isAuthenticated()) {
+          const payload = this.authService.getDecodedToken();
+          this.id = payload.id;
+          this.router.navigate(['/profil/' + this.id]);
+        }
       },
       (error) => {
         this.error = error;

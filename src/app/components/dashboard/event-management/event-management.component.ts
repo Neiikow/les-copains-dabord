@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/class/event';
-import { EventService } from 'src/app/services/event.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-event-management',
