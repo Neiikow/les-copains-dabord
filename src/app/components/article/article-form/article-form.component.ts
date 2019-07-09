@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/class/article';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormValidatorService } from 'src/app/services/form-validator.service';
 
 @Component({
   selector: 'app-article-form',
@@ -23,7 +22,6 @@ export class ArticleFormComponent implements OnInit {
     private articleService: ArticleService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private formValidator: FormValidatorService,
     private formBuilder: FormBuilder,
     private location: Location,
     public router: Router) { }
@@ -36,7 +34,6 @@ export class ArticleFormComponent implements OnInit {
     if (this.dataForm.invalid) {
       return;
     }
-
     if (this.edit) {
       this.articleService.editArticle(formData).subscribe(e => this.location.back());
     } else {
@@ -66,13 +63,10 @@ export class ArticleFormComponent implements OnInit {
   }
   private initForm(data?: Article): void {
     const payload = this.authService.getDecodedToken();
-    const author = payload.username;
-    const date = this.formValidator.getDate();
 
     this.dataForm = this.formBuilder.group({
-      author: [this.edit ? data.author : author],
+      author: [this.edit ? data.author : payload.username],
       content: [this.edit ? data.content : null, Validators.required],
-      create_date: [this.edit ? data.createDate : date],
       id: this.edit ? data.id : null,
       title: [this.edit ? data.title : null, Validators.required],
       type: [this.edit ? data.type : this.type],

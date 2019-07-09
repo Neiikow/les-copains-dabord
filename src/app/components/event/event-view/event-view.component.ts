@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { EventSubscribers } from 'src/app/class/eventSubscribers';
-import { EventService } from 'src/app/services/event.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { count } from 'rxjs/operators';
+import { DataFormatService } from 'src/app/services/data-format.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-event-view',
@@ -21,7 +21,8 @@ export class EventViewComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private location: Location,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
     this.route.params.subscribe((param: {id: number}) => this.getEvent(param.id));
@@ -29,6 +30,9 @@ export class EventViewComponent implements OnInit {
   private getEvent(id: number): void {
     this.eventService.getEventById(id)
       .subscribe(event => {
+        const date = event.date + ' ' + event.time;
+        event.date = this.formatService.frenchDate(date);
+        event.createDate = this.formatService.frenchDate(event['create_date']);
         this.event = event;
         this.getSubscribers();
       });

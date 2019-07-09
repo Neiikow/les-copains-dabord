@@ -50,15 +50,12 @@ export class SignupComponent implements OnInit {
     );
   }
   private initForm(): void {
-    const date = this.formValidator.getDate();
-
     this.dataForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       passwordConf: ['', Validators.required],
       roles: this.formBuilder.array(['ROLE_USER']),
       username: ['', Validators.required],
-      create_date: date,
     }, {
       validator: this.formValidator.confirmMatch('password', 'passwordConf'),
     });

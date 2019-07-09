@@ -10,5 +10,5 @@ export class Article {
     public location_y: number;
     public version: string;
     public link: string;
-    public createDate: string;
+    public createDate: string ;
 }

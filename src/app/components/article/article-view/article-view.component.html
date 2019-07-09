@@ -4,7 +4,7 @@
       <div class='col'>Auteur : {{ article.author }}</div>
       <div class='col text-center' *ngIf="article.type === 'ground'">Coordonnées : X:{{ article.location_x }} / Y:{{ article.location_y }}</div>
       <div class='col text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
-      <div class='col text-right'>{{ article.create_date }}</div>
+      <div class='col text-right'>{{ article.createDate }}</div>
     </div>
     <section>
       <h1 class='text-center'>{{ article.title }}</h1>

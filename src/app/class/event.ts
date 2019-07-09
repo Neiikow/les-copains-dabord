@@ -5,7 +5,7 @@ export class Event {
     public support: string;
     public status: string;
     public author: string;
-    public date: number;
-    public time: number;
+    public date: string;
+    public time: string;
     public createDate: string;
 }

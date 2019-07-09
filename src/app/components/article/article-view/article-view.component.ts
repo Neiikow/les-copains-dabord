@@ -5,6 +5,7 @@ import { Article } from 'src/app/class/article';
 import { Types } from 'src/app/enum/types.enum';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataFormatService } from 'src/app/services/data-format.service';
 
 @Component({
   selector: 'app-article-view',
@@ -20,7 +21,8 @@ export class ArticleViewComponent implements OnInit {
     private route: ActivatedRoute,
     private articleService: ArticleService,
     private location: Location,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
     this.getArticles();
@@ -34,12 +36,16 @@ export class ArticleViewComponent implements OnInit {
   }
   private getArticle(id: number): void {
     this.articleService.getArticleById(id)
-      .subscribe((article: Article) => this.article = article);
+      .subscribe((article: Article) => {
+        article.createDate = this.formatService.frenchDate(article['create_date']);
+        this.article = article;
+      });
   }
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
-      this.articleService.deleteArticle(article.id).subscribe();
-      this.getArticles();
+      this.articleService.deleteArticle(article.id).subscribe(
+        next => this.getArticles(),
+      );
       this.location.back();
     }
   }

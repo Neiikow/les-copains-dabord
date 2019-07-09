@@ -3,6 +3,7 @@ import { Article } from 'src/app/class/article';
 import { Types } from 'src/app/enum/types.enum';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataFormatService } from 'src/app/services/data-format.service';
 
 @Component({
   selector: 'app-article-management',
@@ -15,20 +16,26 @@ export class ArticleManagementComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
     this.getArticles();
   }
   private getArticles(): void {
     this.articleService.getArticles()
-      .subscribe(articles => this.articles = articles);
+      .subscribe(articles => {
+        articles.forEach(article => {
+          article.createDate = this.formatService.frenchDate(article['create_date']);
+        });
+        this.articles = articles;
+      });
   }
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
-      this.articleService.deleteArticle(article.id).subscribe(next => {
-        this.getArticles();
-      });
+      this.articleService.deleteArticle(article.id).subscribe(
+        next => this.getArticles(),
+      );
     }
   }
 }

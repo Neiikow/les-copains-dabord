@@ -11,10 +11,10 @@
 
 <div class='app-bg-primary event d-flex align-items-center text-center mb-2' [routerLink]="[item.id]" *ngFor="let item of pageItems">
   <div class='sm-none p-2 col-md-1'><img src="{{ item.picture }}" height="60" alt="icone"></div>
-  <div class='content p-2 pl-3 col-md-7 text-left'>
+  <div class='content p-2 pl-3 col-md-6 text-left'>
     <h6>{{ item.title }}</h6>
     <p class="text-truncate">{{ item.content }}</p>
   </div>
   <div class='sm-none p-2 col-md-2'>Proposé par<br>{{ item.author }}</div>
-  <div class='sm-none p-2 col-md-2'>Le {{ item.date }}<br>à {{ item.time }}h</div>
+  <div class='sm-none p-2 col-md-3'>Débute le <br>{{ item.date }}</div>
 </div>

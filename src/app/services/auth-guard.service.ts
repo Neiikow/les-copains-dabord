@@ -22,20 +22,3 @@ export class AuthGuardService implements CanActivate {
       }
   }
 }
-/*
-header ->
-{
-  public obs$: Observable<boolean>;
-
-  constructor(private authService: AuthService) {}
-
-  public ngOnInit(): void {
-    this.obs$ = this.authService.onAuth();
-  }
-  public logout(): void {
-    this.authService.logout();
-  }
-}
-*ngIf="(obs$ | async)" (click)="logout()"
-*ngIf="!(obs$ | async)"
-*/

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/class/event';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataFormatService } from 'src/app/services/data-format.service';
 import { EventService } from 'src/app/services/event.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 
@@ -19,7 +20,8 @@ export class EventListComponent implements OnInit {
     private eventService: EventService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private paginService: PaginationService) { }
+    private paginService: PaginationService,
+    private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
     this.getEvents();
@@ -33,6 +35,10 @@ export class EventListComponent implements OnInit {
     const status = this.route.snapshot.data['status'];
     this.eventService.getEventsByStatus(status)
       .subscribe(events => {
+        events.forEach(event => {
+          const date = event.date + ' ' + event.time;
+          event.date = this.formatService.frenchDate(date);
+        });
         this.events = events;
         this.setPage(1, 5);
       });

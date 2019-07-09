@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from 'src/app/class/event';
-import { EventService } from 'src/app/services/event.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormValidatorService } from 'src/app/services/form-validator.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-event-form',
@@ -23,7 +22,6 @@ export class EventFormComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private formValidator: FormValidatorService,
     private location: Location,
     public router: Router) {}
 
@@ -63,7 +61,6 @@ export class EventFormComponent implements OnInit {
   private initForm(data?: Event): void {
     const payload = this.authService.getDecodedToken();
     const author = payload.username;
-    const date = this.formValidator.getDate();
 
     this.dataForm = this.formBuilder.group({
       id: this.edit ? data.id : null,
@@ -74,7 +71,6 @@ export class EventFormComponent implements OnInit {
       author: [this.edit ? data.author : author],
       date: [this.edit ? data.date : null, Validators.required],
       time: [this.edit ? data.time : null, Validators.required],
-      create_date: [this.edit ? data.createDate : date],
     });
     this.event = this.dataForm.value;
   }
