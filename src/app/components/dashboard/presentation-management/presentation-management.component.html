@@ -1,10 +1,8 @@
-<app-presentation-management></app-presentation-management>
-<h4 class="text-center mt-3">Articles</h4>
+<h4 class="text-center">Présentations</h4>
 <div class="table-responsive">
   <table class="table table-hover bg-white mb-2">
     <thead class="text-white app-bg-primary">
       <tr>
-        <th></th>
         <th></th>
         <th class='text-center'>Titre</th>
         <th class="app-d-none">Contenu</th>
@@ -15,7 +13,6 @@
     </thead>
     <tbody>
       <tr class="article" *ngFor="let article of articles">
-        <td><button class="delete btn col alert-danger" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button></td>
         <td><a [routerLink]="['/minecraft', 'editer', article.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
         <td class='text-left text-truncate pl-1'>{{ article.title }}</td>
         <td class="app-d-none">

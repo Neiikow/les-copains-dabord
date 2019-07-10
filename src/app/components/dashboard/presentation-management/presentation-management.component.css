@@ -1,0 +1,49 @@
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    tbody {
+        font-size: 12px;
+    }
+    th, td {
+        padding: 3px;
+    }
+    .app-d-none {
+        display: none;
+    }
+}
+table {
+    border: #17A2B8 solid 2px;
+    font-size: 14px;
+    text-align: center;
+}
+.table thead th {
+    border-bottom: 0;
+}
+td, th {
+    vertical-align: middle;
+    
+}
+td p {
+    max-width: 300px;
+}
+td, tbody th {
+    padding: 0;
+}
+tbody th div {
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+}
+tbody th img {
+    height: 30px;
+}
+.edit:hover {
+    color: #d1ecf1;
+    background: #0c5460;
+}
+.article .btn {
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}

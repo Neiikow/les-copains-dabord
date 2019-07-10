@@ -6,11 +6,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DataFormatService } from 'src/app/services/data-format.service';
 
 @Component({
-  selector: 'app-article-management',
-  styleUrls: ['./article-management.component.css'],
-  templateUrl: './article-management.component.html',
+  selector: 'app-presentation-management',
+  styleUrls: ['./presentation-management.component.css'],
+  templateUrl: './presentation-management.component.html',
 })
-export class ArticleManagementComponent implements OnInit {
+export class PresentationManagementComponent implements OnInit {
   public articles: Article[];
   private types = Types;
 
@@ -23,23 +23,12 @@ export class ArticleManagementComponent implements OnInit {
     this.getArticles();
   }
   private getArticles(): void {
-    this.articleService.getArticles()
+    this.articleService.getArticlesByType('presentation')
       .subscribe(articles => {
-        const tab = [];
         articles.forEach(article => {
-          if (article.type !== 'presentation') {
-            article.createDate = this.formatService.frenchDate(article['create_date']);
-            tab.push(article);
-          }
+          article.createDate = this.formatService.frenchDate(article['create_date']);
         });
-        this.articles = tab;
+        this.articles = articles;
       });
-  }
-  private delete(article: Article): void {
-    if (this.authService.isAuthenticated()) {
-      this.articleService.deleteArticle(article.id).subscribe(
-        next => this.getArticles(),
-      );
-    }
   }
 }

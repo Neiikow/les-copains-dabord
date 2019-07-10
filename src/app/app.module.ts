@@ -32,6 +32,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
 import { PaginationSmComponent } from './components/pagination-sm/pagination-sm.component';
+import { PresentationManagementComponent } from './components/dashboard/presentation-management/presentation-management.component';
 
 export function tokenGetter(): any {
   return localStorage.getItem('token');
@@ -65,6 +66,7 @@ export function tokenGetter(): any {
     MemberManagementComponent,
     PaginationComponent,
     PaginationSmComponent,
+    PresentationManagementComponent,
   ],
   imports: [
     BrowserModule,
