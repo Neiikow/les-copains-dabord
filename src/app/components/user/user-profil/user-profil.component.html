@@ -67,6 +67,8 @@
           <input type="text" class="form-control" id="discord" formControlName="discord" [ngClass]="{'is-invalid': submitted && f.discord.errors}">
           <div *ngIf="submitted && f.discord.errors" class="invalid-feedback">
             <div *ngIf="f.discord.errors.maxlength">Valeur trop longue</div>
+            <div *ngIf="f.discord.errors.minlength">Valeur trop courte</div>
+            <div *ngIf="f.discord.errors.confirmDiscord">Chiffres uniquement</div>
           </div>
         </div>
       </div>

@@ -92,7 +92,10 @@ export class UserProfilComponent implements OnInit {
   }
   private initForm(data?: User): void {
     this.dataForm = this.formBuilder.group({
-      discord: [data.discord, Validators.maxLength(4)],
+      discord: [
+        data.discord,
+        [Validators.minLength(4), Validators.maxLength(4), this.formValidator.confirmDiscord],
+      ],
       email: [data.email, Validators.email],
       id: data.id,
       password: ['', Validators.minLength(4)],

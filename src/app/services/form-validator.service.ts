@@ -19,4 +19,13 @@ export class FormValidatorService {
             }
         };
     }
+    public confirmDiscord(control: any): any {
+        if (control.value) {
+            if (control.value.match(/^[0-9]{4}$/)) {
+                return null;
+            } else {
+                return { confirmDiscord: true };
+            }
+        }
+    }
 }

@@ -13,21 +13,14 @@ FRONTEND **************
 -> Régénérer un token après la modif du profil
 -> Archive
 
-SESSION MENTOR (01/07/19) **************
--> Problème avec le formBuilder du profil
-    StandBy
-
 SESSION MENTOR (08/07/19) **************
--> A Voir
-    - Format discord 0001 : regex ?
-        Oui
-
--> Date : stocker le vrai format et le formater lors de la récup
 -> Pagination : le back s'en occupe et renvoi une page par une . front : demander une page par une avec les params.
 
 SESSION MENTOR (13/07/19) **************
 -> Fait
     - Changement des roles depuis le dashboard
     - Gestion des roles
+    - Date : stocker le vrai format et le formater lors de la récup
+    - Format discord 0001 regex
 
 -> A Voir
