@@ -2,7 +2,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Method\Pagination;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 Class ApiMcController extends FOSRestController
@@ -56,13 +58,13 @@ Class ApiMcController extends FOSRestController
     }
 
     /**
-     * @Rest\Get(
+     * @Rest\POST(
      *    path = "/apimc/playerlist",
      *    name = "playerlist"
      * )
      * @Rest\View
      */
-    public function getOnlineMembers()
+    public function getOnlineMembers(Pagination $pagin, Request $request)
     {
         $members = [];
         $separator = "#<br \/>#";
@@ -79,7 +81,20 @@ Class ApiMcController extends FOSRestController
                 ];
                 array_push($members, $member);
             }
-            return $members;
+
+            $content = json_decode($request->getContent());
+            
+            $options = $pagin->getPager(
+                count($members),
+                $content->currentPage,
+                $content->pageSize
+            );
+            
+            $members = array_slice($members, $options['startIndex'], $options['pageSize']);
+            return [
+                'options' => $options,
+                'members' => $members,
+            ];
         }
 
         return $data;

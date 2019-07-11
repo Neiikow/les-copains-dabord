@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/class/article';
 import { Types } from 'src/app/enum/types.enum';
 import { ArticleService } from 'src/app/services/article.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { DataFormatService } from 'src/app/services/data-format.service';
 
 @Component({
@@ -13,18 +12,20 @@ import { DataFormatService } from 'src/app/services/data-format.service';
 export class PresentationManagementComponent implements OnInit {
   public articles: Article[];
   private types = Types;
+  private pagin: any;
 
   constructor(
     private articleService: ArticleService,
-    private authService: AuthService,
     private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
-    this.getArticles();
+    this.getArticles(1, 3);
   }
-  private getArticles(): void {
-    this.articleService.getArticlesByType('presentation')
-      .subscribe(articles => {
+  private getArticles(currentPage: number, pageSize: number): void {
+    this.articleService.getArticlesByType('presentation', currentPage, pageSize)
+      .subscribe(data => {
+        const articles = data.articles;
+        this.pagin = data.options;
         articles.forEach(article => {
           article.createDate = this.formatService.frenchDate(article['create_date']);
         });

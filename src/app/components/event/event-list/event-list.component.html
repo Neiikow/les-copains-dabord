@@ -1,20 +1,42 @@
+<div *ngIf="events">
+  <h4 class="text-center">Evènements</h4>
+</div>
 <div class="row mb-2">
   <div class="new col-md-3 col-sm-12">
     <div *ngIf="isAuth('ROLE_MEMBER')" >
       <a routerLink="../nouveau" class="btn btn-info">Nouveau</a>
     </div>
   </div>
-  <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
-    <app-pagination [pagin]="pagin" [items]="events"></app-pagination>
+  <div *ngIf="pagin" class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+    <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
+      <a class="btn btn-info" (click)="getEvents(1, pagin.pageSize)">
+        <i class="fas fa-angle-double-left"></i>
+      </a>
+      <a class="btn btn-info" (click)="getEvents(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
+        <i class="fas fa-angle-left"></i>
+      </a>
+      <p class="btn btn-info">
+        {{pagin.currentPage}} / {{pagin.totalPages}}
+      </p>
+      <a class="btn btn-info" (click)="getEvents(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
+        <i class="fas fa-angle-right"></i>
+      </a>
+      <a class="btn btn-info" (click)="getEvents(pagin.totalPages, pagin.pageSize)">
+        <i class="fas fa-angle-double-right"></i>
+      </a>
+    </div>
   </div>
 </div>
 
-<div class='app-bg-primary event d-flex align-items-center text-center mb-2' [routerLink]="[item.id]" *ngFor="let item of pageItems">
-  <div class='sm-none p-2 col-md-1'><img src="{{ item.picture }}" height="60" alt="icone"></div>
-  <div class='content p-2 pl-3 col-md-6 text-left'>
-    <h6>{{ item.title }}</h6>
-    <p class="text-truncate">{{ item.content }}</p>
+<div class='app-bg-primary event d-flex align-items-center text-center mb-2' [routerLink]="[event.id]" *ngFor="let event of events">
+  <div class='sm-none p-2 col-md-1'>
+    <div class="day">{{ event.date.day }}</div>
+    <div class="month">{{ event.date.month }}</div>
   </div>
-  <div class='sm-none p-2 col-md-2'>Proposé par<br>{{ item.author }}</div>
-  <div class='sm-none p-2 col-md-3'>Débute le <br>{{ item.date }}</div>
+  <div class='content p-2 pl-3 col-md-6 text-left'>
+    <h6>{{ event.title }}</h6>
+    <p class="text-truncate">{{ event.content }}</p>
+  </div>
+  <div class='sm-none p-2 col-md-2'>{{ event.support }}</div>
+  <div class='sm-none p-2 col-md-3'>Créé le<br>{{ event.createDate }}</div>
 </div>

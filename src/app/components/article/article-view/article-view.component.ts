@@ -16,6 +16,7 @@ export class ArticleViewComponent implements OnInit {
   public article: Article;
   private articles: Article[];
   private types = Types;
+  private pagin: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,14 +26,17 @@ export class ArticleViewComponent implements OnInit {
     private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
-    this.getArticles();
+    this.getArticles(1, 10);
     this.route.params.subscribe((param: {id: number}) => this.getArticle(param.id));
   }
 
-  private getArticles(): void {
+  private getArticles(currentPage: number, pageSize: number): void {
     const type = this.route.snapshot.data['type'];
-    this.articleService.getArticlesByType(type)
-      .subscribe(articles => this.articles = articles);
+    this.articleService.getArticlesByType(type, currentPage, pageSize)
+      .subscribe(data => {
+        this.pagin = data.options;
+        this.articles = data.articles;
+      });
   }
   private getArticle(id: number): void {
     this.articleService.getArticleById(id)
@@ -44,7 +48,7 @@ export class ArticleViewComponent implements OnInit {
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
       this.articleService.deleteArticle(article.id).subscribe(
-        next => this.getArticles(),
+        next => this.getArticles(this.pagin.currentPage, this.pagin.pageSize),
       );
       this.location.back();
     }

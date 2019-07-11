@@ -24,33 +24,27 @@
     </div>
   </div>
   <div class='info-serv col-md-2 col-sm-12 p-1 app-border-primary app-bg-secondary'>
-    <h4 class="text-center">En jeu <span *ngIf="players">({{ players.length }})</span></h4>
-    <div *ngIf="pageItems">
-      <div class='app-bg-primary border border-dark mt-1 p-1' *ngFor="let item of pageItems">
-        {{ item.name }}
-      </div>
-      <hr>
-      <div class="d-flex justify-content-center">
-        <div *ngIf="pagin.pages && pagin.pages.length" class="btn-group btn-group-sm" role="group" aria-label="pages">
-          <a class="btn btn-info" (click)="setPage(1, pagin.pageSize)">
-            <i class="fas fa-angle-double-left"></i>
-          </a>
-          <a class="btn btn-info" (click)="setPage(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
+    <h4 class="text-center">En jeu <span *ngIf="players">({{ pagin.totalItems }})</span></h4>
+    <div *ngIf="players">
+      <div *ngIf="pagin" class="d-flex justify-content-center">
+        <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
+          <a class="btn btn-info" (click)="getPlayers(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
             <i class="fas fa-angle-left"></i>
           </a>
           <p class="btn btn-info">
-            {{pagin.currentPage}}
+            {{pagin.currentPage}} / {{pagin.totalPages}}
           </p>
-          <a class="btn btn-info" (click)="setPage(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
+          <a class="btn btn-info" (click)="getPlayers(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
             <i class="fas fa-angle-right"></i>
-          </a>
-          <a class="btn btn-info" (click)="setPage(pagin.totalPages, pagin.pageSize)">
-            <i class="fas fa-angle-double-right"></i>
           </a>
         </div>
       </div>
+      <hr>
+      <div class='player app-bg-primary border border-dark mt-1 p-1' *ngFor="let player of players">
+        {{ player.name }}
+      </div>
     </div>
-    <div *ngIf="!pageItems">
+    <div *ngIf="!players">
       Aucun joueur connecté
     </div>
   </div>

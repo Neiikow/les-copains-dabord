@@ -54,3 +54,10 @@ hr {
     font-size: 80%;
     padding: 5px;
 }
+.pagin p:hover {
+    cursor: initial;
+    background-color: #17a2b8;
+}
+.pagin .btn-info {
+    border-color: #0c5460;
+}

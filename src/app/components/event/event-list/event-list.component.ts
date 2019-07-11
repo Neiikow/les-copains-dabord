@@ -4,7 +4,6 @@ import { Event } from 'src/app/class/event';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataFormatService } from 'src/app/services/data-format.service';
 import { EventService } from 'src/app/services/event.service';
-import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-event-list',
@@ -20,31 +19,31 @@ export class EventListComponent implements OnInit {
     private eventService: EventService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private paginService: PaginationService,
     private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
-    this.getEvents();
+    this.getEvents(1, 10);
   }
   public isAuth(role: string): boolean {
     if (this.authService.haveRoles(role)) {
       return true;
     }
   }
-  private getEvents(): void {
+  private getEvents(currentPage: number, pageSize: number): void {
     const status = this.route.snapshot.data['status'];
-    this.eventService.getEventsByStatus(status)
-      .subscribe(events => {
-        events.forEach(event => {
-          const date = event.date + ' ' + event.time;
-          event.date = this.formatService.frenchDate(date);
-        });
-        this.events = events;
-        this.setPage(1, 5);
+    this.eventService.getEventsByStatus(status, currentPage, pageSize)
+      .subscribe(data => {
+        if (data.events) {
+          const events = data.events;
+          this.pagin = data.options;
+          events.forEach(event => {
+            event.createDate = this.formatService.frenchDate(event['create_date']);
+            const date = event.date + ' ' + event.time;
+            event.date = this.formatService.calendarDate(date);
+          });
+          this.events = events;
+        }
       });
   }
-  private setPage(page: number, pageSize: number): void {
-    this.pagin = this.paginService.getPager(this.events.length, page, pageSize);
-    this.pageItems = this.events.slice(this.pagin.startIndex, this.pagin.endIndex + 1);
-  }
+
 }

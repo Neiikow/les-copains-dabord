@@ -2,10 +2,13 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Method\Pagination;
+use App\Method\Archive;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use App\Exception\ResourceValidationException;
@@ -104,19 +107,54 @@ Class EventController extends FOSRestController
         return $event;
     }
     /**
-     * @Rest\Get(
-     *    path = "/api/events/{status}",
+     * @Rest\Post(
+     *    path = "/api/events/show/{status}",
      *    name = "events_status",
      *    requirements = {"status"="[a-z,A-Z]+"}
      * )
      * @Rest\View
      */
-    public function showStatus($status)
+    public function showStatus(Archive $archive, $status, Pagination $pagin, Request $request)
     {
+        $content = json_decode($request->getContent());
         $events = $this->getDoctrine()->getRepository('App:Event')->findBy(
             array('status' => $status)
         );
+        if (!$events) {
+            return 'Aucune donnée disponible';
+        }
 
+        $em = $this->getDoctrine()->getManager();
+        foreach ($events as $event) {
+            if ($event->getStatus() === 'active') {
+                $date = $event->getDate() . $event->getTime();
+                $isExpired = $archive->byExpiredDate($date);
+                if ($isExpired) {
+                    $event->setStatus('archive');
+                    $em->flush();
+                }
+            }
+        }
+
+        $options = $pagin->getPager(
+            count($events),
+            $content->currentPage,
+            $content->pageSize
+        );
+
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('e')
+            ->from('App:Event', 'e')
+            ->where('e.status = :status')->setParameter('status', $status)
+            ->setFirstResult($options['startIndex'])
+            ->setMaxResults($options['pageSize']);
+        $query = $queryBuilder->getQuery();
+        $events = $query->getResult();
+        
+        return [
+            'options' => $options,
+            'events' => $events,
+        ];
         return $events;
     }
     /**
@@ -127,21 +165,62 @@ Class EventController extends FOSRestController
      * )
      * @Rest\View
      */
-    public function showId(Event $event)
+    public function showId(Archive $archive, Event $event)
     {
+        if ($event->getStatus() === 'active') {
+            $em = $this->getDoctrine()->getManager();
+            $date = $event->getDate() . $event->getTime();
+            $isExpired = $archive->byExpiredDate($date);
+
+            if ($isExpired) {
+                $event->setStatus('archive');
+                $em->flush();
+            }
+        }
+
         return $event;
     }
     /**
-     * @Rest\Get(
+     * @Rest\Post(
      *    path = "/api/events",
      *    name = "events_list",
      * )
      * @Rest\View
      */
-    public function showAll()
+    public function showAll(Pagination $pagin, Archive $archive, Request $request)
     {
+        $content = json_decode($request->getContent());
         $events = $this->getDoctrine()->getRepository('App:Event')->findAll();
+        
+        $em = $this->getDoctrine()->getManager();
+        foreach ($events as $event) {
+            if ($event->getStatus() === 'active') {
+                $date = $event->getDate() . $event->getTime();
+                $isExpired = $archive->byExpiredDate($date);
+                if ($isExpired) {
+                    $event->setStatus('archive');
+                    $em->flush();
+                }
+            }
+        }
 
-        return $events;
+        $options = $pagin->getPager(
+            count($events),
+            $content->currentPage,
+            $content->pageSize
+        );
+
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('a')
+            ->from('App:Event', 'a')
+            ->setFirstResult($options['startIndex'])
+            ->setMaxResults($options['pageSize']);
+        $query = $queryBuilder->getQuery();
+        $events = $query->getResult();
+
+        return [
+            'options' => $options,
+            'events' => $events,
+        ];
     }
 }

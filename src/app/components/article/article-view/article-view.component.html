@@ -12,7 +12,7 @@
     </section>
   </div>
   <div id="article-nav" class='col-md-2 col-sm-12 p-0'>
-    <div class='app-bg-secondary d-flex align-items-center rounded-top btn-group'>
+    <div class='action app-bg-secondary d-flex align-items-center rounded-top btn-group'>
       <a *ngIf="isAuth('ROLE_ADMIN')" [routerLink]="['/minecraft', 'editer', article.id]" class="nav-link btn col" title="Editer"><i class="fas fa-edit"></i></a>
       <button *ngIf="isAuth('ROLE_ADMIN')" class="nav-link btn col" (click)="delete(article)" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
       <button class="nav-link btn col" (click)="goBack()" title="Retour"><i class="fas fa-reply"></i></button>
@@ -22,8 +22,22 @@
       <hr>
       <div *ngFor="let article of articles">
         <a class='item-menu text-info p-1' [routerLink]="['../', article.id]">
-          <i class="fas fa-angle-right"></i>{{ article.title }}
+          <i class="fas fa-angle-right"></i> {{ article.title }}
         </a>
+      </div>
+      <hr>
+      <div *ngIf="pagin" class="d-flex justify-content-center">
+        <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
+          <a class="btn btn-info" (click)="getArticles(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
+            <i class="fas fa-angle-left"></i>
+          </a>
+          <p class="btn btn-info">
+            {{pagin.currentPage}} / {{pagin.totalPages}}
+          </p>
+          <a class="btn btn-info" (click)="getArticles(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
+            <i class="fas fa-angle-right"></i>
+          </a>
+        </div>
       </div>
     </section>
   </div>

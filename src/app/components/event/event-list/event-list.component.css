@@ -22,3 +22,17 @@ img {
 .event:hover {
     background: #138496 !important;
 }
+.day {
+    background-color: white;
+    font-size: 20px;
+    border: solid black 1px;
+    border-radius: 3px 3px 0 0;
+    color: black;
+}
+.month {
+    background-color: rgba(207, 0, 0, 0.863);
+    font-size: 14px;
+    border: solid black 1px;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+}

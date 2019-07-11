@@ -13,6 +13,7 @@ import { DataFormatService } from 'src/app/services/data-format.service';
 export class ArticleManagementComponent implements OnInit {
   public articles: Article[];
   private types = Types;
+  private pagin: any;
 
   constructor(
     private articleService: ArticleService,
@@ -20,11 +21,13 @@ export class ArticleManagementComponent implements OnInit {
     private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
-    this.getArticles();
+    this.getArticles(1, 10);
   }
-  private getArticles(): void {
-    this.articleService.getArticles()
-      .subscribe(articles => {
+  private getArticles(currentPage: number, pageSize: number): void {
+    this.articleService.getArticles(currentPage, pageSize)
+      .subscribe(data => {
+        const articles = data.articles;
+        this.pagin = data.options;
         const tab = [];
         articles.forEach(article => {
           if (article.type !== 'presentation') {
@@ -38,7 +41,7 @@ export class ArticleManagementComponent implements OnInit {
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
       this.articleService.deleteArticle(article.id).subscribe(
-        next => this.getArticles(),
+        next => this.getArticles(this.pagin.currentPage, this.pagin.pageSize),
       );
     }
   }

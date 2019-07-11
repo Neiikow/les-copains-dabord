@@ -11,17 +11,20 @@ import { UserService } from 'src/app/services/user.services';
 export class UserListComponent implements OnInit {
   public users: User[];
   private role: string;
+  private pagin: any;
 
   constructor(
     private userService: UserService) { }
 
   public ngOnInit(): void {
-    this.getUsers();
+    this.getUsers(1, 10);
   }
 
-  public getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => {
+  public getUsers(currentPage: number, pageSize: number): void {
+    this.userService.getUsers(currentPage, pageSize)
+      .subscribe(data => {
+        const users = data.users;
+        this.pagin = data.options;
         users.forEach(user => {
           user.roles = [this.setLastRole(user.roles, user)];
         });

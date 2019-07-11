@@ -36,18 +36,18 @@
         font-size: 12px;
     }
 }
-.item-menu:hover, #article-nav .btn {
+.item-menu:hover, #article-nav .action .btn {
     cursor: pointer;
     background: #6EB7BF;
     color: white !important;
 }
-#article-nav .btn:hover {
+#article-nav .action .btn:hover {
     background: #138496;
     color: white !important;
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
 }
-#article-nav .btn {
+#article-nav .action .btn {
     border: none;
     color: black !important;
 }

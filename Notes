@@ -5,16 +5,11 @@ BACKEND **************
 -> Actualiser le token lors du refresh
 -> Terminer la mise en place de refresh token
 -> Supprimer le token et refresh token lors de la déconnexion
--> Documenter l'api
 
 FRONTEND **************
--> Vérification des normes html5: titre pour chaque section etc...
 -> Renvoyer automatiquement le refresh token à l'api si le token est expiré
 -> Régénérer un token après la modif du profil
 -> Archive
-
-SESSION MENTOR (08/07/19) **************
--> Pagination : le back s'en occupe et renvoi une page par une . front : demander une page par une avec les params.
 
 SESSION MENTOR (13/07/19) **************
 -> Fait
@@ -22,5 +17,7 @@ SESSION MENTOR (13/07/19) **************
     - Gestion des roles
     - Date : stocker le vrai format et le formater lors de la récup
     - Format discord 0001 regex
+    - Pagination
 
 -> A Voir
+    - Un seul composant pagination qui communique avec ses parents

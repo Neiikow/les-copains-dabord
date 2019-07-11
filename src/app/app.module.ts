@@ -16,6 +16,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { ArticleManagementComponent } from './components/dashboard/article-management/article-management.component';
 import { EventManagementComponent } from './components/dashboard/event-management/event-management.component';
 import { MemberManagementComponent } from './components/dashboard/member-management/member-management.component';
+import { PresentationManagementComponent } from './components/dashboard/presentation-management/presentation-management.component';
 import { AccessDeniedComponent } from './components/error/access-denied/access-denied.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
 import { EventFormComponent } from './components/event/event-form/event-form.component';
@@ -28,11 +29,8 @@ import { PageLoginComponent } from './components/pages/page-login/page-login.com
 import { PageMembersComponent } from './components/pages/page-members/page-members.component';
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
-import { PaginationSmComponent } from './components/pagination-sm/pagination-sm.component';
-import { PresentationManagementComponent } from './components/dashboard/presentation-management/presentation-management.component';
 
 export function tokenGetter(): any {
   return localStorage.getItem('token');
@@ -64,8 +62,6 @@ export function tokenGetter(): any {
     ArticleManagementComponent,
     EventManagementComponent,
     MemberManagementComponent,
-    PaginationComponent,
-    PaginationSmComponent,
     PresentationManagementComponent,
   ],
   imports: [

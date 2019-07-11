@@ -2,10 +2,12 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Method\Pagination;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use App\Exception\ResourceValidationException;
@@ -112,20 +114,55 @@ Class ArticleController extends FOSRestController
         return $article;
     }
     /**
-     * @Rest\Get(
+     * @Rest\Post(
      *    path = "/api/articles/{type}",
      *    name = "articles_type",
      *    requirements = {"type"="[a-z,A-Z]+"}
      * )
      * @Rest\View
      */
-    public function showType($type)
+    public function showType($type, Pagination $pagin, Request $request)
     {
+        $content = json_decode($request->getContent());
         $articles = $this->getDoctrine()->getRepository('App:Article')->findBy(
             array('type' => $type)
         );
+
+        $options = $pagin->getPager(
+            count($articles),
+            $content->currentPage,
+            $content->pageSize
+        );
+
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('a')
+            ->from('App:Article', 'a')
+            ->where('a.type = :type')->setParameter('type', $type)
+            ->setFirstResult($options['startIndex'])
+            ->setMaxResults($options['pageSize']);
+        $query = $queryBuilder->getQuery();
+        $articles = $query->getResult();
         
-        return $articles;
+        return [
+            'options' => $options,
+            'articles' => $articles,
+        ];
+    }
+    /**
+     * @Rest\Get(
+     *    path = "/api/articles/view/{type}",
+     *    name = "articles_view_type",
+     *    requirements = {"type"="[a-z,A-Z]+"}
+     * )
+     * @Rest\View
+     */
+    public function viewType($type)
+    {
+        $article = $this->getDoctrine()->getRepository('App:Article')->findBy(
+            array('type' => $type)
+        );
+        
+        return $article;
     }
     /**
      * @Rest\Get(
@@ -145,16 +182,34 @@ Class ArticleController extends FOSRestController
         return $article;
     }
     /**
-     * @Rest\Get(
+     * @Rest\Post(
      *    path = "/api/articles",
      *    name = "articles_list",
      * )
      * @Rest\View
      */
-    public function showAll()
+    public function showAll(Pagination $pagin, Request $request)
     {
+        $content = json_decode($request->getContent());
         $articles = $this->getDoctrine()->getRepository('App:Article')->findAll();
+        
+        $options = $pagin->getPager(
+            count($articles),
+            $content->currentPage,
+            $content->pageSize
+        );
 
-        return $articles;
+        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->select('a')
+            ->from('App:Article', 'a')
+            ->setFirstResult($options['startIndex'])
+            ->setMaxResults($options['pageSize']);
+        $query = $queryBuilder->getQuery();
+        $articles = $query->getResult();
+        
+        return [
+            'options' => $options,
+            'articles' => $articles,
+        ];
     }
 }

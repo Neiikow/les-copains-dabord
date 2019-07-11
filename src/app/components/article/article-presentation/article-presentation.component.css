@@ -5,3 +5,13 @@
         margin-top: 10px;
     }
 }
+@media (max-width: 991px) {
+    .player {
+        font-size: 12px;
+    }
+}
+.player {
+    text-align: center;
+    border-radius: 15px 0 15px 0;
+    overflow: hidden;
+}

@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.services';
 export class MemberManagementComponent implements OnInit {
   public users: User[];
   private rolesEnum = Roles;
+  private pagin: any;
 
   constructor(
     private userService: UserService,
@@ -20,12 +21,14 @@ export class MemberManagementComponent implements OnInit {
     private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
-    this.getUsers();
+    this.getUsers(1, 10);
   }
 
-  public getUsers(): void {
-    this.userService.getUsers()
-    .subscribe(users => {
+  public getUsers(currentPage: number, pageSize: number): void {
+    this.userService.getUsers(currentPage, pageSize)
+    .subscribe(data => {
+      const users = data.users;
+      this.pagin = data.options;
       users.forEach(user => {
         user['createDate'] = this.formatService.frenchDate(user['createDate']);
         user.roles = Roles[user.roles[0]];
@@ -36,7 +39,7 @@ export class MemberManagementComponent implements OnInit {
   private delete(user: User): void {
     if (this.authService.isAuthenticated()) {
       this.userService.deleteUser(user.id).subscribe(
-        next => this.getUsers(),
+        next => this.getUsers(this.pagin.currentPage, this.pagin.pageSize),
       );
     }
   }

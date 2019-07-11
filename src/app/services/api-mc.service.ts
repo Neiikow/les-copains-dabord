@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiMcService {
-  private url = 'http://localhost:8888/les-copains-dabord/api/public/apimc/';
+  private url = 'https://neiikow.fr/api/public/index.php/apimc/';
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,11 @@ export class ApiMcService {
     const request = this.http.request('GET', this.url + 'total');
     return request;
   }
-  public getOnlinePlayers(): Observable<object> {
-    return this.http.request('GET', this.url + 'playerlist');
+  public getOnlinePlayers(currentPage: number, pageSize: number): Observable<any> {
+    const pageOptions = {
+      currentPage,
+      pageSize,
+    };
+    return this.http.post<any>(this.url + 'playerlist', pageOptions);
   }
 }

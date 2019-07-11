@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/class/article';
 import { ApiMcService } from 'src/app/services/api-mc.service';
 import { ArticleService } from 'src/app/services/article.service';
-import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-article-presentation',
@@ -11,7 +10,6 @@ import { PaginationService } from 'src/app/services/pagination.service';
 })
 export class ArticlePresentationComponent implements OnInit {
   public players: any;
-  public pageItems: any;
   public article: Article;
   private status: object;
   private version: object;
@@ -20,12 +18,12 @@ export class ArticlePresentationComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-    private apimcService: ApiMcService,
-    private paginService: PaginationService) { }
+    private apimcService: ApiMcService) { }
 
   public ngOnInit(): void {
     this.getArticle();
     this.getServerData();
+    this.getPlayers(1, 6);
   }
 
   private getArticle(): void {
@@ -37,13 +35,12 @@ export class ArticlePresentationComponent implements OnInit {
     this.apimcService.getStatus().subscribe(status => this.status = status);
     this.apimcService.getVersion().subscribe(version => this.version = version);
     this.apimcService.getTotal().subscribe(total => this.total = total);
-    this.apimcService.getOnlinePlayers().subscribe(players => {
-      this.players = players;
-      this.setPage(1, 5);
-    });
   }
-  private setPage(page: number, pageSize: number): void {
-    this.pagin = this.paginService.getPager(this.players.length, page, pageSize);
-    this.pageItems = this.players.slice(this.pagin.startIndex, this.pagin.endIndex + 1);
+  private getPlayers(currentPage: number, pageSize: number): void {
+    this.apimcService.getOnlinePlayers(currentPage, pageSize)
+    .subscribe(data => {
+      this.pagin = data.options;
+      this.players = data.members;
+    });
   }
 }
