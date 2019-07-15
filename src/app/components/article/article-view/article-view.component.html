@@ -2,7 +2,7 @@
   <div id="article" class='col-md-10 col-sm-12 p-0 pr-2'>
     <div class='info app-bg-secondary d-flex flex-wrap align-items-center font-italic p-2 rounded-top'>
       <div class='col'>Auteur : {{ article.author }}</div>
-      <div class='col text-center' *ngIf="article.type === 'ground'">Coordonnées : X:{{ article.location_x }} / Y:{{ article.location_y }}</div>
+      <div class='col text-center' *ngIf="article.type === 'ground'">Coordonnées : X:{{ article.locationX }} / Y:{{ article.locationY }}</div>
       <div class='col text-center' *ngIf="article.type === 'plugin'">Version : {{ article.version }}</div>
       <div class='col text-right'>{{ article.createDate }}</div>
     </div>

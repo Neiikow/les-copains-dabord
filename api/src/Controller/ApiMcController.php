@@ -58,7 +58,7 @@ Class ApiMcController extends FOSRestController
     }
 
     /**
-     * @Rest\POST(
+     * @Rest\Post(
      *    path = "/apimc/playerlist",
      *    name = "playerlist"
      * )

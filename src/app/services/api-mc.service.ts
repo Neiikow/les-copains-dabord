@@ -6,21 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiMcService {
-  private url = 'https://neiikow.fr/api/public/index.php/apimc/';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/apimc/';
 
   constructor(private http: HttpClient) { }
 
-  public getStatus(): Observable<Object> {
-    const request = this.http.request('GET', this.url + 'status');
-    return request;
+  public getStatus(): Observable<any> {
+    return this.http.request('GET', this.url + 'status');
   }
-  public getVersion(): Observable<Object> {
-    const request = this.http.request('GET', this.url + 'version');
-    return request;
+  public getVersion(): Observable<any> {
+    return this.http.request('GET', this.url + 'version');
   }
-  public getTotal(): Observable<Object> {
-    const request = this.http.request('GET', this.url + 'total');
-    return request;
+  public getTotal(): Observable<any> {
+    return this.http.request('GET', this.url + 'total');
   }
   public getOnlinePlayers(currentPage: number, pageSize: number): Observable<any> {
     const pageOptions = {

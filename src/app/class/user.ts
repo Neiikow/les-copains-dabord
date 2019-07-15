@@ -7,4 +7,5 @@ export class User {
     public roles: [string];
     public discord: string;
     public token: string;
+    public createDate: string;
 }

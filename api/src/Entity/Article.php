@@ -7,74 +7,74 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
- * @ORM\Table()
+ * @ORM\Table(name="article")
  * @Serializer\ExclusionPolicy("ALL")
  */
 class Article
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Serializer\Expose
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="title", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $title;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="content", type="string", length=10000)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $content;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="author", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $author;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="picture", type="string", length=1000)
      * @Serializer\Expose
      */
     private $picture;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="type", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $type;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="status", type="string", length=255)
      * @Serializer\Expose
      */
     private $status;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="locationx", type="integer", length=11)
      * @Serializer\Expose
      */
     private $locationX;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="locationY", type="integer", length=11)
      * @Serializer\Expose
      */
     private $locationY;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="link", type="string", length=1000)
      * @Serializer\Expose
      */
     private $link;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="version", type="string", length=50)
      * @Serializer\Expose
      */
     private $version;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="createDate", type="string")
      * @Serializer\Expose
      */
     private $createDate;

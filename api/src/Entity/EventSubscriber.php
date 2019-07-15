@@ -13,20 +13,20 @@ use JMS\Serializer\Annotation as Serializer;
 class EventSubscriber
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Serializer\Expose
      */
     private $id;
     /**
-    * @ORM\Column(name="event_id", type="integer")
+    * @ORM\Column(name="eventId", type="integer", length=11)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $eventId;
     /**
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="userId", type="integer", length=11)
      * @Serializer\Expose
      * @Assert\NotBlank
      */

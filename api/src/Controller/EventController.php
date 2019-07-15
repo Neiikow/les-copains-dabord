@@ -150,12 +150,10 @@ Class EventController extends FOSRestController
             ->setMaxResults($options['pageSize']);
         $query = $queryBuilder->getQuery();
         $events = $query->getResult();
-        
         return [
             'options' => $options,
             'events' => $events,
         ];
-        return $events;
     }
     /**
      * @Rest\Get(

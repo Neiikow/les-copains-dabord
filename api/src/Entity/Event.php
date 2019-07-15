@@ -13,56 +13,56 @@ use JMS\Serializer\Annotation as Serializer;
 class Event
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Serializer\Expose
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="title", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $title;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="content", type="string", length=10000)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $content;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="support", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $support;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="author", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $author;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="status", type="string", length=255)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $status;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="date", type="string", length=10)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $date;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="time", type="string", length=5)
      * @Serializer\Expose
      * @Assert\NotBlank
      */
     private $time;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="createDate", type="string")
      * @Serializer\Expose
      */
     private $createDate;

@@ -60,17 +60,16 @@ export class EventFormComponent implements OnInit {
   }
   private initForm(data?: Event): void {
     const payload = this.authService.getDecodedToken();
-    const author = payload.username;
 
     this.dataForm = this.formBuilder.group({
-      id: this.edit ? data.id : null,
-      title: [this.edit ? data.title : null, Validators.required],
+      author: [this.edit ? data.author : payload.username],
       content: [this.edit ? data.content : null, Validators.required],
-      support: [this.edit ? data.support : null, Validators.required],
-      status: [this.edit ? data.status : 'active'],
-      author: [this.edit ? data.author : author],
       date: [this.edit ? data.date : null, Validators.required],
+      id: this.edit ? data.id : null,
+      status: [this.edit ? data.status : 'active'],
+      support: [this.edit ? data.support : null, Validators.required],
       time: [this.edit ? data.time : null, Validators.required],
+      title: [this.edit ? data.title : null, Validators.required],
     });
     this.event = this.dataForm.value;
   }

@@ -5,12 +5,11 @@ import { Event } from '../class/event';
 import { EventSubscribe } from '../class/eventSubscribe';
 import { EventSubscribers } from '../class/eventSubscribers';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private url = 'https://neiikow.fr/api/public/index.php/api/events';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/events';
 
   constructor(private http: HttpClient) { }
 
@@ -43,10 +42,10 @@ export class EventService {
   public getSubscribers(id: number): Observable<EventSubscribers> {
     return this.http.get<EventSubscribers>(this.url + '/subscribers/' + id);
   }
-  public subscribe(eventId: number, userId: number): Observable<Event> {
+  public subscribe(eventId: number, userId: number): Observable<any> {
     const subscriber = new EventSubscribe();
-    subscriber.event_id = eventId;
-    subscriber.user_id = userId;
-    return this.http.post<Event>(this.url + '/subscribe', subscriber);
+    subscriber['event_id'] = eventId;
+    subscriber['user_id'] = userId;
+    return this.http.post<any>(this.url + '/subscribe', subscriber);
   }
 }

@@ -42,6 +42,8 @@ export class ArticleViewComponent implements OnInit {
     this.articleService.getArticleById(id)
       .subscribe((article: Article) => {
         article.createDate = this.formatService.frenchDate(article['create_date']);
+        article.locationX = article['location_x'];
+        article.locationY = article['location_y'];
         this.article = article;
       });
   }

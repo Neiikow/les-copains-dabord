@@ -54,6 +54,8 @@ export class ArticleFormComponent implements OnInit {
               this.router.navigate(['/acces-refuse']);
               return;
             }
+            article.locationX = article['location_x'];
+            article.locationY = article['location_y'];
             this.type = article.type;
             this.initForm(article);
           });
@@ -73,9 +75,9 @@ export class ArticleFormComponent implements OnInit {
     });
     if (this.type === 'ground') {
       this.dataForm.addControl(
-        'location_x', new FormControl(this.edit ? data.location_x : null, Validators.required));
+        'location_x', new FormControl(this.edit ? data.locationX : null, Validators.required));
       this.dataForm.addControl(
-        'location_y', new FormControl(this.edit ? data.location_y : null, Validators.required));
+        'location_y', new FormControl(this.edit ? data.locationY : null, Validators.required));
       this.dataForm.addControl(
         'picture', new FormControl(this.edit ? data.picture : null, Validators.required));
       this.dataForm.addControl(

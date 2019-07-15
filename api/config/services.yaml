@@ -25,7 +25,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    
+
     acme_api.event.jwt_created_listener:
         class: App\EventListener\JWTCreatedListener
         arguments: [ '@request_stack' ]
@@ -46,3 +46,25 @@ services:
         class: App\EventListener\JWTInvalidListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+            
+    acme_api.event.jwt_authenticated_listener:
+        class: App\EventListener\JWTAuthenticatedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onJWTAuthenticated }
+
+    
+
+
+
+    # acme_api.event.jwt_decoded_listener:
+    #     class: App\EventListener\JWTDecodedListener
+    #     arguments: ['@request_stack']
+    #     tags:
+    #         - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+
+    
+
+    acme_api.event.jwt_encoded_listener:
+        class: App\EventListener\JWTEncodedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_encoded, method: onJWTEncoded }

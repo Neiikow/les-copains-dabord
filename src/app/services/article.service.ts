@@ -7,7 +7,7 @@ import { Article } from '../class/article';
   providedIn: 'root',
 })
 export class ArticleService {
-  private url = 'https://neiikow.fr/api/public/index.php/api/articles';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/articles';
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class ArticleService {
       currentPage,
       pageSize,
     };
-    return this.http.post<any>(this.url, pageOptions);
+    return this.http.post<Article[]>(this.url, pageOptions);
   }
   public getArticlesByType(type: string, currentPage: number, pageSize: number): Observable<any> {
     const pageOptions = {

@@ -11,6 +11,7 @@ class AuthenticationFailureListener
      */
     public function onAuthenticationFailureResponse(AuthenticationFailureEvent $event)
     {
+        //dump('AuthFailure');
         $msg = 'Identifiants incorrects';
 
         $response = new JWTAuthenticationFailureResponse($msg);

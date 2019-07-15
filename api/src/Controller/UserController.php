@@ -97,10 +97,15 @@ Class UserController extends FOSRestController
         if ($user->getPicture()) {
             $data->setPicture($user->getPicture());
         }
-        
+        $jwtManager = $this->container->get('lexik_jwt_authentication.jwt_manager');
+        $data->setToken($jwtManager->create($data));
+
         try {
             $em->flush();
-            $msg = 'Profil de '.$data->getUsername().' édité !';
+            $msg = [
+                'content' => 'Profil de '.$data->getUsername().' édité !',
+                'token' => $data->getToken()
+            ];
             return $this->json(
                 $msg,
                 Response::HTTP_CREATED,
@@ -224,17 +229,5 @@ Class UserController extends FOSRestController
         } else {
             return true;
         }
-    }
-    /**
-     * @Rest\Post(
-     *    path = "/api/login",
-     *    name = "api_login",
-     * )
-     * @Rest\View
-     * @ParamConverter("user", converter="fos_rest.request_body")
-     */
-    public function login(User $user)
-    {
-        return $user;
     }
 }

@@ -142,7 +142,7 @@ Class ArticleController extends FOSRestController
             ->setMaxResults($options['pageSize']);
         $query = $queryBuilder->getQuery();
         $articles = $query->getResult();
-        
+
         return [
             'options' => $options,
             'articles' => $articles,
@@ -161,7 +161,6 @@ Class ArticleController extends FOSRestController
         $article = $this->getDoctrine()->getRepository('App:Article')->findBy(
             array('type' => $type)
         );
-        
         return $article;
     }
     /**
@@ -192,7 +191,7 @@ Class ArticleController extends FOSRestController
     {
         $content = json_decode($request->getContent());
         $articles = $this->getDoctrine()->getRepository('App:Article')->findAll();
-        
+
         $options = $pagin->getPager(
             count($articles),
             $content->currentPage,
@@ -206,6 +205,7 @@ Class ArticleController extends FOSRestController
             ->setMaxResults($options['pageSize']);
         $query = $queryBuilder->getQuery();
         $articles = $query->getResult();
+
         
         return [
             'options' => $options,

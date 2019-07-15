@@ -25,12 +25,13 @@ export class UserProfilComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private formValidator: FormValidatorService) { }
+    private formValidator: FormValidatorService) {
+      for (const [key, value] of Object.entries(Roles)) {
+        this.roles.push({key, value});
+      }
+    }
 
   public ngOnInit(): void {
-    for (const [key, value] of Object.entries(Roles)) {
-      this.roles.push({key, value});
-    }
     this.route.params.subscribe(
       (param: {id: number}) => this.userService.getUserById(param.id)
       .subscribe(
@@ -51,6 +52,7 @@ export class UserProfilComponent implements OnInit {
   private onSubmit(formData: User): void {
     this.submitted = true;
     if (this.dataForm.invalid) {
+      this.intervalError();
       return ;
     }
     if (this.dataForm.value.password || this.dataForm.value.passwordOld) {
@@ -70,7 +72,7 @@ export class UserProfilComponent implements OnInit {
           },
         );
       } else {
-        this.error = "Veuillez renseigner l'ancien et le nouveau mot de passe";
+        this.error = 'Ancien ou nouveau mot de passe incorrect';
         this.intervalError();
       }
     } else {
@@ -81,8 +83,10 @@ export class UserProfilComponent implements OnInit {
     this.dataForm.value.roles = [this.dataForm.value.roles];
     this.authService.edit(formData).subscribe(
       (next) => {
-        this.edited = String(next);
-        this.intervalSuccess();
+        this.edited = String(next['content']);
+        localStorage.setItem('token', next['token']);
+        this.ngOnInit();
+        this.intervalSuccess(next['id']);
       },
       (error) => {
         this.error = error;
@@ -113,14 +117,16 @@ export class UserProfilComponent implements OnInit {
     setTimeout(
       () => {
         this.error = '';
+        this.submitted = null;
         clearInterval();
       }, 3000,
     );
   }
-  private intervalSuccess(): void {
+  private intervalSuccess(id: number): void {
     setTimeout(
       () => {
         this.edited = null;
+        this.submitted = null;
         clearInterval();
       }, 3000,
     );

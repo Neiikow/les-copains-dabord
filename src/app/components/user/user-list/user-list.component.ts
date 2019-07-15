@@ -26,7 +26,7 @@ export class UserListComponent implements OnInit {
         const users = data.users;
         this.pagin = data.options;
         users.forEach(user => {
-          user.roles = [this.setLastRole(user.roles, user)];
+          user.roles = Roles[user.roles[0]];
         });
         this.users = users;
       });

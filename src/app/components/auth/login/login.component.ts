@@ -36,8 +36,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', next.token);
         if (this.authService.isAuthenticated()) {
           const payload = this.authService.getDecodedToken();
-          this.id = payload.id;
-          this.router.navigate(['/profil/' + this.id]);
+          this.router.navigate(['/profil/' + payload.id]);
         }
       },
       (error) => {

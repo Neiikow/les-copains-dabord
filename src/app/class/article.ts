@@ -6,9 +6,9 @@ export class Article {
     public picture: string;
     public type: string;
     public status: string;
-    public location_x: number;
-    public location_y: number;
+    public locationX: number;
+    public locationY: number;
     public version: string;
     public link: string;
-    public createDate: string ;
+    public createDate: string;
 }

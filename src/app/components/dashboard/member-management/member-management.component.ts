@@ -30,7 +30,7 @@ export class MemberManagementComponent implements OnInit {
       const users = data.users;
       this.pagin = data.options;
       users.forEach(user => {
-        user['createDate'] = this.formatService.frenchDate(user['createDate']);
+        user.createDate = this.formatService.frenchDate(user.createDate);
         user.roles = Roles[user.roles[0]];
       });
       this.users = users;

@@ -30,7 +30,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(name="roles", type="array")
      * @Serializer\Expose
      */
     private $roles = array();
@@ -67,7 +67,7 @@ class User implements UserInterface
     private $createDate;
 
     /**
-     * @ORM\Column(name="token", type="text", length=5000)
+     * @ORM\Column(name="token", type="string", length=5000)
      * @Serializer\Expose
      */
     private $token;
