@@ -38,7 +38,9 @@ export class UserProfilComponent implements OnInit {
         (user: User) => {
           const payload = this.authService.getDecodedToken();
           if (payload.roles[0] !== 'ROLE_ADMIN') {
-            user.roles[0] = Roles[user.roles[0]];
+            const key = user.roles[0];
+            const value = Roles[user.roles[0]];
+            this.roles = [{key, value}];
           }
           this.user = user;
           this.initForm(user);
@@ -84,9 +86,12 @@ export class UserProfilComponent implements OnInit {
     this.authService.edit(formData).subscribe(
       (next) => {
         this.edited = String(next['content']);
-        localStorage.setItem('token', next['token']);
+        const payload = this.authService.getDecodedToken();
+        if (payload.id === this.user.id) {
+          localStorage.setItem('token', next['token']);
+        }
         this.ngOnInit();
-        this.intervalSuccess(next['id']);
+        this.intervalSuccess();
       },
       (error) => {
         this.error = error;
@@ -122,7 +127,7 @@ export class UserProfilComponent implements OnInit {
       }, 3000,
     );
   }
-  private intervalSuccess(id: number): void {
+  private intervalSuccess(): void {
     setTimeout(
       () => {
         this.edited = null;

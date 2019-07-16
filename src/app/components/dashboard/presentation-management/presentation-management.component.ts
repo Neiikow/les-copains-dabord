@@ -11,8 +11,8 @@ import { DataFormatService } from 'src/app/services/data-format.service';
 })
 export class PresentationManagementComponent implements OnInit {
   public articles: Article[];
+  public pagin: any;
   private types = Types;
-  private pagin: any;
 
   constructor(
     private articleService: ArticleService,
@@ -20,6 +20,9 @@ export class PresentationManagementComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getArticles(1, 3);
+  }
+  public getOptions(options: any): void {
+    this.getArticles(options.currentPage, options.pageSize);
   }
   private getArticles(currentPage: number, pageSize: number): void {
     this.articleService.getArticlesByType('presentation', currentPage, pageSize)

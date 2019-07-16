@@ -29,6 +29,9 @@ export class EventListComponent implements OnInit {
       return true;
     }
   }
+  public getOptions(options: any): void {
+    this.getEvents(options.currentPage, options.pageSize);
+  }
   private getEvents(currentPage: number, pageSize: number): void {
     const status = this.route.snapshot.data['status'];
     this.eventService.getEventsByStatus(status, currentPage, pageSize)

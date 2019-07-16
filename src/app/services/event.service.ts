@@ -9,7 +9,7 @@ import { EventSubscribers } from '../class/eventSubscribers';
   providedIn: 'root',
 })
 export class EventService {
-  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/events';
+  private url = 'https://neiikow.fr/api/public/api/events';
 
   constructor(private http: HttpClient) { }
 

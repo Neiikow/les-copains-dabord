@@ -31,6 +31,8 @@ import { PageMinecraftComponent } from './components/pages/page-minecraft/page-m
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
+import { PaginationSmComponent } from './components/pagination/pagination-sm/pagination-sm.component';
+import { PaginationMdComponent } from './components/pagination/pagination-md/pagination-md.component';
 
 export function tokenGetter(): any {
   return localStorage.getItem('token');
@@ -63,6 +65,8 @@ export function tokenGetter(): any {
     EventManagementComponent,
     MemberManagementComponent,
     PresentationManagementComponent,
+    PaginationSmComponent,
+    PaginationMdComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,4 +88,4 @@ export function tokenGetter(): any {
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -11,7 +11,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventManagementComponent implements OnInit {
   public events: Event[];
-  private pagin: any;
+  public pagin: any;
 
   constructor(
     private eventService: EventService,
@@ -20,6 +20,9 @@ export class EventManagementComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getEvents(1, 10);
+  }
+  public getOptions(options: any): void {
+    this.getEvents(options.currentPage, options.pageSize);
   }
   private getEvents(currentPage: number, pageSize: number): void {
     this.eventService.getEvents(currentPage, pageSize)

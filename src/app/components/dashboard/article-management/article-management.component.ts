@@ -12,8 +12,8 @@ import { DataFormatService } from 'src/app/services/data-format.service';
 })
 export class ArticleManagementComponent implements OnInit {
   public articles: Article[];
+  public pagin: any;
   private types = Types;
-  private pagin: any;
 
   constructor(
     private articleService: ArticleService,
@@ -22,6 +22,9 @@ export class ArticleManagementComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getArticles(1, 10);
+  }
+  public getOptions(options: any): void {
+    this.getArticles(options.currentPage, options.pageSize);
   }
   private getArticles(currentPage: number, pageSize: number): void {
     this.articleService.getArticles(currentPage, pageSize)

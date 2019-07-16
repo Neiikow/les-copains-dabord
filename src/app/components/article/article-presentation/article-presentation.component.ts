@@ -11,10 +11,10 @@ import { ArticleService } from 'src/app/services/article.service';
 export class ArticlePresentationComponent implements OnInit {
   public players: any;
   public article: Article;
+  public pagin: any;
   private status: object;
   private version: object;
   private total: object;
-  private pagin: any;
 
   constructor(
     private articleService: ArticleService,
@@ -25,7 +25,9 @@ export class ArticlePresentationComponent implements OnInit {
     this.getServerData();
     this.getPlayers(1, 6);
   }
-
+  public getOptions(options: any): void {
+    this.getPlayers(options.currentPage, options.pageSize);
+  }
   private getArticle(): void {
     const type = 'presentation';
     this.articleService.getArticleByType(type)

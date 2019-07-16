@@ -49,13 +49,13 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      * @Serializer\Expose
      */
     private $picture;
 
     /**
-     * @ORM\Column(name="discord", type="string", length=255)
+     * @ORM\Column(name="discord", type="string", length=255, nullable=true)
      * @Serializer\Expose
      */
     private $discord;
@@ -67,7 +67,7 @@ class User implements UserInterface
     private $createDate;
 
     /**
-     * @ORM\Column(name="token", type="string", length=5000)
+     * @ORM\Column(name="token", type="string", length=5000, nullable=true)
      * @Serializer\Expose
      */
     private $token;

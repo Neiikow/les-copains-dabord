@@ -1,23 +1,7 @@
 <app-presentation-management></app-presentation-management>
 <h4 class="text-center mt-3">Articles</h4>
 <div *ngIf="pagin" class="d-flex justify-content-center mb-2">
-  <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
-    <a class="btn btn-info" (click)="getArticles(1, pagin.pageSize)">
-      <i class="fas fa-angle-double-left"></i>
-    </a>
-    <a class="btn btn-info" (click)="getArticles(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
-      <i class="fas fa-angle-left"></i>
-    </a>
-    <p class="btn btn-info">
-      {{pagin.currentPage}} / {{pagin.totalPages}}
-    </p>
-    <a class="btn btn-info" (click)="getArticles(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
-      <i class="fas fa-angle-right"></i>
-    </a>
-    <a class="btn btn-info" (click)="getArticles(pagin.totalPages, pagin.pageSize)">
-      <i class="fas fa-angle-double-right"></i>
-    </a>
-  </div>
+  <app-pagination-md [pagin]="pagin" (options)="getOptions($event)"></app-pagination-md>
 </div>
 
 <div class="table-responsive">

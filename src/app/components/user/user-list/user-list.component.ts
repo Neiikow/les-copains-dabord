@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class UserListComponent implements OnInit {
   public users: User[];
+  public pagin: any;
   private role: string;
-  private pagin: any;
 
   constructor(
     private userService: UserService) { }
@@ -30,6 +30,9 @@ export class UserListComponent implements OnInit {
         });
         this.users = users;
       });
+  }
+  public getOptions(options: any): void {
+    this.getUsers(options.currentPage, options.pageSize);
   }
   private setLastRole(roles: [string], user: User): string {
     const role = user.roles[user.roles.length - 1];

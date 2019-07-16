@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ArticleListComponent implements OnInit {
   public design: string;
   public pagin: any;
-  private articles: Article[];
+  public articles: Article[];
   private type: string;
   private types = Types;
 
@@ -35,6 +35,9 @@ export class ArticleListComponent implements OnInit {
     if (this.authService.haveRoles(role)) {
       return true;
     }
+  }
+  public getOptions(options: any): void {
+    this.getArticles(options.currentPage, options.pageSize);
   }
   private getArticles(currentPage: number, pageSize: number): void {
     this.articleService.getArticlesByType(this.type, currentPage, pageSize)

@@ -12,8 +12,8 @@ import { UserService } from 'src/app/services/user.services';
 })
 export class MemberManagementComponent implements OnInit {
   public users: User[];
+  public pagin: any;
   private rolesEnum = Roles;
-  private pagin: any;
 
   constructor(
     private userService: UserService,
@@ -35,6 +35,9 @@ export class MemberManagementComponent implements OnInit {
       });
       this.users = users;
     });
+  }
+  public getOptions(options: any): void {
+    this.getUsers(options.currentPage, options.pageSize);
   }
   private delete(user: User): void {
     if (this.authService.isAuthenticated()) {

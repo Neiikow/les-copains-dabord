@@ -1,8 +1,4 @@
 gesdinet_jwt_refresh_token :
-      user_provider: main # provider concerné
-      firewall: refresh # par feu concerné
-      user_identity_field : username # champ d'identité de l'utilisateur
       ttl_update : true # actualisation du refresh token
       ttl : 1209600 # durée de validation
-#      refresh_token_class : App\Entity\User
-#      object_manager : doctrine.orm.entity_manager
+      user_provider: security.user.provider.concrete.main

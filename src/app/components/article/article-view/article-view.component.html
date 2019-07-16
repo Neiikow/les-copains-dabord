@@ -27,17 +27,7 @@
       </div>
       <hr>
       <div *ngIf="pagin" class="d-flex justify-content-center">
-        <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
-          <a class="btn btn-info" (click)="getArticles(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
-            <i class="fas fa-angle-left"></i>
-          </a>
-          <p class="btn btn-info">
-            {{pagin.currentPage}} / {{pagin.totalPages}}
-          </p>
-          <a class="btn btn-info" (click)="getArticles(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
-            <i class="fas fa-angle-right"></i>
-          </a>
-        </div>
+          <app-pagination-sm [pagin]="pagin" (options)="getOptions($event)"></app-pagination-sm>
       </div>
     </section>
   </div>

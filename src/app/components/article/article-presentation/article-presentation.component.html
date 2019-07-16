@@ -25,20 +25,8 @@
   </div>
   <div class='info-serv col-md-2 col-sm-12 p-1 app-border-primary app-bg-secondary'>
     <h4 class="text-center">En jeu <span *ngIf="players">({{ pagin.totalItems }})</span></h4>
-    <div *ngIf="players">
-      <div *ngIf="pagin" class="d-flex justify-content-center">
-        <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
-          <a class="btn btn-info" (click)="getPlayers(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
-            <i class="fas fa-angle-left"></i>
-          </a>
-          <p class="btn btn-info">
-            {{pagin.currentPage}} / {{pagin.totalPages}}
-          </p>
-          <a class="btn btn-info" (click)="getPlayers(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
-            <i class="fas fa-angle-right"></i>
-          </a>
-        </div>
-      </div>
+    <div *ngIf="players && pagin" class="text-center">
+      <app-pagination-sm [pagin]="pagin" (options)="getOptions($event)"></app-pagination-sm>
       <hr>
       <div class='player app-bg-primary border border-dark mt-1 p-1' *ngFor="let player of players">
         {{ player.name }}

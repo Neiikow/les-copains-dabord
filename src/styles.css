@@ -1,8 +1,6 @@
-body {
-    padding-top: 58px;
-}
 .container-fluid {
-    min-height: 731px;
+    margin-top: 58px;
+    min-height: calc(100vh - 58px);
     background: url('public/img/bg-minecraft.jpg') no-repeat center fixed;
     background-size: cover;
 }

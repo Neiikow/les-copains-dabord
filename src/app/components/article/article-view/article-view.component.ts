@@ -29,7 +29,9 @@ export class ArticleViewComponent implements OnInit {
     this.getArticles(1, 10);
     this.route.params.subscribe((param: {id: number}) => this.getArticle(param.id));
   }
-
+  public getOptions(options: any): void {
+    this.getArticles(options.currentPage, options.pageSize);
+  }
   private getArticles(currentPage: number, pageSize: number): void {
     const type = this.route.snapshot.data['type'];
     this.articleService.getArticlesByType(type, currentPage, pageSize)

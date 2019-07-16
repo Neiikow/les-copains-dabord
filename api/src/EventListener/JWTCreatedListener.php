@@ -17,7 +17,6 @@ class JWTCreatedListener extends AuthenticationSuccessHandler
      */
     public function __construct(RequestStack $requestStack)
     {
-        //dump('CreatedConstruct');
         $this->requestStack = $requestStack;
     }
 

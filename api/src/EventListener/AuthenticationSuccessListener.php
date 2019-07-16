@@ -14,6 +14,7 @@ class AuthenticationSuccessListener
         $data = $event->getData();
         $user = $event->getUser();
         $user->setToken($data['token']);
+
         $response = $event->getResponse();
         $response->headers->set('Authorization', 'Bearer '.$data['token']);
 

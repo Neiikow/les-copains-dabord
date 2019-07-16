@@ -16,7 +16,6 @@ class JWTEncodedListener
      */
     public function __construct(RequestStack $requestStack)
     {
-        //dump('EncodedConstruct');
         $this->requestStack = $requestStack;
     }
     /**

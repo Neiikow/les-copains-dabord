@@ -38,7 +38,7 @@ class Article
      */
     private $author;
     /**
-     * @ORM\Column(name="picture", type="string", length=1000)
+     * @ORM\Column(name="picture", type="string", length=1000, nullable=true)
      * @Serializer\Expose
      */
     private $picture;
@@ -54,22 +54,22 @@ class Article
      */
     private $status;
     /**
-     * @ORM\Column(name="locationx", type="integer", length=11)
+     * @ORM\Column(name="locationx", type="integer", length=11, nullable=true)
      * @Serializer\Expose
      */
     private $locationX;
     /**
-     * @ORM\Column(name="locationY", type="integer", length=11)
+     * @ORM\Column(name="locationY", type="integer", length=11, nullable=true)
      * @Serializer\Expose
      */
     private $locationY;
     /**
-     * @ORM\Column(name="link", type="string", length=1000)
+     * @ORM\Column(name="link", type="string", length=1000, nullable=true)
      * @Serializer\Expose
      */
     private $link;
     /**
-     * @ORM\Column(name="version", type="string", length=50)
+     * @ORM\Column(name="version", type="string", length=50, nullable=true)
      * @Serializer\Expose
      */
     private $version;

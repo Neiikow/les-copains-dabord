@@ -1,22 +1,6 @@
 <h4 class="text-center">Membres</h4>
 <div *ngIf="pagin" class="d-flex justify-content-center mb-2">
-  <div class="pagin btn-group btn-group-sm" role="group" aria-label="pages">
-    <a class="btn btn-info" (click)="getUsers(1, pagin.pageSize)">
-      <i class="fas fa-angle-double-left"></i>
-    </a>
-    <a class="btn btn-info" (click)="getUsers(pagin.currentPage - 1, pagin.pageSize)" aria-label="Previous">
-      <i class="fas fa-angle-left"></i>
-    </a>
-    <p class="btn btn-info">
-      {{pagin.currentPage}} / {{pagin.totalPages}}
-    </p>
-    <a class="btn btn-info" (click)="getUsers(pagin.currentPage + 1, pagin.pageSize)" aria-label="Next">
-      <i class="fas fa-angle-right"></i>
-    </a>
-    <a class="btn btn-info" (click)="getUsers(pagin.totalPages, pagin.pageSize)">
-      <i class="fas fa-angle-double-right"></i>
-    </a>
-  </div>
+  <app-pagination-md [pagin]="pagin" (options)="getOptions($event)"></app-pagination-md>
 </div>
 <div class="table-responsive">
   <table class="table table-hover bg-white mb-0">

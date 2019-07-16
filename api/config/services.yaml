@@ -68,3 +68,8 @@ services:
         class: App\EventListener\JWTEncodedListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_encoded, method: onJWTEncoded }
+
+    gesdinet.refresh_token:
+        class: App\EventListener\LogListener
+        tags:
+            - { name: kernel.event_listener, event: gesdinet.refresh_token, method: getSubscribedEvents }
