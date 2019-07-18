@@ -68,9 +68,10 @@ export class ArticleFormComponent implements OnInit {
 
     this.dataForm = this.formBuilder.group({
       author: [this.edit ? data.author : payload.username],
-      content: [this.edit ? data.content : null, Validators.required],
+      content: [this.edit ? data.content : null, [Validators.required, Validators.maxLength(10000)]],
       id: this.edit ? data.id : null,
-      title: [this.edit ? data.title : null, Validators.required],
+      picture: [this.edit ? data.picture : null, [Validators.required, Validators.maxLength(1000)]],
+      title: [this.edit ? data.title : null, [Validators.required, Validators.maxLength(255)]],
       type: [this.edit ? data.type : this.type],
     });
     if (this.type === 'ground') {
@@ -79,17 +80,13 @@ export class ArticleFormComponent implements OnInit {
       this.dataForm.addControl(
         'location_y', new FormControl(this.edit ? data.locationY : null, Validators.required));
       this.dataForm.addControl(
-        'picture', new FormControl(this.edit ? data.picture : null, Validators.required));
-      this.dataForm.addControl(
         'status', new FormControl(this.edit ? data.status : 'online'));
     }
     if (this.type === 'plugin') {
       this.dataForm.addControl(
-        'link', new FormControl(this.edit ? data.link : null, Validators.required));
+        'link', new FormControl(this.edit ? data.link : null, [Validators.required, Validators.maxLength(1000)]));
       this.dataForm.addControl(
-        'picture', new FormControl(this.edit ? data.picture : null, Validators.required));
-      this.dataForm.addControl(
-        'status', new FormControl(this.edit ? data.status : 'online'));
+        'status', new FormControl(this.edit ? data.status : 'online', Validators.maxLength(50)));
       this.dataForm.addControl(
         'version', new FormControl(this.edit ? data.version : null, Validators.required));
     }

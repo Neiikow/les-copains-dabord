@@ -8,7 +8,7 @@
     <section>
       <h1 class='text-center mb-0'>{{ event.title }}</h1>
       <div class='event-date mb-4 font-italic text-center'>Débute le <strong>{{ event.date }}</strong></div>
-      <p>{{ event.content }}</p>
+      <p [innerHTML]="event.content | keepHtml"></p>
     </section>
   </div>
   <div id="event-nav" class='col-md-2 col-sm-12 p-0'>

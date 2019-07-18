@@ -19,7 +19,7 @@
         <td><a [routerLink]="['/minecraft', 'editer', article.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
         <td class='text-left text-truncate pl-1'>{{ article.title }}</td>
         <td class="app-d-none">
-          <p class="text-truncate m-auto">{{ article.content }}</p>
+          <p class="text-truncate m-auto" [innerHTML]="article.content"></p>
         </td>
         <td class="app-d-none">{{ types[article.type] }}</td>
         <td class="app-d-none">{{ article.author }}</td>

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiMcService {
-  private url = 'https://neiikow.fr/api/public/apimc/';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/apimc/';
 
   constructor(private http: HttpClient) { }
 

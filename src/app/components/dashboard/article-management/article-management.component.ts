@@ -29,14 +29,14 @@ export class ArticleManagementComponent implements OnInit {
   private getArticles(currentPage: number, pageSize: number): void {
     this.articleService.getArticles(currentPage, pageSize)
       .subscribe(data => {
-        const articles = data.articles;
         this.pagin = data.options;
         const tab = [];
-        articles.forEach(article => {
+        data.articles.forEach(article => {
           if (article.type !== 'presentation') {
             article.createDate = this.formatService.frenchDate(article['create_date']);
             tab.push(article);
           }
+          article.content = this.formatService.removeTags(article.content);
         });
         this.articles = tab;
       });

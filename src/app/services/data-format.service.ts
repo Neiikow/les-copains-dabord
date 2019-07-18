@@ -34,4 +34,10 @@ export class DataFormatService {
       'year': year,
     };
   }
+  public removeTags(data: string): any {
+    const re = /(<([^>]+)>)/ig;
+    const formated = data.replace(re, '');
+
+    return formated;
+  }
 }

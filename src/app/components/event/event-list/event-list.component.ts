@@ -37,14 +37,14 @@ export class EventListComponent implements OnInit {
     this.eventService.getEventsByStatus(status, currentPage, pageSize)
       .subscribe(data => {
         if (data.events) {
-          const events = data.events;
           this.pagin = data.options;
-          events.forEach(event => {
+          data.events.forEach(event => {
             event.createDate = this.formatService.frenchDate(event['create_date']);
             const date = event.date + ' ' + event.time;
             event.date = this.formatService.calendarDate(date);
+            event.content = this.formatService.removeTags(event.content);
           });
-          this.events = events;
+          this.events = data.events;
         }
       });
   }

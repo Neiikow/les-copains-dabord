@@ -7,7 +7,7 @@ import { User } from '../class/user';
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'https://neiikow.fr/api/public/api/users';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/users';
 
   constructor(private http: HttpClient) { }
 

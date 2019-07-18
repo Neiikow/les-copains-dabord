@@ -63,13 +63,13 @@ export class EventFormComponent implements OnInit {
 
     this.dataForm = this.formBuilder.group({
       author: [this.edit ? data.author : payload.username],
-      content: [this.edit ? data.content : null, Validators.required],
+      content: [this.edit ? data.content : null, [Validators.required, Validators.maxLength(10000)]],
       date: [this.edit ? data.date : null, Validators.required],
       id: this.edit ? data.id : null,
       status: [this.edit ? data.status : 'active'],
       support: [this.edit ? data.support : null, Validators.required],
       time: [this.edit ? data.time : null, Validators.required],
-      title: [this.edit ? data.title : null, Validators.required],
+      title: [this.edit ? data.title : null, [Validators.required, Validators.maxLength(255)]],
     });
     this.event = this.dataForm.value;
   }

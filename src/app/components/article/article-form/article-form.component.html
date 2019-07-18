@@ -6,6 +6,7 @@
         <input type="text"class="form-control" id="title" formControlName="title" [ngClass]="{'is-invalid': submitted && f.title.errors}">
         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
           <div *ngIf="f.title.errors.required">Titre requis</div>
+          <div *ngIf="f.title.errors.maxlength">Valeur trop longue</div>
         </div>
       </div>
       <div class="col-md-8 col-sm-12" *ngIf="type === 'ground'">
@@ -31,6 +32,7 @@
             <input type="url" class="form-control" id="picture" placeholder="Url de l'image" formControlName="picture" [ngClass]="{'is-invalid': submitted && f.picture.errors}">
             <div *ngIf="submitted && f.picture.errors" class="invalid-feedback">
               <div *ngIf="f.picture.errors.required">Illustration requise</div>
+              <div *ngIf="f.picture.errors.maxlength">Valeur trop longue</div>
             </div>
           </div>
         </div>
@@ -44,6 +46,7 @@
               <input type="text" class="form-control" id="version" formControlName="version" [ngClass]="{'is-invalid': submitted && f.version.errors}">
               <div *ngIf="submitted && f.version.errors" class="invalid-feedback">
                 <div *ngIf="f.version.errors.required">Version requise</div>
+                <div *ngIf="f.version.errors.maxlength">Valeur trop longue</div>
               </div>
             </div>
             <div class="form-group mb-0">
@@ -51,6 +54,7 @@
               <input type="url" class="form-control" id="picture" placeholder="Url du logo" formControlName="picture" [ngClass]="{'is-invalid': submitted && f.picture.errors}">
               <div *ngIf="submitted && f.picture.errors" class="invalid-feedback">
                 <div *ngIf="f.picture.errors.required">Logo requis</div>
+                <div *ngIf="f.picture.errors.maxlength">Valeur trop longue</div>
               </div>
             </div>
           </div>
@@ -59,18 +63,27 @@
             <input type="url" class="form-control" id="link" placeholder="Url du site" formControlName="link" [ngClass]="{'is-invalid': submitted && f.link.errors}">
             <div *ngIf="submitted && f.link.errors" class="invalid-feedback">
               <div *ngIf="f.link.errors.required">Lien requis</div>
+              <div *ngIf="f.link.errors.maxlength">Valeur trop longue</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="form-group">
     <label for="content">Contenu du message</label>
-    <textarea class="form-control" id="content" rows="10" formControlName="content" [ngClass]="{'is-invalid': submitted && f.content.errors}"></textarea>
-    <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
+    <editor class="is-invalid" formControlName="content" [ngClass]="{'is-invalid': submitted && f.content.errors}"
+      [init]="{
+        menubar: false,
+        statusbar: false,
+        plugins: 'autoresize advlist autolink link lists',
+        toolbar: 'undo redo | cut copy paste blockquote | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fontselect fontsizeselect forecolor backcolor bold italic underline strikethrough'
+      }">
+    </editor>
+    <div *ngIf="submitted && f.content.errors" class="invalid-data">
       <div *ngIf="f.content.errors.required">Contenu requis</div>
+      <div *ngIf="f.content.errors.maxlength">Valeur trop longue</div>
     </div>
   </div>
   <button type="submit" class="btn btn-info">Publier</button>

@@ -1,15 +1,8 @@
 DATABASE_URL=mysql://dbu115415:Endless91-@db5000100716.hosting-data.io/dbs95231
-BACKEND **************
--> Save new token in bdd after refresh
-
 FRONTEND **************
 -> Renvoyer automatiquement le refresh token à l'api si le token est expiré
--> Affichage du content d'un terrains
 
 SESSION MENTOR (17/07/19) **************
--> Fait
-    - Enregistrer le token dans user lors de la connexion
-    - Comparer le token dans le header et dans la bdd pour chaque requête
-    - Régénérer un token après la modif du profil
-    - Refresh des pages en prod
-    - Un seul composant pagination qui communique avec ses parents
+-> A voir 
+    - innerHtml et style : autre solution ?
+    (> regex)

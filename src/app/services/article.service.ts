@@ -7,7 +7,7 @@ import { Article } from '../class/article';
   providedIn: 'root',
 })
 export class ArticleService {
-  private url = 'https://neiikow.fr/api/public/api/articles';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/articles';
 
   constructor(private http: HttpClient) { }
 

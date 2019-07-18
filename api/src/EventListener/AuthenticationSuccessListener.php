@@ -11,8 +11,10 @@ class AuthenticationSuccessListener
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
         //dump('AuthSuccess');
+        //dump($event);
         $data = $event->getData();
         $user = $event->getUser();
+        //dump($data);
         $user->setToken($data['token']);
 
         $response = $event->getResponse();

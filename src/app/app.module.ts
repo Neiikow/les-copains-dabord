@@ -2,7 +2,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { EscapeHtmlPipe } from './pipes/keep-html.pipe';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,10 +31,10 @@ import { PageLoginComponent } from './components/pages/page-login/page-login.com
 import { PageMembersComponent } from './components/pages/page-members/page-members.component';
 import { PageMinecraftComponent } from './components/pages/page-minecraft/page-minecraft.component';
 import { PageProfilComponent } from './components/pages/page-profil/page-profil.component';
+import { PaginationMdComponent } from './components/pagination/pagination-md/pagination-md.component';
+import { PaginationSmComponent } from './components/pagination/pagination-sm/pagination-sm.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserProfilComponent } from './components/user/user-profil/user-profil.component';
-import { PaginationSmComponent } from './components/pagination/pagination-sm/pagination-sm.component';
-import { PaginationMdComponent } from './components/pagination/pagination-md/pagination-md.component';
 
 export function tokenGetter(): any {
   return localStorage.getItem('token');
@@ -40,6 +42,7 @@ export function tokenGetter(): any {
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
+    EscapeHtmlPipe,
     AppComponent,
     HeaderComponent,
     PageMinecraftComponent,
@@ -69,6 +72,7 @@ export function tokenGetter(): any {
     PaginationMdComponent,
   ],
   imports: [
+    EditorModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

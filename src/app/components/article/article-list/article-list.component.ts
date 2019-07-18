@@ -4,6 +4,7 @@ import { Article } from 'src/app/class/article';
 import { Types } from 'src/app/enum/types.enum';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataFormatService } from 'src/app/services/data-format.service';
 
 @Component({
   selector: 'app-article-list',
@@ -20,7 +21,8 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private authService: AuthService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private formatService: DataFormatService) { }
 
   public ngOnInit(): void {
     this.design = this.route.snapshot.data['design'];
@@ -43,6 +45,9 @@ export class ArticleListComponent implements OnInit {
     this.articleService.getArticlesByType(this.type, currentPage, pageSize)
       .subscribe(data => {
         this.pagin = data.options;
+        data.articles.forEach(article => {
+          article.content = this.formatService.removeTags(article.content);
+        });
         this.articles = data.articles;
       });
   }

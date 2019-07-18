@@ -11,7 +11,7 @@ import { User } from '../class/user';
 })
 export class AuthService {
   public authSub = new Subject<boolean>();
-  private url = 'https://neiikow.fr/api/public/api/';
+  private url = 'http://localhost:8888/les-copains-dabord/api/public/api/';
 
   constructor(
     private http: HttpClient,

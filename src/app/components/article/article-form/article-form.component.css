@@ -20,7 +20,7 @@ form {
 .form-inline .form-group{
     flex: auto;
 }
-.invalid-gps {
+.invalid-data {
     font-size: 80%;
     color: #dc3545;
     margin-top: .25em;

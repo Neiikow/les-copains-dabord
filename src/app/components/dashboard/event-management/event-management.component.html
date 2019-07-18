@@ -21,7 +21,7 @@
         <td><a [routerLink]="['/evenements', 'editer', event.id]" class="edit btn col alert-info" title="Editer"><i class="fas fa-edit"></i></a></td>
         <td class='text-left text-truncate pl-1'>{{ event.title }}</td>
         <td class="app-d-none">
-          <p class="text-truncate">{{ event.content }}</p>
+          <p class="text-truncate" [innerHTML]="event.content"></p>
         </td>
         <td class="app-d-none">{{ event.support }}</td>
         <td class="app-d-none">{{ event.author }}</td>

@@ -17,9 +17,8 @@ class JWTAuthenticatedListener
         $token = $event->getToken();
         $userToken = $token->getUser()->getToken();
         $requestToken = $token->getCredentials();
-        
+
         if ($userToken !== $requestToken) {
-            //dump('Les tokens ne sont pas égaux');die;
             throw new InvalidTokenException();
         }
     }

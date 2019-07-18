@@ -20,7 +20,7 @@
       </div>
       <div class="card-body" [style.background-image]="'url('+article.picture+')'">
         <div class='content-card w-50 m-auto'>
-          <p class="card-text p-3">{{ article.content }}</p>
+          <p class="card-text p-1 pl-3 pr-3" [innerHTML]="article.content"></p>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <div class='icone sm-none p-2 col-md-1'><img src="{{ article.picture }}" height="60" alt="icone"></div>
         <div class='content p-2 pl-3 col-md-10 col-sm-12 text-left'>
           <h6>{{ article.title }}</h6>
-          <p class="text-truncate">{{ article.content }}</p>
+          <p class="text-truncate" [innerHTML]="article.content"></p>
         </div>
         <div class='sm-none p-2 col-md-1'>{{ article.version }}</div>
       </div>

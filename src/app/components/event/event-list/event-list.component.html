@@ -19,7 +19,7 @@
   </div>
   <div class='content p-2 pl-3 col-md-6 text-left'>
     <h6>{{ event.title }}</h6>
-    <p class="text-truncate">{{ event.content }}</p>
+    <p class="text-truncate" [innerHTML]="event.content"></p>
   </div>
   <div class='sm-none p-2 col-md-2'>{{ event.support }}</div>
   <div class='sm-none p-2 col-md-3'>Créé le<br>{{ event.createDate }}</div>

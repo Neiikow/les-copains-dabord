@@ -27,12 +27,12 @@ export class EventManagementComponent implements OnInit {
   private getEvents(currentPage: number, pageSize: number): void {
     this.eventService.getEvents(currentPage, pageSize)
       .subscribe(data => {
-        const events = data.events;
         this.pagin = data.options;
-        events.forEach(event => {
+        data.events.forEach(event => {
           event.createDate = this.formatService.frenchDate(event['create_date']);
+          event.content = this.formatService.removeTags(event.content);
         });
-        this.events = events;
+        this.events = data.events;
       });
   }
   private delete(event: Event): void {

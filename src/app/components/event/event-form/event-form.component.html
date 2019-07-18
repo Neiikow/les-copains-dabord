@@ -6,6 +6,7 @@
         <input type="text"class="form-control" id="title" formControlName="title" [ngClass]="{'is-invalid': submitted && f.title.errors}">
         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
           <div *ngIf="f.title.errors.required">Titre requis</div>
+          <div *ngIf="f.title.errors.maxlength">Valeur trop longue</div>
         </div>
       </div>
       <div class="col-md-8 col-sm-12">
@@ -20,7 +21,7 @@
                 <input type="time" class="form-control mt-1" id="time" formControlName="time" [ngClass]="{'is-invalid': submitted && f.time.errors}">
               </div>
             </div>
-            <div *ngIf="submitted && (f.date.errors || f.time.errors)" class="invalid-date">
+            <div *ngIf="submitted && (f.date.errors || f.time.errors)" class="invalid-data">
               <div *ngIf="f.date.errors.required || f.time.errors">Date requise</div>
             </div>
           </div>
@@ -44,9 +45,17 @@
 
   <div class="form-group">
     <label for="content">Contenu du message</label>
-    <textarea class="form-control" id="content" rows="10" formControlName="content" [ngClass]="{'is-invalid': submitted && f.content.errors}"></textarea>
-    <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
+    <editor class="is-invalid" formControlName="content" [ngClass]="{'is-invalid': submitted && f.content.errors}"
+      [init]="{
+        menubar: false,
+        statusbar: false,
+        plugins: 'autoresize advlist autolink link lists',
+        toolbar: 'undo redo | cut copy paste blockquote | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fontselect fontsizeselect forecolor backcolor bold italic underline strikethrough'
+      }">
+    </editor>
+    <div *ngIf="submitted && f.content.errors" class="invalid-data">
       <div *ngIf="f.content.errors.required">Contenu requis</div>
+      <div *ngIf="f.content.errors.maxlength">Valeur trop longue</div>
     </div>
   </div>
   <button type="submit" class="btn btn-info">Publier</button>
