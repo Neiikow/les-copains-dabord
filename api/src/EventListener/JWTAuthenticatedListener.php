@@ -13,13 +13,7 @@ class JWTAuthenticatedListener
      */
     public function onJWTAuthenticated(JWTAuthenticatedEvent $event)
     {
-        //dump('Authenticated');
         $token = $event->getToken();
-        $userToken = $token->getUser()->getToken();
         $requestToken = $token->getCredentials();
-
-        if ($userToken !== $requestToken) {
-            throw new InvalidTokenException();
-        }
     }
 }

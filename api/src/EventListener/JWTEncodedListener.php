@@ -23,7 +23,6 @@ class JWTEncodedListener
      */
     public function onJwtEncoded(JWTEncodedEvent $event)
     {
-        //dump('Encoded');
         $token = $event->getJWTString();
     }
 }

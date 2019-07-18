@@ -12,7 +12,6 @@ class JWTInvalidListener extends AuthenticationSuccessHandler
  */
 public function onJWTNotFound(JWTNotFoundEvent $event)
 {
-    //dump('Invalid');
     $msg = 'Token invalide';
 
     $response = new JsonResponse($msg, 403);

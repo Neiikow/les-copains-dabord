@@ -34,10 +34,12 @@ export class SignupComponent implements OnInit {
       (next) => {
         this.authService.login(formData).subscribe(
           (next) => {
-            const decodedToken = this.authService.getDecodedToken();
-            localStorage.setItem('token', next.token);
-            localStorage.setItem('id', decodedToken.id);
-            this.router.navigate(['/profil']);
+            localStorage.setItem('token', next['token']);
+            localStorage.setItem('refresh_token', next['refresh_token']);
+            if (this.authService.isAuthenticated()) {
+              const payload = this.authService.getDecodedToken();
+              this.router.navigate(['/profil/' + payload.id]);
+            }
           },
           (error) => {
             this.error = error;

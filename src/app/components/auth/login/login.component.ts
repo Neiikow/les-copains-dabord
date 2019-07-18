@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(formData).subscribe(
       (next) => {
-        localStorage.setItem('token', next.token);
+        localStorage.setItem('token', next['token']);
+        localStorage.setItem('refresh_token', next['refresh_token']);
         if (this.authService.isAuthenticated()) {
           const payload = this.authService.getDecodedToken();
           this.router.navigate(['/profil/' + payload.id]);

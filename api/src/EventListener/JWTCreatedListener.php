@@ -27,7 +27,6 @@ class JWTCreatedListener extends AuthenticationSuccessHandler
      */
     public function onJWTCreated(JWTCreatedEvent $event)
     {
-        //dump('Created');
         $user = $event->getUser();
 
         $payload = $event->getData();

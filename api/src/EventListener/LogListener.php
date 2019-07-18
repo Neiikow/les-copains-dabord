@@ -17,8 +17,6 @@ class LogListener implements EventSubscriberInterface
 
     public function log(RefreshEvent $event)
     {
-        //dump('log');
-        //dump($event);
         $refreshToken = $event->getRefreshToken()->getRefreshToken();
         $user = $event->getPreAuthenticatedToken()->getUser()->getUsername();
         
@@ -27,7 +25,6 @@ class LogListener implements EventSubscriberInterface
     
     public static function getSubscribedEvents()
     {
-        //dump('GetSub');
         return array(
             'gesdinet.refresh_token' => 'log',
         );

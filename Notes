@@ -3,6 +3,3 @@ FRONTEND **************
 -> Renvoyer automatiquement le refresh token à l'api si le token est expiré
 
 SESSION MENTOR (17/07/19) **************
--> A voir 
-    - innerHtml et style : autre solution ?
-    (> regex)

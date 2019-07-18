@@ -98,13 +98,14 @@ Class UserController extends FOSRestController
             $data->setPicture($user->getPicture());
         }
         $jwtManager = $this->container->get('lexik_jwt_authentication.jwt_manager');
-        $data->setToken($jwtManager->create($data));
+        
+        $token = $jwtManager->create($data);
 
         try {
             $em->flush();
             $msg = [
                 'content' => 'Profil de '.$data->getUsername().' édité !',
-                'token' => $data->getToken()
+                'token' => $token
             ];
             return $this->json(
                 $msg,
