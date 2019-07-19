@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as jwt_decode from 'jwt-decode';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { User } from '../class/user';
 
 @Injectable({
@@ -66,12 +66,26 @@ export class AuthService {
     }
   }
 
+  public refreshToken(): Observable<any> {
+    const data = {'refresh_token': localStorage.getItem('refresh_token')};
+    return this.http.post<any>(this.url + 'token/refresh', data)
+    .pipe(
+      map(data => {
+        localStorage.setItem('token', data['token']);
+        localStorage.setItem('refresh_token', data['refresh_token']);
+
+        return data;
+      }),
+      catchError(this.handleError),
+    );
+  }
+
   public isAuthenticated(): boolean {
-    if (this.getToken()) {
-      const token = this.getToken();
-      if (this.jwtHelper.isTokenExpired(token)) {
-        return false;
-      }
+    const token = this.getToken();
+    if (token) {
+      // if (this.jwtHelper.isTokenExpired(token)) {
+      //   return false;
+      // }
       return true;
     }
     return false;
@@ -79,7 +93,6 @@ export class AuthService {
 
   public haveRoles(role: string): boolean {
     if (this.getToken()) {
-      const token = this.getToken();
       const decodedToken = this.getDecodedToken();
 
       if (!this.isAuthenticated() || !decodedToken.roles.find((value: string) => value === role)) {

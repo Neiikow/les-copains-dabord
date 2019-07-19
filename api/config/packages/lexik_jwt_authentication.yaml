@@ -2,4 +2,4 @@ lexik_jwt_authentication:
     secret_key: '%env(resolve:JWT_SECRET_KEY)%' # clé de création du token (.env)
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'  # clé de validation du token (.env)
     pass_phrase: '%env(JWT_PASSPHRASE)%' # clé de la signature du token (.env)
-    token_ttl: 20 # durée de validation
+    token_ttl: 5 # durée de validation

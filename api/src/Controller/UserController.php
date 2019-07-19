@@ -78,7 +78,6 @@ Class UserController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $data = $em->getRepository(User::class)->find($id);
 
-        $data->setUsername($user->getUsername());
         $data->setEmail($user->getEmail());
         $data->setRoles($user->getRoles());
 
@@ -98,7 +97,6 @@ Class UserController extends FOSRestController
             $data->setPicture($user->getPicture());
         }
         $jwtManager = $this->container->get('lexik_jwt_authentication.jwt_manager');
-        
         $token = $jwtManager->create($data);
 
         try {

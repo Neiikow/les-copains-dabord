@@ -12,7 +12,7 @@
     <div class="mb-1 col-md-6 col-sm-12">
       <div class="form-group">
         <label for="username">Pseudo</label>
-        <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors}">
+        <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors}" readonly>
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
           <div *ngIf="f.username.errors.required">Pseudo requis</div>
         </div>
