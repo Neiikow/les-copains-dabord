@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Article } from '../class/article';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +29,11 @@ export class ArticleService {
   public getArticleByType(type: string): Observable<Article> {
     return this.http.get<Article>(this.url + '/view/' + type);
   }
-  public getArticleById(id: number): Observable<Article> {
-    return this.http.get<Article>(this.url + '/view/' + id);
+  public getArticleById(id: number): Observable<any> {
+    return this.http.get<Article>(this.url + '/view/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
   }
   public addArticle(article: Article): Observable<Article> {
     return this.http.post<Article>(this.url + '/new', article);
@@ -37,7 +41,15 @@ export class ArticleService {
   public editArticle(article: Article): Observable<Article> {
     return this.http.post<Article>(this.url + '/edit/' + article.id, article);
   }
-  public deleteArticle(id: number): Observable<Article> {
-    return this.http.delete<Article>(this.url + '/delete/' + id);
+  public deleteArticle(id: number): Observable<any> {
+    return this.http.delete<Article>(this.url + '/delete/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    const errorMsg = error.error.message;
+    return throwError(errorMsg);
   }
 }

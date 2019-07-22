@@ -14,6 +14,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventViewComponent implements OnInit {
   public event: Event;
+  public error: string;
   private subscribers: EventSubscribers;
   private isSub = false;
 
@@ -35,7 +36,11 @@ export class EventViewComponent implements OnInit {
         event.createDate = this.formatService.frenchDate(event['create_date']);
         this.event = event;
         this.getSubscribers();
-      });
+      },
+      (error) => {
+        this.error = error;
+      },
+    );
   }
   private getSubscribers(): void {
     this.eventService.getSubscribers(this.event.id)

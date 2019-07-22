@@ -171,14 +171,22 @@ Class ArticleController extends FOSRestController
      * )
      * @Rest\View
      */
-    public function showId(Article $article)
+    public function showId($id)
     {
-        if (!$article) {
-            throw $this->createNotFoundException(
-                'Aucun article correspondant'
-            );
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Article::class)->find($id);
+
+        if ($article) {
+            if (!$article) {
+                throw $this->createNotFoundException(
+                    'Aucun article correspondant'
+                );
+            }
+            return $article;
+        } else {
+            $errors['message'] = 'Aucun article correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
         }
-        return $article;
     }
     /**
      * @Rest\Post(

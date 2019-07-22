@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Event } from '../class/event';
 import { EventSubscribe } from '../class/eventSubscribe';
 import { EventSubscribers } from '../class/eventSubscribers';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -27,17 +28,26 @@ export class EventService {
     };
     return this.http.post<any>(this.url + '/show/' + status, pageOptions);
   }
-  public getEventById(id: number): Observable<Event> {
-    return this.http.get<Event>(this.url + '/view/' + id);
+  public getEventById(id: number): Observable<any> {
+    return this.http.get<Event>(this.url + '/view/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
   }
   public addEvent(event: Event): Observable<Event> {
     return this.http.post<Event>(this.url + '/new', event);
   }
-  public editEvent(event: Event): Observable<Event> {
-    return this.http.post<Event>(this.url + '/edit/' + event.id, event);
+  public editEvent(event: Event): Observable<any> {
+    return this.http.post<Event>(this.url + '/edit/' + event.id, event)
+    .pipe(
+      catchError(this.handleError),
+    );
   }
-  public deleteEvent(id: number): Observable<Event> {
-    return this.http.delete<Event>(this.url + '/delete/' + id);
+  public deleteEvent(id: number): Observable<any> {
+    return this.http.delete<Event>(this.url + '/delete/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
   }
   public getSubscribers(id: number): Observable<EventSubscribers> {
     return this.http.get<EventSubscribers>(this.url + '/subscribers/' + id);
@@ -47,5 +57,10 @@ export class EventService {
     subscriber['event_id'] = eventId;
     subscriber['user_id'] = userId;
     return this.http.post<any>(this.url + '/subscribe', subscriber);
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    const errorMsg = error.error.message;
+    return throwError(errorMsg);
   }
 }

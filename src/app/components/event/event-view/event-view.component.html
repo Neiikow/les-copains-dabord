@@ -1,3 +1,6 @@
+<div *ngIf="error" class="text-center alert alert-danger" role="alert">
+  {{ error }}
+</div>
 <div id="event" class='d-flex flex-wrap' *ngIf="event">
   <div class='event col-md-10 col-sm-12 p-0 pr-2'>
     <div class='info app-bg-secondary d-flex flex-wrap align-items-center font-italic p-2 rounded-top'>

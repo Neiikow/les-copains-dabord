@@ -96,9 +96,8 @@ Class EventController extends FOSRestController
         $event = $em->getRepository(Event::class)->find($id);
 
         if (!$event) {
-            throw $this->createNotFoundException(
-                'Aucun event correspondant à l\'id : '.$id
-            );
+            $errors['message'] = 'Aucun event correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
         }
 
         $em->remove($event);
@@ -121,7 +120,8 @@ Class EventController extends FOSRestController
             array('status' => $status)
         );
         if (!$events) {
-            return 'Aucune donnée disponible';
+            $errors['message'] = 'Aucune donnée disponible';
+            return $this->json($errors, 404);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -163,20 +163,27 @@ Class EventController extends FOSRestController
      * )
      * @Rest\View
      */
-    public function showId(Archive $archive, Event $event)
+    public function showId(Archive $archive, $id)
     {
-        if ($event->getStatus() === 'active') {
-            $em = $this->getDoctrine()->getManager();
-            $date = $event->getDate() . $event->getTime();
-            $isExpired = $archive->byExpiredDate($date);
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->find($id);
 
-            if ($isExpired) {
-                $event->setStatus('archive');
-                $em->flush();
+        if ($event) {
+            if ($event->getStatus() === 'active') {
+                $em = $this->getDoctrine()->getManager();
+                $date = $event->getDate() . $event->getTime();
+                $isExpired = $archive->byExpiredDate($date);
+    
+                if ($isExpired) {
+                    $event->setStatus('archive');
+                    $em->flush();
+                }
             }
+            return $event;
+        } else {
+            $errors['message'] = 'Aucun event correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
         }
-
-        return $event;
     }
     /**
      * @Rest\Post(

@@ -14,6 +14,7 @@ import { DataFormatService } from 'src/app/services/data-format.service';
 })
 export class ArticleViewComponent implements OnInit {
   public article: Article;
+  public error: string;
   private articles: Article[];
   private types = Types;
   private pagin: any;
@@ -38,7 +39,8 @@ export class ArticleViewComponent implements OnInit {
       .subscribe(data => {
         this.pagin = data.options;
         this.articles = data.articles;
-      });
+      },
+    );
   }
   private getArticle(id: number): void {
     this.articleService.getArticleById(id)
@@ -47,7 +49,11 @@ export class ArticleViewComponent implements OnInit {
         article.locationX = article['location_x'];
         article.locationY = article['location_y'];
         this.article = article;
-      });
+      },
+      (error) => {
+        this.error = error;
+      },
+    );
   }
   private delete(article: Article): void {
     if (this.authService.isAuthenticated()) {
