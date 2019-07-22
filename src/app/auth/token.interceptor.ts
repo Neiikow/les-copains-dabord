@@ -19,8 +19,8 @@ export class TokenInterceptor implements HttpInterceptor {
       .pipe(
         catchError(err => {
           if (err instanceof HttpErrorResponse) {
-            if (request.url.includes('refreshtoken') || request.url.includes('login')) {
-                if (request.url.includes('refreshtoken')) {
+            if (request.url.includes('token/refresh') || request.url.includes('login')) {
+                if (request.url.includes('token/refresh')) {
                     this.authService.logout();
                 }
                 return throwError(err);
@@ -30,6 +30,8 @@ export class TokenInterceptor implements HttpInterceptor {
                 return this.handle401Error(request, next);
               case 400:
                 return this.authService.logout();
+              case 404:
+                return throwError(err);
             }
           } else {
             return throwError(err);

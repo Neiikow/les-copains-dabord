@@ -44,7 +44,11 @@ export class UserProfilComponent implements OnInit {
           }
           this.user = user;
           this.initForm(user);
-    }));
+      },
+      (error) => {
+        this.error = error;
+      },
+    ));
   }
   public haveRoles(role: string): boolean {
     if (this.authService.haveRoles(role)) {
@@ -57,6 +61,7 @@ export class UserProfilComponent implements OnInit {
       this.intervalError();
       return ;
     }
+    this.dataForm.value.roles = [this.dataForm.value.roles];
     if (this.dataForm.value.password || this.dataForm.value.passwordOld) {
       if (this.dataForm.value.password && this.dataForm.value.passwordOld) {
         const passwordNew = this.dataForm.value.password;
@@ -82,7 +87,6 @@ export class UserProfilComponent implements OnInit {
     }
   }
   private edit(formData: User): void {
-    this.dataForm.value.roles = [this.dataForm.value.roles];
     this.authService.edit(formData).subscribe(
       (next) => {
         this.edited = String(next['content']);

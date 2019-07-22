@@ -56,7 +56,7 @@ Class UserController extends FOSRestController
         catch(UniqueConstraintViolationException $e)
         {
             $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
-            return $this->json($errors, 400);
+            return $this->json($errors, 404);
         }
     }
     /**
@@ -133,9 +133,8 @@ Class UserController extends FOSRestController
         $user = $em->getRepository(User::class)->find($id);
 
         if (!$user) {
-            throw $this->createNotFoundException(
-                'Aucun utilisateur correspondant à l\'id : '.$id
-            );
+            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
         }
 
         $em->remove($user);
@@ -182,19 +181,27 @@ Class UserController extends FOSRestController
      * )
      * @Rest\View
      */
-    public function showId(User $user)
+    public function showId($id)
     {
-        $user = [
-           'id' => $user->getId(),
-           'username' => $user->getUsername(),
-           'email' => $user->getEmail(),
-           'roles' => $user->getRoles(),
-           'discord' => $user->getDiscord(),
-           'picture' => $user->getPicture(),
-           'createDate' => $user->getCreateDate(),
-        ];
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
 
-        return $user;
+        if ($user) {
+            $data = [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'roles' => $user->getRoles(),
+                'discord' => $user->getDiscord(),
+                'picture' => $user->getPicture(),
+                'createDate' => $user->getCreateDate(),
+            ];
+    
+            return $data;
+        } else {
+            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
+        }
     }
     /**
      * @Rest\Post(
@@ -206,15 +213,13 @@ Class UserController extends FOSRestController
      */
     public function passwordMatch(UserPasswordEncoderInterface $passwordEncoder, User $user)
     {
-        
         $id = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $userMatch = $em->getRepository(User::class)->find($id);
 
         if (!$userMatch) {
-            throw $this->createNotFoundException(
-                'Aucun utilisateur correspondant à l\'id : '.$id
-            );
+            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
+            return $this->json($errors, 404);
         }
 
         $encodedPassword = $passwordEncoder->encodePassword(
@@ -222,9 +227,8 @@ Class UserController extends FOSRestController
             $user->getPassword()
         );
         if ($encodedPassword !== $userMatch->getPassword()) {
-            throw $this->createNotFoundException(
-                'Ancien mot de passe incorrect'
-            );
+            $errors['message'] = "Ancien mot de passe incorrect";
+            return $this->json($errors, 404);
         } else {
             return true;
         }

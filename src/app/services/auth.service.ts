@@ -83,9 +83,6 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const token = this.getToken();
     if (token) {
-      // if (this.jwtHelper.isTokenExpired(token)) {
-      //   return false;
-      // }
       return true;
     }
     return false;

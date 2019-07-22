@@ -68,7 +68,7 @@ const routes: Routes = [
     RouterModule,
   ],
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes),
   ],
   providers: [
     AuthGuardService,

@@ -2,7 +2,7 @@
   <h1 class="p-1">Profil</h1>
 </div>
 <div class='justify-content-center m-3'>
-  <div *ngIf="submitted && error" class="text-center alert alert-danger" role="alert">
+  <div *ngIf="error" class="text-center alert alert-danger" role="alert">
     {{ error }}
   </div>
   <div *ngIf="submitted && edited" class="text-center alert alert-success" role="alert">

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { User } from '../class/user';
 
 @Injectable({
@@ -18,10 +19,21 @@ export class UserService {
     };
     return this.http.post<any>(this.url, pageOptions);
   }
-  public getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.url + '/view/' + id);
+  public getUserById(id: number): Observable<any> {
+    return this.http.get<any>(this.url + '/view/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
   }
-  public deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(this.url + '/delete/' + id);
+  public deleteUser(id: number): Observable<any> {
+    return this.http.delete<any>(this.url + '/delete/' + id)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    const errorMsg = error.error.message;
+    return throwError(errorMsg);
   }
 }
