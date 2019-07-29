@@ -96,8 +96,9 @@ Class EventController extends FOSRestController
         $event = $em->getRepository(Event::class)->find($id);
 
         if (!$event) {
-            $errors['message'] = 'Aucun event correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Aucun event correspondant à l\'id : '.$id
+            );
         }
 
         $em->remove($event);
@@ -120,8 +121,9 @@ Class EventController extends FOSRestController
             array('status' => $status)
         );
         if (!$events) {
-            $errors['message'] = 'Aucune donnée disponible';
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Aucun events disponible'
+            );
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -146,8 +148,10 @@ Class EventController extends FOSRestController
             ->select('e')
             ->from('App:Event', 'e')
             ->where('e.status = :status')->setParameter('status', $status)
+            ->orderBy('e.date', 'ASC')
             ->setFirstResult($options['startIndex'])
             ->setMaxResults($options['pageSize']);
+
         $query = $queryBuilder->getQuery();
         $events = $query->getResult();
         return [
@@ -168,22 +172,23 @@ Class EventController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository(Event::class)->find($id);
 
-        if ($event) {
-            if ($event->getStatus() === 'active') {
-                $em = $this->getDoctrine()->getManager();
-                $date = $event->getDate() . $event->getTime();
-                $isExpired = $archive->byExpiredDate($date);
-    
-                if ($isExpired) {
-                    $event->setStatus('archive');
-                    $em->flush();
-                }
-            }
-            return $event;
-        } else {
-            $errors['message'] = 'Aucun event correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+        if (!$event) {
+            throw $this->createNotFoundException(
+                'Aucun event correspondant à l\'id : '.$id
+            );
         }
+
+        if ($event->getStatus() === 'active') {
+            $em = $this->getDoctrine()->getManager();
+            $date = $event->getDate() . $event->getTime();
+            $isExpired = $archive->byExpiredDate($date);
+
+            if ($isExpired) {
+                $event->setStatus('archive');
+                $em->flush();
+            }
+        }
+        return $event;
     }
     /**
      * @Rest\Post(

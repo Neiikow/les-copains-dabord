@@ -55,8 +55,9 @@ Class UserController extends FOSRestController
         }
         catch(UniqueConstraintViolationException $e)
         {
-            $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Pseudo ou adresse Email déjà utilisés !'
+            );
         }
     }
     /**
@@ -115,8 +116,9 @@ Class UserController extends FOSRestController
             );
         }
         catch(UniqueConstraintViolationException $e) {
-            $errors['message'] = "Pseudo ou adresse Email déjà utilisés !";
-            return $this->json($errors, 400);
+            throw $this->createNotFoundException(
+                'Pseudo ou adresse Email déjà utilisés !'
+            );
         }
     }
     /**
@@ -133,8 +135,9 @@ Class UserController extends FOSRestController
         $user = $em->getRepository(User::class)->find($id);
 
         if (!$user) {
-            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Aucun utilisateur correspondant à l\'id : '.$id
+            );
         }
 
         $em->remove($user);
@@ -199,8 +202,9 @@ Class UserController extends FOSRestController
     
             return $data;
         } else {
-            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Aucun utilisateur correspondant à l\'id : '.$id
+            );
         }
     }
     /**
@@ -218,19 +222,21 @@ Class UserController extends FOSRestController
         $userMatch = $em->getRepository(User::class)->find($id);
 
         if (!$userMatch) {
-            $errors['message'] = 'Aucun utilisateur correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+            throw $this->createNotFoundException(
+                'Aucun utilisateur correspondant à l\'id : '.$id
+            );
         }
 
         $encodedPassword = $passwordEncoder->encodePassword(
             $userMatch,
             $user->getPassword()
         );
+        
         if ($encodedPassword !== $userMatch->getPassword()) {
-            $errors['message'] = "Ancien mot de passe incorrect";
-            return $this->json($errors, 404);
-        } else {
-            return true;
+            throw $this->createNotFoundException(
+                'Ancien mot de passe incorrect'
+            );
         }
+        return true;
     }
 }

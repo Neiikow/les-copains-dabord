@@ -2,7 +2,7 @@
   <div class='col-md-10 col-sm-12'>
     <div *ngFor="let article of article">
       <h1 class="text-center">{{ article.title }}</h1>
-      <p>{{ article.content }}</p>
+      <p [innerHTML]="article.content  | keepHtml"></p>
       <div class="font-italic text-secondary font-weight-light">
         <hr>
         <div class="d-flex flex-wrap justify-content-between">

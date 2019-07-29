@@ -176,17 +176,12 @@ Class ArticleController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository(Article::class)->find($id);
 
-        if ($article) {
-            if (!$article) {
-                throw $this->createNotFoundException(
-                    'Aucun article correspondant'
-                );
-            }
-            return $article;
-        } else {
-            $errors['message'] = 'Aucun article correspondant à l\'id : '.$id;
-            return $this->json($errors, 404);
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'Aucun article correspondant à l\'id : '.$id
+            );
         }
+        return $article;
     }
     /**
      * @Rest\Post(
